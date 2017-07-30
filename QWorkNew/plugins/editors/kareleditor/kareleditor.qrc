@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/kareleditor">
+        <file>images/percent.png</file>
+        <file>images/constant.png</file>
+        <file>images/function.png</file>
+        <file>images/keyword.png</file>
+        <file>images/snippet.png</file>
+        <file>images/type.png</file>
+        <file>images/variable.png</file>
+        <file>images/set_karel.png</file>
+        <file>images/goto_definition.png</file>
+        <file>images/find_usages.png</file>
+        <file>images/rename_usages.png</file>
+    </qresource>
+</RCC>

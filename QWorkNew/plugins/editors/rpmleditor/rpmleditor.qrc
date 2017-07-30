@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/rpmleditor">
+        <file>rpmleditor.mimetypes.xml</file>
+    </qresource>
+</RCC>

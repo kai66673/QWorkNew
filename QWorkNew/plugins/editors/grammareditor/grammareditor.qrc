@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/grammareditor">
+        <file>images/set_editor.png</file>
+        <file>images/yy_run_issues.png</file>
+        <file>images/yy_run_output.png</file>
+        <file>images/yy_run.png</file>
+        <file>images/yy_warnings.png</file>
+        <file>images/yy_cancel.png</file>
+    </qresource>
+</RCC>

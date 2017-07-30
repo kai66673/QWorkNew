@@ -1,0 +1,12 @@
+#ifndef RICHEDITOR_GLOBAL_H
+#define RICHEDITOR_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(RICHEDITOR_LIBRARY)
+#  define RICHEDITOR_EXPORT Q_DECL_EXPORT
+#else
+#  define RICHEDITOR_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // RICHEDITOR_GLOBAL_H

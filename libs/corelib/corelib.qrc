@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/progressbar.png</file>
+        <file>images/wrapindicator.png</file>
+        <file>images/dock_actions.png</file>
+        <file>images/dock_close.png</file>
+        <file>images/dock_restore.png</file>
+        <file>images/dock_settings.png</file>
+    </qresource>
+    <qresource prefix="/core">
+        <file>images/prj_folder.png</file>
+        <file>images/linkicon.png</file>
+        <file>images/prj_close.png</file>
+        <file>images/prj_new.png</file>
+        <file>images/prj_open.png</file>
+        <file>images/prj_project.png</file>
+        <file>images/error.png</file>
+        <file>images/info.png</file>
+        <file>images/warning.png</file>
+        <file>images/prj_options.png</file>
+        <file>images/prj_configure.png</file>
+        <file>images/prj_dock.png</file>
+        <file>images/filtericon.png</file>
+        <file>images/darkarrowdown.png</file>
+        <file>images/darkarrowup.png</file>
+        <file>images/darkclose.png</file>
+        <file>images/reset.png</file>
+        <file>images/next.png</file>
+        <file>images/editclear.png</file>
+    </qresource>
+</RCC>

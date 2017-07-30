@@ -1,0 +1,57 @@
+// Copyright (c) 2008 Roberto Raggi <roberto.raggi@gmail.com>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+
+#ifndef SQL_DIAGNOSTICCLIENT_H
+#define SQL_DIAGNOSTICCLIENT_H
+
+#include "ASTfwd.h"
+#include <cstdarg>
+
+namespace Sql {
+
+class SQL_EXPORT DiagnosticClient
+{
+    DiagnosticClient(const DiagnosticClient &other);
+    void operator =(const DiagnosticClient &other);
+
+public:
+    enum Level {
+        Warning,
+        Error,
+        Fatal
+    };
+
+    DiagnosticClient();
+    virtual ~DiagnosticClient();
+
+    virtual void report(int level,
+                        const char *fileName,
+                        unsigned line, unsigned column, unsigned length,
+                        const char *format, va_list ap) = 0;
+    virtual void reportString ( int level,
+                                const char *fileName,
+                                unsigned line, unsigned column, unsigned length,
+                                const QString &text ) = 0;
+};
+
+} // namespace Sql
+
+
+#endif // SQL_DIAGNOSTICCLIENT_H

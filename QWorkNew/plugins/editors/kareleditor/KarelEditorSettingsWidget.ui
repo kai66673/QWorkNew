@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>KarelEditorSettingsWidget</class>
+ <widget class="QWidget" name="KarelEditorSettingsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>420</width>
+    <height>346</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>General</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Case Fix Behavior</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QCheckBox" name="applyOnSaveCheckBox">
+            <property name="text">
+             <string>Apply on Save</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="builtingCheckBox">
+              <property name="text">
+               <string>Builtings</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="builtingsComboBox">
+              <item>
+               <property name="text">
+                <string>Upper Case</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Lower Case</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Capital Case</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="keywordsCheckBox">
+              <property name="text">
+               <string>Keywords</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="keywordsComboBox">
+              <item>
+               <property name="text">
+                <string>Upper Case</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Lower Case</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Capital Case</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="typesCheckBox">
+              <property name="text">
+               <string>Types</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QComboBox" name="typesComboBox">
+              <item>
+               <property name="text">
+                <string>Upper Case</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Lower Case</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Capital Case</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="directivesCheckBox">
+              <property name="text">
+               <string>Directives</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QComboBox" name="directivesComboBox">
+              <item>
+               <property name="text">
+                <string>Upper Case</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Lower Case</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Capital Case</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QCheckBox" name="systemsCheckBox">
+              <property name="text">
+               <string>Systems</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QComboBox" name="systemsComboBox">
+              <item>
+               <property name="text">
+                <string>Upper Case</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Lower Case</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Capital Case</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>70</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

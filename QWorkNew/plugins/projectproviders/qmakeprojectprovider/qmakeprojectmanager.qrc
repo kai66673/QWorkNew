@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/qmakeproject">
+        <file>QMakeProjectProvider.mimetypes.xml</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>wizards/images/console.png</file>
+        <file>wizards/images/gui.png</file>
+        <file>wizards/images/lib.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/dock_favorites.png</file>
+        <file>images/fav_add_folder.png</file>
+        <file>images/fav_app_folder.png</file>
+        <file>images/fav_del_folder.png</file>
+        <file>images/fav_folder.png</file>
+        <file>images/fav_ses_folder.png</file>
+        <file>images/fav_null_item.png</file>
+        <file>images/fav_open_file.png</file>
+        <file>images/fav_collapse.png</file>
+        <file>images/fav_expand.png</file>
+        <file>images/fav_add_item.png</file>
+        <file>images/fav_delete.png</file>
+    </qresource>
+</RCC>

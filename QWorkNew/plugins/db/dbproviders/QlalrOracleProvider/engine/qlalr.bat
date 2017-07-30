@@ -1,0 +1,1 @@
+qlalr.exe --qt --no-debug --no-lines QLalrOracle.g

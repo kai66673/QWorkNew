@@ -1,0 +1,77 @@
+QToolBar:horizontal {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #EEEEEE,
+                                stop: 0.6 #E7E7E7, stop: 1.0 #D3D3D3);
+}
+
+QToolBar:vertical {
+    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
+                                stop: 0 #E1E1E1, stop: 0.4 #EEEEEE,
+                                stop: 0.6 #E7E7E7, stop: 1.0 #D3D3D3);
+}
+QToolBar {
+    spacing: 0px;
+}
+QToolBar::separator:horizontal {
+    border-left: 1px solid qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #AAAAAA,
+                                stop: 0.6 #A7A7A7, stop: 1.0 #D3D3D3);
+}
+QToolBar::separator:vertical {
+    border-bottom: 1px solid qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0,
+                                stop: 0 #E1E1E1, stop: 0.4 #AAAAAA,
+                                stop: 0.6 #A7A7A7, stop: 1.0 #D3D3D3);
+}
+
+QLabel {
+    padding: 3px
+}
+
+QToolButton {
+    border: 0px;
+    padding: 0px;
+    margin: 1px;
+}
+QToolButton:hover {
+    margin: 1px;
+    border: 1px solid #878787;
+}
+QToolButton:checked {
+    margin: 1px;
+    border: 1px inset gray;
+}
+QToolButton:hover:checked {
+    margin: 1px;
+    border: 1px solid #373737;
+}
+
+QToolBar QComboBox {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #EEEEEE,
+                                stop: 0.6 #E7E7E7, stop: 1.0 #D3D3D3);
+    height: 19px;
+    width: 19px;
+    color: black;
+    border: 0px;
+    border-radius: 0px;
+    margin: 0px;
+    border-left: 1px solid qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #AAAAAA,
+                                stop: 0.6 #A7A7A7, stop: 1.0 #D3D3D3);
+    subcontrol-origin: padding;
+    subcontrol-position: center;
+    width: 20px;
+    padding: 3px;
+    min-width: 6em;
+}
+QToolBar QComboBox::drop-down {
+    subcontrol-origin: padding;
+    border-left: 1px solid qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #AAAAAA,
+                                stop: 0.6 #A7A7A7, stop: 1.0 #D3D3D3);
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+QToolBar QComboBox::down-arrow {
+    image: url(:/utils/images/cb_down_arrow.png);
+}

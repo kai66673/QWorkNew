@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/fav_open_url.png</file>
+    </qresource>
+</RCC>

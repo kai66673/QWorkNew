@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
+    <mime-type type="text/x-python">
+        <sub-class-of type="text/plain"/>
+        <comment>Python Source File</comment>
+        <glob pattern="*.py"/>
+        <glob pattern="*.py3"/>
+        <glob pattern="*.pyw"/>
+        <glob pattern="*.pyw3"/>
+        <glob pattern="*.wsgi"/>
+        <!-- Find comment for bash interpreter -->
+        <magic priority="40">
+           <match value="#!/usr/bin/env python" type="string" offset="0:1"/>
+           <match value="#!/usr/bin/python" type="string" offset="0:1"/>
+           <match value="if __name__ == &quot;__main__&quot;:" type="string" offset="0:2000"/>
+           <match value="if __name__ == &apos;__main__&apos;:" type="string" offset="0:2000"/>
+        </magic>
+    </mime-type>
+</mime-info>

@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/utils">
+        <file>images/arrow.png</file>
+        <file>images/cb_down_arrow.png</file>
+        <file>images/dock_close.png</file>
+        <file>images/dock_restore.png</file>
+        <file>images/dock_menu.png</file>
+    </qresource>
+</RCC>

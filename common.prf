@@ -1,0 +1,44 @@
+greaterThan(QT_MAJOR_VERSION, 4) {
+    QT += widgets
+    QT += printsupport
+    DEFINES += HAVE_QT5
+    QTVERDIR = qt5
+}
+else {
+    QTVERDIR = qt4
+}
+
+win32-msvc*|win32-icc: {
+    BUILDDIR = build
+}
+else {
+    BUILDDIR = buildg
+}
+
+PYTHONQTVERDIR = PythonQt3.0
+
+CONFIG += c++11
+
+isEmpty(TARGET_ARCH) {
+    # Detect target
+    equals(QT_ARCH, x86_64)|contains(CONFIG, x86_64):TARGET_ARCH = x64
+    else:equals(QMAKE_HOST.arch, x86_64):            TARGET_ARCH = x64
+    else:equals(QMAKE_HOST.arch, i386):              TARGET_ARCH = x32
+    else:equals(QT_ARCH, "i386"):                    TARGET_ARCH = x32
+    else:equals(QMAKE_HOST.arch, x86):               TARGET_ARCH = x32
+    else:equals(QMAKE_HOST.arch, i686):              TARGET_ARCH = x32
+    else:equals(QT_ARCH, "mips"):                    TARGET_ARCH = mips
+    else:equals(QT_ARCH, "arm"):                     TARGET_ARCH = arm
+    else:equals(QMAKE_HOST.arch, armv7l):            TARGET_ARCH = arm7
+    else:equals(QMAKE_HOST.arch, armv5tel):          TARGET_ARCH = arm5
+    else:error("Couldn't detect supported jCjS architecture. Currently supported architectures are: x64, x32 and arm")
+}
+
+CONFIG(release) {
+    BINDIR = $${TARGET_ARCH}/bin_release
+}
+else {
+    BINDIR = $${TARGET_ARCH}/bin_debug
+}
+
+TARGET_DIR = ../../../../$${BUILDDIR}/QWorkNew/$${QTVERDIR}/$${BINDIR}

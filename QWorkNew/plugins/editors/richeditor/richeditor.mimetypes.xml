@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
+    <mime-type type="text/x-html">
+        <sub-class-of type="text/plain"/>
+        <comment>HTML File</comment>
+        <glob pattern="*.html"/>
+        <glob pattern="*.HTML"/>
+        <glob pattern="*.htm"/>
+        <glob pattern="*.HTM"/>
+        <!-- Find comment for bash interpreter -->
+        <magic priority="40">
+           <match value="<html>" type="string" offset="0:1"/>
+        </magic>
+    </mime-type>
+</mime-info>

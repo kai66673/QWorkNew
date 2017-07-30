@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/formeditor">
+        <file>formeditor.mimetypes.xml</file>
+        <file>images/fe_a.png</file>
+        <file>images/fe_oi.png</file>
+        <file>images/fe_p.png</file>
+        <file>images/fe_ss.png</file>
+        <file>images/fe_wb.png</file>
+        <file>images/qt_ui.png</file>
+    </qresource>
+</RCC>

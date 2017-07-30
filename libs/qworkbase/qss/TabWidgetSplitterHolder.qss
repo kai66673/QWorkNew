@@ -1,0 +1,5 @@
+TabWidgetSplitterHolder::handle { background: darkGray; width: 1px; height: 1px; }
+QSplitterHandle::hover{}
+TabWidgetSplitterHolder::handle:horizontal:hover { background: black; }
+TabWidgetSplitterHolder::handle:vertical:hover { background: black; }
+ContainerTabWidget::pane { border-top: 1px solid #C2C7CB; }

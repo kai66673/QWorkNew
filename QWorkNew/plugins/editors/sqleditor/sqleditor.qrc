@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/act_execute_curr.png</file>
+        <file>images/act_execute.png</file>
+        <file>images/set_sql_editor.png</file>
+        <file>images/sql_keyword.png</file>
+        <file>images/dbb_table.png</file>
+        <file>images/sql_ci_column.png</file>
+        <file>images/dbb_trigger.png</file>
+        <file>images/dbb_index.png</file>
+        <file>images/dbb_user.png</file>
+        <file>images/sql_ci_keyword.png</file>
+    </qresource>
+</RCC>

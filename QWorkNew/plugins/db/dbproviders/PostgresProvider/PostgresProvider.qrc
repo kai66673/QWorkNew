@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/pgsql_dbb_class.png</file>
+        <file>images/pgsql_dbb_enum.png</file>
+        <file>images/pgsql_dbb_range.png</file>
+        <file>images/pgsql_dbb_types.png</file>
+    </qresource>
+</RCC>

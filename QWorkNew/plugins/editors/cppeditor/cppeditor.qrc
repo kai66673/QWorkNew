@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/cppeditor">
+        <file>images/qt_cpp.png</file>
+        <file>images/qt_h.png</file>
+        <file>CppEditor.mimetypes.xml</file>
+        <file>images/qt_c.png</file>
+        <file>images/f1.png</file>
+        <file>images/outline_sort.png</file>
+        <file>images/rename_usages.png</file>
+        <file>images/find_usages.png</file>
+        <file>images/set_editor.png</file>
+        <file>images/snippet.png</file>
+        <file>scripting/switchHeaderSource.py</file>
+        <file>images/goto_definition.png</file>
+        <file>images/cpp_helper.png</file>
+    </qresource>
+</RCC>

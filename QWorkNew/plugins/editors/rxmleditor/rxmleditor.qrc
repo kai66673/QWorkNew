@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/rxmleditor">
+        <file>rxmleditor.mimetypes.xml</file>
+    </qresource>
+</RCC>

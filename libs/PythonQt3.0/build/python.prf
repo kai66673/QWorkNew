@@ -1,0 +1,34 @@
+# profile to include and link Python
+
+# Change this variable to your python version (2.5, 2.6)
+unix: {
+    PYTHON_VERSION=3.5
+    LIBS += $$system(python$${PYTHON_VERSION}-config --libs)
+    QMAKE_CXXFLAGS += $$system(python$${PYTHON_VERSION}-config --includes)
+    ROPE_DIR=rope_3
+}
+
+win32: {
+    CONFIG(debug, debug|release) {
+        DEBUG_EXT = _d
+    } else {
+        DEBUG_EXT =
+    }
+
+    win32-msvc2010: {
+        PYTHON_VERSION=27
+        INCLUDEPATH += C:/Python27-msvc2010-$${TARGET_ARCH}/include
+        LIBS += -lpython$${PYTHON_VERSION}$${DEBUG_EXT}
+        ROPE_DIR=rope_2
+    } else: win32-msvc2012|win32-msvc2013: {
+        PYTHON_VERSION=33
+        INCLUDEPATH += C:/Python33-msvc2012-$${TARGET_ARCH}/include
+        LIBS += -lpython$${PYTHON_VERSION}$${DEBUG_EXT}
+        ROPE_DIR=rope_3
+    } else: win32-msvc2015 {
+        PYTHON_VERSION=35
+        INCLUDEPATH += C:/Python35/include
+        LIBS += -lpython$${PYTHON_VERSION}$${DEBUG_EXT}
+        ROPE_DIR=rope_3
+    }
+}

@@ -1,0 +1,27 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/add_data_table.png</file>
+        <file>images/field_add.png</file>
+        <file>images/rpt_inp_par_insert.png</file>
+        <file>images/page_mode.png</file>
+        <file>images/rpt_prefs.png</file>
+        <file>images/data_sources.png</file>
+        <file>images/add.png</file>
+        <file>images/delete.png</file>
+        <file>images/edit.png</file>
+        <file>images/db_ds_column.png</file>
+        <file>images/db_ds_schema.png</file>
+        <file>images/db_ds_table.png</file>
+        <file>images/db_ds_view.png</file>
+        <file>images/dse_cancel.png</file>
+        <file>images/dse_revert.png</file>
+        <file>images/dse_save.png</file>
+        <file>images/dse_execute.png</file>
+        <file>images/dse_obj.png</file>
+        <file>images/dse_par.png</file>
+        <file>images/clear.png</file>
+        <file>images/rpt_run.png</file>
+        <file>images/rpt_print.png</file>
+        <file>images/odf_export.png</file>
+    </qresource>
+</RCC>

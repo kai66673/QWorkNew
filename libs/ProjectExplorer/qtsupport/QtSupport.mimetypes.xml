@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
+  <mime-type type="application/x-linguist">
+    <sub-class-of type="application/xml"/>
+    <comment>message catalog</comment>
+    <glob pattern="*.ts"/>
+  </mime-type>
+  <mime-type type="application/vnd.qt.xml.resource">
+      <sub-class-of type="text/xml"/>
+      <comment>Qt Resource file</comment>
+      <glob pattern="*.qrc"/>
+  </mime-type>
+  <mime-type type="application/x-designer">
+      <sub-class-of type="application/xml"/>
+      <comment>Qt Designer file</comment>
+      <glob pattern="*.ui"/>
+  </mime-type>
+</mime-info>

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/find/locator">
+        <file>images/locator.png</file>
+    </qresource>
+</RCC>

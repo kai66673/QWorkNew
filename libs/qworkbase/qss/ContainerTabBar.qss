@@ -1,0 +1,35 @@
+ContainerTabBar::tab {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #EEEEEE,
+                                stop: 0.6 #E7E7E7, stop: 1.0 #D3D3D3);
+    border: 1px solid #f4f4f3;
+    border-bottom: 0px;
+    border-color: #9B9B9B;
+    border-top-left-radius: 1px;
+    border-top-right-radius: 1px;
+    min-width: 8ex;
+    padding: 2px;
+    margin-left: -1px;
+    margin-right: 0px;
+    margin-top: -1px;
+}
+ContainerTabBar::tab:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #fafafa, stop: 0.4 #f4f4f4,
+                                stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
+}
+ContainerTabBar::tab:selected {
+    background: qlineargradient(spread:pad, x1:0.5, y1:0.108, x2:0.5, y2:0.369318, stop:0 rgba(56, 83, 77, 255), stop:1 rgba(255, 255, 255, 255));
+}
+ContainerTabBar QToolButton {
+    border: 0px;
+    border-radius: 0px;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #E1E1E1, stop: 0.4 #EEEEEE,
+                                      stop: 0.6 #E7E7E7, stop: 1.0 #D3D3D3);
+}
+ContainerTabBar QToolButton:hover {
+      border: 0px;
+      border-radius: 0px;
+      background-color: gray;
+}

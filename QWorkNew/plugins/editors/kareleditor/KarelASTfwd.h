@@ -1,0 +1,127 @@
+#ifndef KARELASTFWD_H
+#define KARELASTFWD_H
+
+namespace Karel {
+
+template <typename _Tp> class List;
+
+class AST;
+class ASTVisitor;
+class ModuleAST;
+class LiteralAST;
+class IntegerLiteralAST;
+class ArraySizeAST;
+class IntegerLiteralOrStarAST;
+class ConstantArraySizeAST;
+class StringLiteralAST;
+class BooleanLiteralAST;
+class NameAST;
+class ProgramNameAST;
+class RoutineNameAST;
+class EnvironmentNameAST;
+class ConstantNameAST;
+class VariableNameAST;
+class FieldNameAST;
+class TypeNameAST;
+class DirectiveAST;
+class AlphabetizeDirectiveAST;
+class CommentDirectiveAST;
+class CmosVarsDirectiveAST;
+class CrtDeviceDirectiveAST;
+class DefGroupDirectiveAST;
+class DelayDirectiveAST;
+class InveronmentDirectiveAST;
+class IncludeDirectiveAST;
+class LockGroupDirectiveAST;
+class NoAbortDirectiveAST;
+class NoPauseDirectiveAST;
+class NoBusyLampDirectiveAST;
+class NoLockGroupDirectiveAST;
+class NoPauseShiftDirectiveAST;
+class PriorityDirectiveAST;
+class StackSizeDirectiveAST;
+class TimeSliceDirectiveAST;
+class TpMotionDirectiveAST;
+class VarTypeConstDeclarationAST;
+class ConstDeclarationAST;
+class TypeDeclarationAST;
+class VarDeclarationAST;
+class ConstDeclarationItemAST;
+class ConstantValueAST;
+class LiteralConstantValueAST;
+class ConstantNameConstantValueAST;
+class TypeDeclarationItemAST;
+class VarDeclarationItemAST;
+class FromProgramClauseAST;
+class UserTypeAST;
+class DataUserTypeAST;
+class StructureUserTypeAST;
+class FieldDefinitionAST;
+class StructureArrayTypeAST;
+class DataStructureArrayTypeAST;
+class ByteStructureArrayTypeAST;
+class ShortStructureArrayTypeAST;
+class DataTypeAST;
+class UserDataTypeAST;
+class SimpleDataTypeAST;
+class VectorDataTypeAST;
+class VisProcessDataTypeAST;
+class ModelDataTypeAST;
+class CamSetupDataTypeAST;
+class FileDataTypeAST;
+class ConfigDataTypeAST;
+class PathDataTypeAST;
+class PathHeaderClauseAST;
+class NodeDataClauseAST;
+class StringDataTypeAST;
+class ArrayDataTypeAST;
+class PositionDataTypeAST;
+class InGroupClauseAST;
+class PositionTypeAST;
+class PositionPositionTypeAST;
+class XYZWPRPositionTypeAST;
+class XYZWPREXTPositionTypeAST;
+class JointposPositionTypeAST;
+class Jointpos1PositionTypeAST;
+class Jointpos2PositionTypeAST;
+class Jointpos3PositionTypeAST;
+class Jointpos4PositionTypeAST;
+class Jointpos5PositionTypeAST;
+class Jointpos6PositionTypeAST;
+class Jointpos7PositionTypeAST;
+class Jointpos8PositionTypeAST;
+class Jointpos9PositionTypeAST;
+class RoutineDeclarationAST;
+class RoutineImplemenationAST;
+class FromPrgRoutineImplemenationAST;
+class DirectRoutineImplemenationAST;
+class RoutineDefinitionAST;
+class RoutineParametersClauseAST;
+class RoutineReturnTypeClauseAST;
+class RoutineParameterAST;
+class IdAST;
+class PrimaryIdAST;
+class ArrayIdAST;
+class VariableFieldAST;
+class VariableAccessAST;
+class StatementAST;
+class FakeVariableStatementAST;
+class UsingStatementAST;
+
+typedef List<TypeDeclarationItemAST *> TypeDeclarationItemListAST;
+typedef List<VarTypeConstDeclarationAST *> VarTypeConstDeclarationListAST;
+typedef List<DirectiveAST *> DirectiveListAST;
+typedef List<ConstDeclarationItemAST *> ConstDeclarationItemListAST;
+typedef List<VariableAccessAST *> VariableAccessListAST;
+typedef List<VarDeclarationItemAST *> VarDeclarationItemListAST;
+typedef List<VariableNameAST *> VariableNameListAST;
+typedef List<ArraySizeAST *> ArraySizeListAST;
+typedef List<StatementAST *> StatementListAST;
+typedef List<FieldDefinitionAST *> FieldDefinitionListAST;
+typedef List<IntegerLiteralAST *> IntegerLiteralListAST;
+typedef List<RoutineDeclarationAST *> RoutineDeclarationListAST;
+typedef List<RoutineParameterAST *> RoutineParameterListAST;
+
+}   // namespace Karel
+
+#endif // KARELASTFWD_H

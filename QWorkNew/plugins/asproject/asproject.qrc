@@ -1,0 +1,40 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/prj_close.png</file>
+        <file>images/prj_new.png</file>
+        <file>images/prj_open.png</file>
+        <file>images/prj_browser.png</file>
+        <file>images/prj_file.png</file>
+        <file>images/prj_folder.png</file>
+        <file>images/prj_project.png</file>
+        <file>images/tag_var_prot.png</file>
+        <file>images/tag_class.png</file>
+        <file>images/tag_enum.png</file>
+        <file>images/tag_enumerator.png</file>
+        <file>images/tag_func.png</file>
+        <file>images/tag_func_priv.png</file>
+        <file>images/tag_func_prot.png</file>
+        <file>images/tag_macro.png</file>
+        <file>images/tag_namespace.png</file>
+        <file>images/tag_struct.png</file>
+        <file>images/tag_var.png</file>
+        <file>images/tag_var_priv.png</file>
+        <file>images/tag_prot.png</file>
+        <file>images/tag_tags.png</file>
+        <file>images/inc_del.png</file>
+        <file>images/inc_add.png</file>
+        <file>images/pba_edit.png</file>
+        <file>images/pba_add.png</file>
+        <file>images/pba_delete.png</file>
+        <file>images/prj_run.png</file>
+        <file>images/compile_warning.png</file>
+        <file>images/compile_error.png</file>
+        <file>images/env_clear.png</file>
+        <file>images/env_system.png</file>
+        <file>images/build_console.png</file>
+        <file>images/build_issues.png</file>
+        <file>images/build_cancel.png</file>
+        <file>images/build_warnings.png</file>
+        <file>images/env_import.png</file>
+    </qresource>
+</RCC>

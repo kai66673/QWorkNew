@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/textbold.png</file>
+        <file>images/textitalic.png</file>
+        <file>images/textunder.png</file>
+        <file>images/left_margin.png</file>
+        <file>images/right_margin.png</file>
+        <file>images/text_indent.png</file>
+        <file>images/textcenter.png</file>
+        <file>images/textjustify.png</file>
+        <file>images/textleft.png</file>
+        <file>images/textright.png</file>
+        <file>images/rpt_table_add.png</file>
+        <file>images/cells_prop.png</file>
+        <file>images/table_prop.png</file>
+        <file>images/column_add_after.png</file>
+        <file>images/column_add_before.png</file>
+        <file>images/column_delete.png</file>
+        <file>images/merge_cell.png</file>
+        <file>images/row_add_after.png</file>
+        <file>images/row_add_before.png</file>
+        <file>images/row_delete.png</file>
+        <file>images/split_cell.png</file>
+        <file>images/border_bottom.png</file>
+        <file>images/border_left.png</file>
+        <file>images/border_right.png</file>
+        <file>images/border_top.png</file>
+    </qresource>
+</RCC>

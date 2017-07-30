@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/sql_ci_func.png</file>
+        <file>images/sql_ci_keyword.png</file>
+        <file>images/sql_ci_type.png</file>
+        <file>images/sql_keyword.png</file>
+        <file>images/sql_ci_par.png</file>
+        <file>images/sql_ci_var.png</file>
+    </qresource>
+</RCC>

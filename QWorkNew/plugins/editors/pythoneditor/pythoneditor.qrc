@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/pythoneditor">
+        <file>images/set_editor.png</file>
+        <file>pythoneditor.mimetypes.xml</file>
+        <file>images/py_class.png</file>
+        <file>images/py_keyword.png</file>
+        <file>images/py_prop.png</file>
+        <file>images/py_slot.png</file>
+        <file>images/py_var.png</file>
+        <file>images/snippet.png</file>
+    </qresource>
+</RCC>

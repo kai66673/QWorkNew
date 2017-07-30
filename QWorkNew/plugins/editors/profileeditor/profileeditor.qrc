@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/profileeditor">
+        <file>images/set_profile.png</file>
+    </qresource>
+</RCC>

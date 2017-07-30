@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
+    <mime-type type="text/x-rpml">
+        <sub-class-of type="text/plain"/>
+        <comment>Report-HTML File</comment>
+        <glob pattern="*.rpml"/>
+        <glob pattern="*.RPML"/>
+        <!-- Find comment for bash interpreter -->
+        <magic priority="40">
+           <match value="<html>" type="string" offset="0:1"/>
+        </magic>
+    </mime-type>
+</mime-info>
