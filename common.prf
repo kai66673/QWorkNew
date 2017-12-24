@@ -15,7 +15,7 @@ else {
     BUILDDIR = buildg
 }
 
-PYTHONQTVERDIR = PythonQt3.0
+PYTHONQTVERDIR = PythonQt3.2
 
 CONFIG += c++11
 
