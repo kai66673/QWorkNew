@@ -1,0 +1,6 @@
+osgearth usage example
+https://alexander-bobkov.ru/2016/06/07/hyexplorer
+
+some another GIS with Qt5 usage
+https://bitbucket.org/maproom/qmapshack/src/f3d69f7b6ee3?at=default
+
