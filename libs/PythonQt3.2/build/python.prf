@@ -2,10 +2,11 @@
 
 # Change this variable to your python version (2.5, 2.6)
 unix: {
-    PYTHON_VERSION=3.5
+    PYTHON_VERSION=3.6
     LIBS += $$system(python$${PYTHON_VERSION}-config --libs)
     QMAKE_CXXFLAGS += $$system(python$${PYTHON_VERSION}-config --includes)
     ROPE_DIR=rope_3
+    INCLUDEPATH += /usr/include/x86_64-linux-gnu/qt5/QtCore/5.9.5/QtCore
 }
 
 win32: {

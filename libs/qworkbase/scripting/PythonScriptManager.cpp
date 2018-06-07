@@ -460,7 +460,7 @@ PythonScriptManager::PythonScriptManager( QMenu *scriptsMenu, QObject *parent )
 {
     m_instance = this;
 
-    PythonQt::init(PythonQt::IgnoreSiteModule | PythonQt::RedirectStdOut);
+    PythonQt::init(/*PythonQt::IgnoreSiteModule |*/ PythonQt::RedirectStdOut);
     PythonQt_QtAll::init();
 
     m_pythonConsole = new PythonQtScriptingConsole(NULL, PythonQt::self()->getMainModule());

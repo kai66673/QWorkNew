@@ -301,8 +301,9 @@ void QwTitleBar::createToggleActions( const QList<QAction *> &actions )
         QAction *toggleAction = new QAction(act->icon(), act->text(), this);
         toggleAction->setCheckable(true);
         bool bChecked = false;
-        if ( actSettings.find(act->text()) != actSettings.end() )
-            bChecked = actSettings[act->text()];
+        QString actText = act->text().replace(QChar('&'), QLatin1String(""));
+        if ( actSettings.find(actText) != actSettings.end() )
+            bChecked = actSettings[actText];
         toggleAction->setChecked(bChecked);
         m_toggleActions.append(toggleAction);
         m_toggleMenu->addAction(toggleAction);
@@ -359,7 +360,7 @@ void QwTitleBar::readSettings( QMap<QString, bool> &actSettings )
             return;
         }
         bool bShown = (itemElement.attribute("shown", "0").toInt() ? true : false);
-        actSettings[itemElement.attribute("name", "")] = bShown;
+        actSettings[itemElement.attribute("name", "").replace(QChar('&'), QLatin1String(""))] = bShown;
 
         itemElement = itemElement.nextSiblingElement();
     }
@@ -400,7 +401,7 @@ void QwTitleBar::writeSettings()
 
     foreach ( QAction *act, m_toggleActions ) {
         QDomElement itemElement = domDocument.createElement("item");
-        itemElement.setAttribute("name", act->text());
+        itemElement.setAttribute("name", act->text().replace(QChar('&'), QLatin1String("")));
         itemElement.setAttribute("shown", act->isChecked());
         root.appendChild(itemElement);
     }

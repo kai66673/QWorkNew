@@ -34,11 +34,11 @@ isEmpty(TARGET_ARCH) {
     else:error("Couldn't detect supported jCjS architecture. Currently supported architectures are: x64, x32 and arm")
 }
 
-CONFIG(release) {
-    BINDIR = $${TARGET_ARCH}/bin_release
+CONFIG(debug, debug|release) {
+    BINDIR = $${TARGET_ARCH}/bin_debug
 }
 else {
-    BINDIR = $${TARGET_ARCH}/bin_debug
+    BINDIR = $${TARGET_ARCH}/bin_release
 }
 
 TARGET_DIR = ../../../../$${BUILDDIR}/QWorkNew/$${QTVERDIR}/$${BINDIR}
