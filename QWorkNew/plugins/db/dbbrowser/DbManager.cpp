@@ -438,14 +438,12 @@ void DbManager::loadSession( const QString &location )
     int errorLine;
     int errorColumn;
 
-    // Загружаем всю структуру
     if ( !domDocument.setContent(&file, true, &errorStr, &errorLine, &errorColumn) ) {
         m_mainWindow->showWarning( tr("Error On Load Session Db-Connections\nCommon Error in xml-file:\nLine %1, Column %2: %3")
                                    .arg(errorLine).arg(errorColumn).arg(errorStr) );
         return;
     }
 
-    // Первичная проверка (тип и версия документа)
     QDomElement root = domDocument.documentElement();
     if ( root.tagName() != "dbconnections" ) {
         m_mainWindow->showWarning( tr("Error On Load Session Db-Connections\nInvalid Format of Sessions xml-file") );

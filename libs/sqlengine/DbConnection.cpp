@@ -379,9 +379,16 @@ void DbConnection::startQueryDataNewJob( const QString &schemaName, const QStrin
     QString queryString = "SELECT * FROM ";
     if ( (m_loader->supportedTopLevel() == Database::IDbLoader::MultiSchema ||
           m_loader->supportedTopLevel() == Database::IDbLoader::DbMultiSchema) &&
-         !schemaName.isEmpty() )
-        queryString += schemaName.toUpper() + ".";
-    queryString += tableName.toUpper();
+         !schemaName.isEmpty() ) {
+        if (!m_connectionInfo->caseSensetive())
+            queryString += schemaName.toUpper() + ".";
+        else
+            queryString += schemaName + ".";
+    }
+    if (!m_connectionInfo->caseSensetive())
+        queryString += tableName.toUpper();
+    else
+        queryString += tableName;
 
     DbJob *newJob = new DbJob(queryString);
 

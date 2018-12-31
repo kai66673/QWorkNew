@@ -7,6 +7,7 @@ SUBDIRS += Db2Provider \
            SqliteProvider \
            PostgresProvider \
            LinterProvider \
+           MySqlProvider \
            CassandraProvider
 
 win32: SUBDIRS += OracleRdbProvider

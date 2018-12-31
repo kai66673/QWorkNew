@@ -124,13 +124,16 @@ public:
         , m_connectionTitle("")
         , m_connectionDescription("")
         , m_defaultSchemaName("")
+        , m_caseSensetive(false)
     {}
 
-    BaseConnectionInfo( const QString &connName, const QString &connTitle, const QString &connDescription, const QString &defaultSchemaName = "" )
+    BaseConnectionInfo( const QString &connName, const QString &connTitle, const QString &connDescription,
+                        const QString &defaultSchemaName = "", bool caseSensetive = false )
         : m_connectionName(connName)
         , m_connectionTitle(connTitle)
         , m_connectionDescription(connDescription)
         , m_defaultSchemaName(defaultSchemaName)
+        , m_caseSensetive(caseSensetive)
     {}
 
     virtual ~BaseConnectionInfo() {}
@@ -139,6 +142,7 @@ public:
     inline QString connectionTitle() const { return m_connectionTitle; }
     inline QString connectionDescription() const { return m_connectionDescription; }
     inline QString defaultSchemaName() const { return m_defaultSchemaName; }
+    inline bool caseSensetive() const { return m_caseSensetive; }
 
     virtual DbAccessor::Ptr accessor() const;
 
@@ -147,6 +151,7 @@ private:
     QString m_connectionTitle;
     QString m_connectionDescription;
     QString m_defaultSchemaName;
+    bool m_caseSensetive;
 };
 
 class SQL_EXPORT IDbConnectWidget: public QWidget
