@@ -1,6 +1,8 @@
 #include "Core.h"
+
 #include "mysqlauthwidget.h"
 #include "mysqlprovider.h"
+#include "mysql_sql_constants.h"
 
 namespace Database {
 namespace MySql {
@@ -66,6 +68,9 @@ MetadataQuery::Ptr Provider::objectsMetadataQuery(const QString &schemaName, int
         case Sql::Constants::DbSchemaObjectType::C_CONSTRAINT:
             return MetadataQuery::create("SELECT CONSTRAINT_NAME, TABLE_NAME FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE TABLE_SCHEMA = '"
                                          + schemaName + "' AND CONSTRAINT_NAME <> 'PRIMARY' ORDER BY 1", 0, 2);
+        case Sql::Constants::DbSchemaObjectType::C_ROUTINE:
+            return MetadataQuery::create("SELECT ROUTINE_NAME FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_SCHEMA = '"
+                                         + schemaName + "' ORDER BY 1");
     }
 
     return MetadataQuery::Ptr(nullptr);
@@ -128,6 +133,31 @@ MetadataQuery::Ptr Provider::objectTableNameMetadataQuery(const QString &schemaN
 IDbDetailsFactory *Provider::createDbDetailsFactory(const QString &connName, const QString &schemaName, int schemaObjectType, int schemaObjectSubtype, const QString &objName) const
 {
     return nullptr;
+}
+
+QStringList Provider::additionalSchemaCategories() const
+{
+    return QStringList() << QObject::tr("Routines");
+}
+
+QString Provider::additionalSchemaCategoryIconName(int schemaObjectType) const
+{
+    switch (schemaObjectType) {
+        case Sql::Constants::DbSchemaObjectType::C_ROUTINE:
+            return QStringLiteral(":/images/dbb_funcproc_list.png");
+    }
+
+    return QStringLiteral("");
+}
+
+QString Provider::additionalSchemaObjectIconName(int schemaObjectType, ItemProperties *properties) const
+{
+    switch (schemaObjectType) {
+        case Sql::Constants::DbSchemaObjectType::C_ROUTINE:
+            return QStringLiteral(":/images/dbb_function.png");
+    }
+
+    return QStringLiteral("");
 }
 
 #ifndef HAVE_QT5

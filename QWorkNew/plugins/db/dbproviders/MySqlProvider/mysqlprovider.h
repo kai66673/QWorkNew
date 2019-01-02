@@ -31,6 +31,10 @@ public:
     MetadataQuery::Ptr subobjectsMetadataQuery(const QString &schemaName, int schemaObjectType, const QString &objName, int schemaObjectSubtype) const override;
     MetadataQuery::Ptr objectTableNameMetadataQuery(const QString &schemaName, int schemaObjectType, const QString &objName) const override;
     IDbDetailsFactory *createDbDetailsFactory(const QString &connName, const QString &schemaName, int schemaObjectType, int schemaObjectSubtype, const QString &objName) const override;
+
+    QStringList additionalSchemaCategories() const override;
+    QString additionalSchemaCategoryIconName(int schemaObjectType) const override;
+    QString additionalSchemaObjectIconName(int schemaObjectType, ItemProperties *properties) const override;
 };
 
 } // MySql
