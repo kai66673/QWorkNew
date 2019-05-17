@@ -1,6 +1,6 @@
 include (../../common.prf)
 
-QT       += core gui xml
+QT       += core gui xml widgets
 
 TARGET = QWorkIde
 TEMPLATE = app
