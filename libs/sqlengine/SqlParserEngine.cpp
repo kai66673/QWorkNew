@@ -1890,7 +1890,17 @@ static inline void sqlClassify6( const char *s, Token &tk )
     }
     else if ( s[1] == 'O' || s[1] == 'o') {
       if ( s[2] == 'D' || s[2] == 'd') {
-        if ( s[3] == 'U' || s[3] == 'u') {
+        if ( s[3] == 'I' || s[3] == 'i' ) {
+          if ( s[4] == 'F' || s[4] == 'f' ) {
+            if ( s[5] == 'Y' || s[5] == 'y' ) {
+              tk.kf.keytype = 1;
+              tk.kf.keyword1 = 1;
+              tk.kf.keyid = T_6_MODIFY;
+              return;
+            }
+          }
+        }
+        else if ( s[3] == 'U' || s[3] == 'u') {
           if ( s[4] == 'L' || s[4] == 'l') {
             if ( s[5] == 'E' || s[5] == 'e') {
               tk.kf.keytype = 1;

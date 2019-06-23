@@ -152,6 +152,7 @@ enum KindKeyword1 {
   T_6_HAVING,
   T_6_INSERT,
   T_6_METHOD,
+  T_6_MODIFY,
   T_6_MODULE,
   T_6_OPTION,
   T_6_OUTPUT,

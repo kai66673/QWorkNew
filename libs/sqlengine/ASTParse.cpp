@@ -217,6 +217,14 @@ bool AlterTableStatementAST::parse( Parser *p, Utils::MemoryPool *pool )
             p->errorCursor("Expected `CONSTRAINT' or `COLUMN' token");
             return false;
         }
+        case T_6_MODIFY:
+            if ( p->LA1(2) == T_6_COLUMN ) {
+                AlterTableModifyColumnClauseAST *modifyClause = new (pool) AlterTableModifyColumnClauseAST;
+                alterTableClause = modifyClause;
+                return modifyClause->parse(p, pool);
+            }
+            p->errorCursor("Expected `COLUMN' token");
+            return false;
     }
 
     p->errorCursor("Expected `ADD' or `DROP' token");
@@ -365,6 +373,53 @@ bool AlterTableAddConstraintClauseAST::parse( Parser *p, Utils::MemoryPool *pool
 bool AlterTableAddColumnClauseAST::parse( Parser *p, Utils::MemoryPool *pool )
 {
     add_token = p->consumeToken();
+    column_token = p->consumeToken();
+    objectKind = Field;
+
+    if ( p->isPatentialIdentifier() ) {
+        ColumnDefinitionAST *columnDef = new (pool) ColumnDefinitionAST;
+        columnDef->columnName = new (pool) ColumnNameAST;
+        const Token &tk = p->tok();
+        columnDef->columnName->name = tk.identifier;
+        columnDef->columnName->name_token = p->consumeToken();
+        if ( p->LA3() ) {
+            p->parseTypeSpecifier(columnDef->columnType);
+        }
+        else {
+            p->errorCursor("Expected type specifier");
+        }
+
+        if ( p->LA1() == T_7_DEFAULT ) {
+            columnDef->default_token = p->consumeToken();
+            if ( p->LA1() == T_4_NULL ) {
+                NullValueExpressionAST *nullExpr = new (pool) NullValueExpressionAST;
+                nullExpr->null_token = p->consumeToken();
+                columnDef->defaultExpr = nullExpr;
+            }
+            else if ( p->LA() == T_NUMERIC_LITERAL ) {
+                NumericExpressionAST *numericAst = new (pool) NumericExpressionAST;
+                numericAst->numeric_token = p->consumeToken();
+                columnDef->defaultExpr = numericAst;
+            }
+            else if ( p->LA() == T_CHAR_LITERAL ) {
+                LiteralExpressionAST *literAst = new (pool) LiteralExpressionAST;
+                literAst->liter_token = p->consumeToken();
+                columnDef->defaultExpr = literAst;
+            }
+            else
+                p->warningCursor("Expected default value");
+        }
+
+        column = columnDef;
+        return p->parseColumnConstraintList(columnDef->constraintList);
+    }
+
+    return false;
+}
+
+bool AlterTableModifyColumnClauseAST::parse( Parser *p, Utils::MemoryPool *pool )
+{
+    modify_token = p->consumeToken();
     column_token = p->consumeToken();
     objectKind = Field;
 

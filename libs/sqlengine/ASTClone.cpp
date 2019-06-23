@@ -825,6 +825,16 @@ AlterTableAddColumnClauseAST *AlterTableAddColumnClauseAST::clone(Utils::MemoryP
     return ast;
 }
 
+AlterTableModifyColumnClauseAST *AlterTableModifyColumnClauseAST::clone(Utils::MemoryPool *pool) const
+{
+    AlterTableModifyColumnClauseAST *ast = new (pool) AlterTableModifyColumnClauseAST;
+    ast->modify_token = modify_token;
+    ast->column_token = column_token;
+    if (column)
+        ast->column = column->clone(pool);
+    return ast;
+}
+
 CommentOnTableStatementAST *CommentOnTableStatementAST::clone(Utils::MemoryPool *pool) const
 {
     CommentOnTableStatementAST *ast = new (pool) CommentOnTableStatementAST;

@@ -117,6 +117,7 @@ public:
     virtual bool match( AlterTableDropClauseAST *node, AlterTableDropClauseAST *pattern );
     virtual bool match( AlterTableAddConstraintClauseAST *node, AlterTableAddConstraintClauseAST *pattern );
     virtual bool match( AlterTableAddColumnClauseAST *node, AlterTableAddColumnClauseAST *pattern );
+    virtual bool match( AlterTableModifyColumnClauseAST *node, AlterTableModifyColumnClauseAST *pattern );
     virtual bool match( CommentOnTableStatementAST *node, CommentOnTableStatementAST *pattern );
     virtual bool match( CommentOnColumnStatementAST *node, CommentOnColumnStatementAST *pattern );
     virtual bool match( CommitStatementAST *node, CommitStatementAST *pattern );

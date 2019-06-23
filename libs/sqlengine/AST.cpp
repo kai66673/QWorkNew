@@ -1405,6 +1405,20 @@ unsigned AlterTableAddColumnClauseAST::lastToken() const
     return add_token + 1;
 }
 
+unsigned AlterTableModifyColumnClauseAST::firstToken() const
+{
+    return modify_token;
+}
+
+unsigned AlterTableModifyColumnClauseAST::lastToken() const
+{
+    if (column)
+        return column->lastToken();
+    if (column_token)
+        return column_token + 1;
+    return modify_token + 1;
+}
+
 unsigned CommentOnTableStatementAST::firstToken() const
 {
     return comment_token;

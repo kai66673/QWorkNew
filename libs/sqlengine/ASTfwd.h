@@ -154,8 +154,8 @@ class AlterTableClauseAST;
     class AlterTableAddClauseAST;
         class AlterTableAddConstraintClauseAST;
         class AlterTableAddColumnClauseAST;
+        class AlterTableModifyColumnClauseAST;
     class AlterTableEnableOrDisableClauseAST;
-    class AlterTableModifyeClauseAST;
 
 
 class SortedColumnNameAST;

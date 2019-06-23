@@ -612,6 +612,14 @@ bool AlterTableAddColumnClauseAST::match0( AST *pattern, ASTMatcher *matcher )
     return false;
 }
 
+bool AlterTableModifyColumnClauseAST::match0( AST *pattern, ASTMatcher *matcher )
+{
+    if ( AlterTableModifyColumnClauseAST *_other = pattern->asAlterTableModifyColumnClause() )
+        return matcher->match(this, _other);
+
+    return false;
+}
+
 bool CommentOnTableStatementAST::match0( AST *pattern, ASTMatcher *matcher )
 {
     if ( CommentOnTableStatementAST *_other = pattern->asCommentOnTableStatement() )

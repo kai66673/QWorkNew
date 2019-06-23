@@ -251,6 +251,7 @@ public:
     virtual AlterTableAddClauseAST *asAlterTableAddClause() { return 0; }
     virtual AlterTableAddConstraintClauseAST *asAlterTableAddConstraintClause() { return 0; }
     virtual AlterTableAddColumnClauseAST *asAlterTableAddColumnClause() { return 0; }
+    virtual AlterTableModifyColumnClauseAST *asAlterTableModifyColumnClause() { return 0; }
 
     virtual CommentStatementAST *asCommentStatement() { return 0; }
     virtual CommentOnTableStatementAST *asCommentOnTableStatement() { return 0; }
@@ -2478,6 +2479,35 @@ public:
 protected:
     virtual void accept0( ASTVisitor *visitor );
     virtual bool match0( AST *, ASTMatcher * );
+};
+
+class SQL_EXPORT AlterTableModifyColumnClauseAST: public AlterTableClauseAST
+{
+public:
+    unsigned modify_token;
+    unsigned column_token;
+    ColumnDefinitionAST *column;
+
+    bool parse(Parser *p, Utils::MemoryPool *pool);
+
+public:
+    AlterTableModifyColumnClauseAST()
+        : AlterTableClauseAST()
+        , modify_token(0),
+          column_token(0),
+          column(nullptr)
+    {}
+
+    virtual AlterTableModifyColumnClauseAST *asAlterTableModifyColumnClause() { return this; }
+
+    virtual unsigned firstToken() const;
+    virtual unsigned lastToken() const;
+
+    virtual AlterTableModifyColumnClauseAST *clone(Utils::MemoryPool *pool) const;
+
+protected:
+    virtual void accept0(ASTVisitor *visitor);
+    virtual bool match0(AST *, ASTMatcher *);
 };
 
 class SQL_EXPORT CommentStatementAST: public StatementAST

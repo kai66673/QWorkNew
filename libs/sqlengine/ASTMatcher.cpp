@@ -1141,6 +1141,19 @@ bool ASTMatcher::match( AlterTableAddConstraintClauseAST *node, AlterTableAddCon
     return true;
 }
 
+bool ASTMatcher::match( AlterTableModifyColumnClauseAST *node, AlterTableModifyColumnClauseAST *pattern )
+{
+    pattern->modify_token = node->modify_token;
+    pattern->column_token = node->column_token;
+
+    if ( !pattern->column )
+        pattern->column = node->column;
+    else if ( !AST::match(node->column, pattern->column, this) )
+        return false;
+
+    return true;
+}
+
 bool ASTMatcher::match( AlterTableAddColumnClauseAST *node, AlterTableAddColumnClauseAST *pattern )
 {
     pattern->add_token = node->add_token;

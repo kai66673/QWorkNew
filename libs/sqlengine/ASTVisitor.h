@@ -182,6 +182,7 @@ public:
     virtual bool visit(AlterTableDropClauseAST *) { return true; }
     virtual bool visit(AlterTableAddConstraintClauseAST *) { return true; }
     virtual bool visit(AlterTableAddColumnClauseAST *) { return true; }
+    virtual bool visit(AlterTableModifyColumnClauseAST *) { return true; }
     virtual bool visit(CommentOnTableStatementAST *) { return true; }
     virtual bool visit(CommentOnColumnStatementAST *) { return true; }
     virtual bool visit(CommitStatementAST *) { return true; }
@@ -294,6 +295,7 @@ public:
     virtual void endVisit(AlterTableDropClauseAST *) { }
     virtual void endVisit(AlterTableAddConstraintClauseAST *) { }
     virtual void endVisit(AlterTableAddColumnClauseAST *) { }
+    virtual void endVisit(AlterTableModifyColumnClauseAST *) { }
     virtual void endVisit(CommentOnTableStatementAST *) { }
     virtual void endVisit(CommentOnColumnStatementAST *) { }
     virtual void endVisit(CommitStatementAST *) { }

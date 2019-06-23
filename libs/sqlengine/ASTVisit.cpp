@@ -639,6 +639,14 @@ void AlterTableAddColumnClauseAST::accept0( ASTVisitor *visitor )
     visitor->endVisit(this);
 }
 
+void AlterTableModifyColumnClauseAST::accept0( ASTVisitor *visitor )
+{
+    if ( visitor->visit(this) ) {
+        accept(column, visitor);
+    }
+    visitor->endVisit(this);
+}
+
 void CommentOnTableStatementAST::accept0( ASTVisitor *visitor )
 {
     if ( visitor->visit(this) ) {
