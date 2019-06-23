@@ -26,6 +26,7 @@ class QwTabBarDockWidget;
 class QwTabCloseResolver
 {
 public:
+    virtual ~QwTabCloseResolver() = default;
     virtual bool canCloseTab(int /*tabIndex*/) { return true; }
 };
 
@@ -34,7 +35,7 @@ class QTCREATOR_UTILS_EXPORT QwTabBar: public QTabBar, public Utils::StyleManage
     Q_OBJECT
 
 public:
-    QwTabBar(QWidget *parent = 0);
+    QwTabBar(QWidget *parent = nullptr);
 };
 
 class QwTabBarHolder: public QWidget
@@ -43,7 +44,7 @@ class QwTabBarHolder: public QWidget
     friend class QwTabBarDockWidget;
 
 public:
-    QwTabBarHolder( QMainWindow *mainWindow, QwTabCloseResolver *tabCloseResolver = 0 );
+    QwTabBarHolder(QMainWindow *mainWindow, QwTabCloseResolver *tabCloseResolver = nullptr);
     virtual ~QwTabBarHolder();
 
     void addTab( const QIcon &icon, const QString &title, const QString &toolTip );
@@ -76,9 +77,9 @@ class QwTitleBar: public QWidget, public Utils::StyleManagedWidget
     Q_OBJECT
 
 public:
-    explicit QwTitleBar( QMainWindow *mainWindow, QwCustomDockWidget *dock, const QString &title,
-                         const QList<QAction *> &actions = QList<QAction *>(),
-                         QWidget *widget = 0, bool innerMode = false );
+    explicit QwTitleBar(QMainWindow *mainWindow, QwCustomDockWidget *dock, const QString &title,
+                        const QList<QAction *> &actions = QList<QAction *>(),
+                        QWidget *widget = nullptr, bool innerMode = false);
     virtual ~QwTitleBar();
 
     void writeSettings();
@@ -126,11 +127,11 @@ public:
 
     typedef QPair <Qt::DockWidgetArea, TabifyHint> DockAreaTabifyHint;
 
-    explicit QwCustomDockWidget( QMainWindow *mainWindow, const QString &title, const QString &objName,
-                                 const QKeySequence &toggleShortcut, const QIcon &toggleIcon,
-                                 Qt::DockWidgetArea initialDockArea, TabifyHint tabifyHint,
-                                 const QList<QAction *> &actions = QList<QAction *>(),
-                                 QWidget *widget = 0, bool innerMode = false );
+    explicit QwCustomDockWidget(QMainWindow *mainWindow, const QString &title, const QString &objName,
+                                const QKeySequence &toggleShortcut, const QIcon &toggleIcon,
+                                Qt::DockWidgetArea initialDockArea, TabifyHint tabifyHint,
+                                const QList<QAction *> &actions = QList<QAction *>(),
+                                QWidget *widget = nullptr, bool innerMode = false);
     virtual ~QwCustomDockWidget();
 
     void setContextMenu( QMenu *menu );
@@ -150,7 +151,7 @@ public slots:
     void toggleFloating();
     void showContextMenu(const QPoint &pos);
     void toggled(bool onoff);
-    void showAndSetCurrentIfTabified( bool *indexChanged = 0 );
+    void showAndSetCurrentIfTabified(bool *indexChanged = nullptr);
     void popup();
 
 protected:
@@ -168,11 +169,11 @@ class QTCREATOR_UTILS_EXPORT QwTabBarDockWidget: public QwCustomDockWidget
     Q_OBJECT
 
 public:
-    QwTabBarDockWidget( QMainWindow *mainWindow, const QString &title, const QString &objName,
-                        const QKeySequence &toggleShortcut, const QIcon &toggleIcon,
-                        Qt::DockWidgetArea initialDockArea, TabifyHint tabifyHint,
-                        const QList<QAction *> &actions = QList<QAction *>(),
-                        QwTabCloseResolver *tabCloseRsolver = 0 );
+    QwTabBarDockWidget(QMainWindow *mainWindow, const QString &title, const QString &objName,
+                       const QKeySequence &toggleShortcut, const QIcon &toggleIcon,
+                       Qt::DockWidgetArea initialDockArea, TabifyHint tabifyHint,
+                       const QList<QAction *> &actions = QList<QAction *>(),
+                       QwTabCloseResolver *tabCloseRsolver = nullptr);
 
     void addTab( const QIcon &icon, const QString &title, const QString &toolTip, QWidget *widget );
 
@@ -210,7 +211,7 @@ class QTCREATOR_UTILS_EXPORT QwTabCornerToolBar: public QToolBar, public Utils::
     Q_OBJECT
 
 public:
-    QwTabCornerToolBar(QWidget *parent = 0);
+    QwTabCornerToolBar(QWidget *parent = nullptr);
 };
 
 #endif // QWDOCKWIDGET_H

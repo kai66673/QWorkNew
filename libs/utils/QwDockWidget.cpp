@@ -49,7 +49,7 @@ QwTabBar::QwTabBar(QWidget *parent)
 { }
 
 QwTabBarHolder::QwTabBarHolder(QMainWindow *mainWindow, QwTabCloseResolver *tabCloseResolver)
-    : QWidget(0)
+    : QWidget(nullptr)
     , m_mainWindow(mainWindow)
     , m_tabCloseResolver(tabCloseResolver)
 {
@@ -162,7 +162,7 @@ QwTitleBar::QwTitleBar( QMainWindow *mainWindow , QwCustomDockWidget *dock, cons
     , Utils::StyleManagedWidget(this, registerQwTitleBarWatcher())
     , m_dock(dock)
     , m_dockTitle(title)
-    , m_toggleMenu(0)
+    , m_toggleMenu(nullptr)
     , m_mainWindow(mainWindow)
     , m_appName(Utils::FileUtils::applicationName())
     , m_innerMode(innerMode)
@@ -454,7 +454,7 @@ QwCustomDockWidget::QwCustomDockWidget( QMainWindow *mainWindow , const QString 
                                         const QList<QAction *> &actions,
                                         QWidget *widget , bool innerMode )
     : QDockWidget(title, mainWindow)
-    , m_contextMenu(0)
+    , m_contextMenu(nullptr)
     , m_titleBar(new QwTitleBar(mainWindow, this, title, actions, widget, innerMode))
     , m_customWidget(widget)
     , m_mainWindow(mainWindow)
