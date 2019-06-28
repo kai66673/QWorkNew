@@ -144,6 +144,12 @@ void SqlCompletionAssistVisitor::addConstraints( const QString &schemaName, cons
     DbMetadataProvider::getInstance()->fillTableConstraints(schemaName, tableName, *m_completions);
 }
 
+void SqlCompletionAssistVisitor::addTableIndexes(const QString &schemaName, const QString &tableName)
+{
+    m_creationStorage->addTableIndexes(tableName, m_completions);
+    DbMetadataProvider::getInstance()->fillTableIndexes(schemaName, tableName, *m_completions);
+}
+
 void SqlCompletionAssistVisitor::addSimpleKeyword(const QString &text)
 {
     TextEditor::BasicProposalItem *item = new TextEditor::BasicProposalItem;
@@ -947,8 +953,11 @@ bool SqlCompletionAssistVisitor::complete( AlterTableStatementAST *ast )
             if ( m_tokenIndexBefore == ast->schemaTableName->lastToken() - 1 && !ast->alterTableClause ) {
                 addSimpleSequence("ADD CONSTRAINT");
                 addSimpleSequence("ADD COLUMN");
+                addSimpleSequence("ADD FOREIGN KEY");
                 addSimpleSequence("DROP CONSTRAINT");
                 addSimpleSequence("DROP COLUMN");
+                addSimpleSequence("DROP FOREIGN KEY");
+                addSimpleSequence("DROP INDEX");
                 return true;
             }
         }
@@ -967,8 +976,14 @@ bool SqlCompletionAssistVisitor::complete( AlterTableStatementAST *ast )
             }
             if ( m_tokenIndexBefore == dropAst->drop_object_type_token ) {
                 if ( !tableName.isEmpty() ) {
-                    if ( translationUnit()->tokenKeyword(m_tokenIndexBefore) == T_10_CONSTRAINT )
+                    auto kwd = translationUnit()->tokenKeyword(m_tokenIndexBefore);
+                    if ( kwd == T_10_CONSTRAINT ) {
                         addConstraints(schemaName, tableName);
+                    } else if ( kwd == T_5_INDEX ) {
+                        addTableIndexes(schemaName, tableName);
+                    } else if ( kwd == T_7_FOREIGN ) {
+                        addSimpleKeyword("KEY");
+                    }
                     else
                         addSchemaTableFields(schemaName, tableName);
                 }
@@ -977,10 +992,21 @@ bool SqlCompletionAssistVisitor::complete( AlterTableStatementAST *ast )
             if ( m_tokenIndexBefore == dropAst->drop_object_type_token + 1 &&
                  translationUnit()->tokenAt(m_tokenIndexBefore).kind() == T_IDENTIFIER && m_completionOperator != T_EOF_SYMBOL ) {
                 if ( !tableName.isEmpty() ) {
-                    if ( translationUnit()->tokenKeyword(m_tokenIndexBefore - 1) == T_10_CONSTRAINT )
+                    auto kwd = translationUnit()->tokenKeyword(m_tokenIndexBefore - 1);
+                    if ( kwd == T_10_CONSTRAINT ) {
                         addConstraints(schemaName, tableName);
-                    else
+                    } else if ( kwd == T_5_INDEX ) {
+                        addTableIndexes(schemaName, tableName);
+                    } else
                         addSchemaTableFields(schemaName, tableName);
+                }
+                return true;
+            }
+            if ( m_tokenIndexBefore == dropAst->drop_object_type_token1 + 1 &&
+                 translationUnit()->tokenAt(m_tokenIndexBefore).kind() == T_IDENTIFIER && m_completionOperator != T_EOF_SYMBOL ) {
+                if ( !tableName.isEmpty() ) {
+                    if ( translationUnit()->tokenKeyword(m_tokenIndexBefore - 1) == T_3_KEY )
+                        addConstraints(schemaName, tableName);
                 }
                 return true;
             }

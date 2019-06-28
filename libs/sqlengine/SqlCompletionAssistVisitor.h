@@ -61,6 +61,7 @@ private:
     void addSchemaTableFields( const QString &schemaName, const QString &tableName );
     void addSchemaViewFields( const QString &schemaName, const QString &viewName );
     void addConstraints( const QString &schemaName, const QString &tableName );
+    void addTableIndexes( const QString &schemaName, const QString &tableName );
     void addSimpleKeyword( const QString &text );
     void addSimpleSequence( const QString &text );
     void addSimpleField( const QString &field );

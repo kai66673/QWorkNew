@@ -2369,7 +2369,8 @@ public:
     enum TableObjectKind {
         Unknown = 0,
         Field,
-        Constraint
+        Constraint,
+        Index
     };
 
     TableObjectKind objectKind;
@@ -2388,7 +2389,8 @@ class SQL_EXPORT AlterTableDropClauseAST: public AlterTableClauseAST
 {
 public:
     unsigned drop_token;
-    unsigned drop_object_type_token;    // constraint or column
+    unsigned drop_object_type_token;    // constraint or column or index or foreign
+    unsigned drop_object_type_token1;   // constraint or column or index or key
     NameAST *dropObjectName;            // ColumnNameAST or ConstraintNameAST
 
     bool parse( Parser *p, Utils::MemoryPool *pool );
@@ -2398,6 +2400,7 @@ public:
         : AlterTableClauseAST()
         , drop_token(0)
         , drop_object_type_token(0)
+        , drop_object_type_token1(0)
         , dropObjectName(0)
     {}
 

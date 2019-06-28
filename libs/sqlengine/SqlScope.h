@@ -34,6 +34,7 @@ public:
     void addTables( QList<TextEditor::BasicProposalItem *> *completions );
     void addTableColumns( const QString &tableName, QList<TextEditor::BasicProposalItem *> *completions );
     void addTableConstraints( const QString &tableName, QList<TextEditor::BasicProposalItem *> *completions );
+    void addTableIndexes( const QString &tableName, QList<TextEditor::BasicProposalItem *> *completions );
     void addIndexes( QList<TextEditor::BasicProposalItem *> *completions );
 
     QList<TableType *> tables;

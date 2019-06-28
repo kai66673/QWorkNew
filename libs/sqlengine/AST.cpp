@@ -1374,6 +1374,8 @@ unsigned AlterTableDropClauseAST::lastToken() const
 {
     if ( dropObjectName )
         return dropObjectName->lastToken();
+    if ( drop_object_type_token1 )
+        return drop_object_type_token1 + 1;
     if ( drop_object_type_token )
         return drop_object_type_token + 1;
     return drop_token + 1;

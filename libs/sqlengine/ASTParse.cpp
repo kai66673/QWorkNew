@@ -286,6 +286,19 @@ bool AlterTableDropClauseAST::parse( Parser *p, Utils::MemoryPool *pool )
     drop_token = p->consumeToken();
 
     switch ( p->LA1() ) {
+        case T_5_INDEX: {
+            drop_object_type_token = p->consumeToken();
+            if ( !p->isPatentialIdentifier() ) {
+                p->errorCursor("Expected index name");
+                return false;
+            }
+            const Token &tk = p->tok();
+            dropObjectName = new (pool) IndexNameAST;
+            dropObjectName->name = tk.identifier;
+            dropObjectName->name_token = p->consumeToken();
+            objectKind = Index;
+            break;
+        }
         case T_10_CONSTRAINT: {
             drop_object_type_token = p->consumeToken();
             if ( !p->isPatentialIdentifier() ) {
@@ -310,6 +323,24 @@ bool AlterTableDropClauseAST::parse( Parser *p, Utils::MemoryPool *pool )
             dropObjectName->name = tk.identifier;
             dropObjectName->name_token = p->consumeToken();
             objectKind = Field;
+            break;
+        }
+        case T_7_FOREIGN: {
+            drop_object_type_token = p->consumeToken();
+            if ( p->LA1() != T_3_KEY ) {
+                p->errorCursor("Expected token `KEY`");
+                return false;
+            }
+            drop_object_type_token1 = p->consumeToken();
+            if ( !p->isPatentialIdentifier() ) {
+                p->errorCursor("Expected constraint name");
+                return false;
+            }
+            const Token &tk = p->tok();
+            dropObjectName = new (pool) ConstraintNameAST;
+            dropObjectName->name = tk.identifier;
+            dropObjectName->name_token = p->consumeToken();
+            objectKind = Constraint;
             break;
         }
         default:

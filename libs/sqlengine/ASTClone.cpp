@@ -801,6 +801,7 @@ AlterTableDropClauseAST *AlterTableDropClauseAST::clone(Utils::MemoryPool *pool)
     AlterTableDropClauseAST *ast = new (pool) AlterTableDropClauseAST;
     ast->drop_token = drop_token;
     ast->drop_object_type_token = drop_object_type_token;
+    ast->drop_object_type_token1 = drop_object_type_token1;
     if ( dropObjectName )
         ast->dropObjectName = dropObjectName->clone(pool);
     return ast;

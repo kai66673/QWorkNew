@@ -1120,6 +1120,7 @@ bool ASTMatcher::match( AlterTableDropClauseAST *node, AlterTableDropClauseAST *
 {
     pattern->drop_token = node->drop_token;
     pattern->drop_object_type_token = node->drop_object_type_token;
+    pattern->drop_object_type_token1 = node->drop_object_type_token1;
 
     if ( !pattern->dropObjectName )
         pattern->dropObjectName = node->dropObjectName;

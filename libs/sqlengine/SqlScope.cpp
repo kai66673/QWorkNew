@@ -96,6 +96,22 @@ void SqlCreationStorage::addTableConstraints( const QString &tableName, QList<Te
     }
 }
 
+void SqlCreationStorage::addTableIndexes(const QString &tableName, QList<TextEditor::BasicProposalItem *> *completions)
+{
+    foreach ( TableType *table, tables ) {
+        if ( !table->tableName.compare(tableName) ) {
+            foreach ( const QString &name, table->indexes ) {
+                TextEditor::BasicProposalItem *item = new TextEditor::BasicProposalItem;
+                item ->setText(name);
+                item->setIcon(QIcon(":/images/dbb_index.png"));
+                completions->append(item);
+            }
+
+            return;
+        }
+    }
+}
+
 void SqlCreationStorage::addIndexes( QList<TextEditor::BasicProposalItem *> *completions )
 {
     foreach ( const QString &index, indexes ) {
