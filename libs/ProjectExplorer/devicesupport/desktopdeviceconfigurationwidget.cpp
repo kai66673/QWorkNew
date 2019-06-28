@@ -32,6 +32,7 @@
 #include "ui_desktopdeviceconfigurationwidget.h"
 #include <projectexplorerconstants.h>
 
+#include <QRegExpValidator>
 #include <coreconstants.h>
 #include <utils/portlist.h>
 #include <utils/qtcassert.h>

@@ -27,9 +27,10 @@ win32: {
         LIBS += -lpython$${PYTHON_VERSION}$${DEBUG_EXT}
         ROPE_DIR=rope_3
     } else: win32-msvc2015 {
-        PYTHON_VERSION=35
-        INCLUDEPATH += C:/Python35/include
+        PYTHON_VERSION=36
+        INCLUDEPATH += C:/Python36/include
         LIBS += -lpython$${PYTHON_VERSION}$${DEBUG_EXT}
+        LIBS += -LC:/Python36/libs
         ROPE_DIR=rope_3
     }
 }

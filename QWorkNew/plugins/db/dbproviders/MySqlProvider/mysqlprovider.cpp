@@ -1,3 +1,5 @@
+#include <QSqlError>
+
 #include "Core.h"
 #include "DbUtils.h"
 
@@ -23,8 +25,9 @@ BaseConnectionInfo *Provider::createConnection(const QString &connName, const QS
 
     if ( !db.open() ) {
         QMessageBox::critical( Core::Storage::mainWindow()->widget(),
-                               tr("Cannot open database"),
-                               tr("Unable to establish a database connection.\nClick Cancel to exit."),
+                               tr("Cannot open database:\n"),
+                               tr("Unable to establish a database connection.\nClick Cancel to exit.\n\n%1\n(%2)")
+                               .arg(db.lastError().text()).arg(QSqlDatabase::drivers().join(", ")),
                                QMessageBox::Cancel );
         return nullptr;
     }

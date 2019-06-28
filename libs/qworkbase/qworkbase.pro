@@ -5,7 +5,7 @@
 #-------------------------------------------------
 include (../../common.prf)
 
-QT += network xml
+QT += network xml gui
 
 TARGET = QWorkBase
 TEMPLATE = lib
