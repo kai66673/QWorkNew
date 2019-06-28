@@ -160,146 +160,146 @@ public:
 
     virtual AST *clone(Utils::MemoryPool *pool) const = 0;
 
-    virtual TranslationUnitAST *asTranslationUnit() { return 0; }
-    virtual StatementAST *asStatement() { return 0; }
-    virtual InvalidStatementAST *asInvalidStatement() { return 0; }
-    virtual UnknownStatementAST *asUnknownStatement() { return 0; }
-    virtual DmlStatementAST *asDmlStatement() { return 0; }
-    virtual SelectStatementAST *asSelectStatement() { return 0; }
-    virtual SelectCoreAST *asSelectCore() { return 0; }
-    virtual SelectCompoundAST *asSelectCompound() { return 0; }
-    virtual SelectCompoundUnionAST *asSelectCompoundUnion() { return 0; }
-    virtual SelectCompoundIntersectAST *asSelectCompoundIntersect() { return 0; }
-    virtual SelectCompoundExceptAST *asSelectCompoundExcept() { return 0; }
-    virtual SelectCompoundMinusAST *asSelectCompoundMinus() { return 0; }
-    virtual OrderByBlockAST *asOrderByBlock() { return 0; }
-    virtual LimitToBlockAST *asLimitToBlock() { return 0; }
-    virtual OrderingTermAST *asOrderingTerm() { return 0; }
-    virtual NameAST *asName() { return 0; }
-    virtual SchemaNameAST *asSchemaName() { return 0; }
-    virtual TableNameAST *asTableName() { return 0; }
-    virtual ColumnAliasAST *asColumnAlias() { return 0; }
-    virtual TableAliasAST *asTableAlias() { return 0; }
-    virtual ColumnNameAST *asColumnName() { return 0; }
-    virtual FunctionNameAST *asFunctionName() { return 0; }
-    virtual ParamNameAST *asParamName() { return 0; }
-    virtual LabelNameAST *asLabelName() { return 0; }
-    virtual ViewNameAST *asViewName() { return 0; }
-    virtual IndexNameAST *asIndexName() { return 0; }
-    virtual TriggerNameAST *asTriggerName() { return 0; }
-    virtual ConstraintNameAST *asConstraintName() { return 0; }
-    virtual SchemaTableNameAST *asSchemaTableName() { return 0; }
-    virtual SchemaIndexNameAST *asSchemaIndexName() { return 0; }
-    virtual SchemaTriggerNameAST *asSchemaTriggerName() { return 0; }
-    virtual ResultColumnAST *asResultColumn() { return 0; }
-    virtual StarResultColumnAST *asStarResultColumn() { return 0; }
-    virtual ExprResultColumnAST *asExprResultColumn() { return 0; }
-    virtual SubQueryAST *asSubQuery() { return 0; }
-    virtual SingleSourceAST *asSingleSource() { return 0; }
-    virtual DirectSingleSourceAST *asDirectSingleSource() { return 0; }
-    virtual SubQuerySingleSourceAST *asSubQuerySingleSource() { return 0; }
-    virtual JoinOpAST *asJoinOp() { return 0; }
-    virtual JoinConstraintAST *asJoinConstraint() { return 0; }
-    virtual JoinItemAST *asJoinItem() { return 0; }
-    virtual JoinSourceAST *asJoinSource() { return 0; }
-    virtual GroupByBlockAST *asGroupByBlock() { return 0; }
+    virtual TranslationUnitAST *asTranslationUnit() { return nullptr; }
+    virtual StatementAST *asStatement() { return nullptr; }
+    virtual InvalidStatementAST *asInvalidStatement() { return nullptr; }
+    virtual UnknownStatementAST *asUnknownStatement() { return nullptr; }
+    virtual DmlStatementAST *asDmlStatement() { return nullptr; }
+    virtual SelectStatementAST *asSelectStatement() { return nullptr; }
+    virtual SelectCoreAST *asSelectCore() { return nullptr; }
+    virtual SelectCompoundAST *asSelectCompound() { return nullptr; }
+    virtual SelectCompoundUnionAST *asSelectCompoundUnion() { return nullptr; }
+    virtual SelectCompoundIntersectAST *asSelectCompoundIntersect() { return nullptr; }
+    virtual SelectCompoundExceptAST *asSelectCompoundExcept() { return nullptr; }
+    virtual SelectCompoundMinusAST *asSelectCompoundMinus() { return nullptr; }
+    virtual OrderByBlockAST *asOrderByBlock() { return nullptr; }
+    virtual LimitToBlockAST *asLimitToBlock() { return nullptr; }
+    virtual OrderingTermAST *asOrderingTerm() { return nullptr; }
+    virtual NameAST *asName() { return nullptr; }
+    virtual SchemaNameAST *asSchemaName() { return nullptr; }
+    virtual TableNameAST *asTableName() { return nullptr; }
+    virtual ColumnAliasAST *asColumnAlias() { return nullptr; }
+    virtual TableAliasAST *asTableAlias() { return nullptr; }
+    virtual ColumnNameAST *asColumnName() { return nullptr; }
+    virtual FunctionNameAST *asFunctionName() { return nullptr; }
+    virtual ParamNameAST *asParamName() { return nullptr; }
+    virtual LabelNameAST *asLabelName() { return nullptr; }
+    virtual ViewNameAST *asViewName() { return nullptr; }
+    virtual IndexNameAST *asIndexName() { return nullptr; }
+    virtual TriggerNameAST *asTriggerName() { return nullptr; }
+    virtual ConstraintNameAST *asConstraintName() { return nullptr; }
+    virtual SchemaTableNameAST *asSchemaTableName() { return nullptr; }
+    virtual SchemaIndexNameAST *asSchemaIndexName() { return nullptr; }
+    virtual SchemaTriggerNameAST *asSchemaTriggerName() { return nullptr; }
+    virtual ResultColumnAST *asResultColumn() { return nullptr; }
+    virtual StarResultColumnAST *asStarResultColumn() { return nullptr; }
+    virtual ExprResultColumnAST *asExprResultColumn() { return nullptr; }
+    virtual SubQueryAST *asSubQuery() { return nullptr; }
+    virtual SingleSourceAST *asSingleSource() { return nullptr; }
+    virtual DirectSingleSourceAST *asDirectSingleSource() { return nullptr; }
+    virtual SubQuerySingleSourceAST *asSubQuerySingleSource() { return nullptr; }
+    virtual JoinOpAST *asJoinOp() { return nullptr; }
+    virtual JoinConstraintAST *asJoinConstraint() { return nullptr; }
+    virtual JoinItemAST *asJoinItem() { return nullptr; }
+    virtual JoinSourceAST *asJoinSource() { return nullptr; }
+    virtual GroupByBlockAST *asGroupByBlock() { return nullptr; }
 
-    virtual DeleteStatementAST *asDeleteStatement() { return 0; }
-    virtual InsertStatementAST *asInsertStatement() { return 0; }
-    virtual InsertClauseAST *asInsertClause() { return 0; }
-    virtual InsertClauseAsValuesAST *asInsertClauseAsValues() { return 0; }
-    virtual InsertClauseAsSelectAST *asInsertClauseAsSelect() { return 0; }
-    virtual CreateTableClauseAST *asCreateTableClause() { return 0; }
-    virtual CreateTableDirectClauseAST *asCreateTableDirectClause() { return 0; }
-    virtual CreateTableAsSelectClauseAST *asCreateTableAsSelectClause() { return 0; }
-    virtual CreateTriggerRefClauseAST *asCreateTriggerRefClause() { return 0; }
-    virtual CreateRdbTriggerBodyAST *asCreateRdbTriggerBody() { return 0; }
-    virtual CreateRdbTriggerBodyItemAST *asCreateRdbTriggerBodyItem() { return 0; }
-     virtual CreateTriggerBodyAST *asCreateTriggerBody() { return 0; }
-    virtual UpdateStatementAST *asUpdateStatement() { return 0; }
-    virtual ColumnDefinitionAST *asColumnDefinition() { return 0; }
-    virtual ConstraintAST *asConstraint() { return 0; }
-    virtual TableConstraintAST *asTableConstraint() { return 0; }
-    virtual ColumnConstraintAST *asColumnConstraint() { return 0; }
-    virtual UniqueOrPkTableConstraintAST *asUniqueOrPkTableConstraint() { return 0; }
-    virtual CheckTableConstraintAST *asCheckTableConstraint() { return 0; }
-    virtual FkTableConstraintAST *asFkTableConstraint() { return 0; }
-    virtual FkReferencesClauseAST *asForeignKeyClause() { return 0; }
-    virtual PkColumnConstraintAST *asPkColumnConstraint() { return 0; }
-    virtual NotNullColumnConstraintAST *asNotNullColumnConstraint() { return 0; }
-    virtual UniqueColumnConstraintAST *asUniqueColumnConstraint() { return 0; }
-    virtual CheckColumnConstraintAST *asCheckColumnConstraint() { return 0; }
-    virtual ReferencesColumnConstraintAST *asReferencesColumnConstraint() { return 0; }
-    virtual SortedColumnNameAST *asSortedColumnName() { return 0; }
+    virtual DeleteStatementAST *asDeleteStatement() { return nullptr; }
+    virtual InsertStatementAST *asInsertStatement() { return nullptr; }
+    virtual InsertClauseAST *asInsertClause() { return nullptr; }
+    virtual InsertClauseAsValuesAST *asInsertClauseAsValues() { return nullptr; }
+    virtual InsertClauseAsSelectAST *asInsertClauseAsSelect() { return nullptr; }
+    virtual CreateTableClauseAST *asCreateTableClause() { return nullptr; }
+    virtual CreateTableDirectClauseAST *asCreateTableDirectClause() { return nullptr; }
+    virtual CreateTableAsSelectClauseAST *asCreateTableAsSelectClause() { return nullptr; }
+    virtual CreateTriggerRefClauseAST *asCreateTriggerRefClause() { return nullptr; }
+    virtual CreateRdbTriggerBodyAST *asCreateRdbTriggerBody() { return nullptr; }
+    virtual CreateRdbTriggerBodyItemAST *asCreateRdbTriggerBodyItem() { return nullptr; }
+     virtual CreateTriggerBodyAST *asCreateTriggerBody() { return nullptr; }
+    virtual UpdateStatementAST *asUpdateStatement() { return nullptr; }
+    virtual ColumnDefinitionAST *asColumnDefinition() { return nullptr; }
+    virtual ConstraintAST *asConstraint() { return nullptr; }
+    virtual TableConstraintAST *asTableConstraint() { return nullptr; }
+    virtual ColumnConstraintAST *asColumnConstraint() { return nullptr; }
+    virtual UniqueOrPkTableConstraintAST *asUniqueOrPkTableConstraint() { return nullptr; }
+    virtual CheckTableConstraintAST *asCheckTableConstraint() { return nullptr; }
+    virtual FkTableConstraintAST *asFkTableConstraint() { return nullptr; }
+    virtual FkReferencesClauseAST *asForeignKeyClause() { return nullptr; }
+    virtual PkColumnConstraintAST *asPkColumnConstraint() { return nullptr; }
+    virtual NotNullColumnConstraintAST *asNotNullColumnConstraint() { return nullptr; }
+    virtual UniqueColumnConstraintAST *asUniqueColumnConstraint() { return nullptr; }
+    virtual CheckColumnConstraintAST *asCheckColumnConstraint() { return nullptr; }
+    virtual ReferencesColumnConstraintAST *asReferencesColumnConstraint() { return nullptr; }
+    virtual SortedColumnNameAST *asSortedColumnName() { return nullptr; }
 
-    virtual DdlStatementAST *asDdlStatement() { return 0; }
-    virtual CreateStatementAST *asCreateStatement() { return 0; }
-    virtual CreateTableStatementAST *asCreateTableStatement() { return 0; }
-    virtual CreateViewStatementAST *asCreateViewStatement() { return 0; }
-    virtual CreateIndexStatementAST *asCreateIndexStatement() { return 0; }
-    virtual CreateTriggerStatementAST *asCreateTriggerStatement() { return 0; }
-    virtual DropStatementAST *asDropStatement() { return 0; }
-    virtual DropTableStatementAST *asDropTableStatement() { return 0; }
-    virtual DropViewStatementAST *asDropViewStatement() { return 0; }
-    virtual DropIndexStatementAST *asDropIndexStatement() { return 0; }
-    virtual DropTriggerStatementAST *asDropTriggerStatement() { return 0; }
-    virtual TruncateStatementAST *asTruncateStatement() { return 0; }
-    virtual AlterStatementAST *asAlterStatement() { return 0; }
-    virtual AlterTableStatementAST *asAlterTableStatement() { return 0; }
-    virtual AlterTableClauseAST *asAlterTableClause() { return 0; }
-    virtual AlterTableDropClauseAST *asAlterTableDropClause() { return 0; }
-    virtual AlterTableAddClauseAST *asAlterTableAddClause() { return 0; }
-    virtual AlterTableAddConstraintClauseAST *asAlterTableAddConstraintClause() { return 0; }
-    virtual AlterTableAddColumnClauseAST *asAlterTableAddColumnClause() { return 0; }
-    virtual AlterTableModifyColumnClauseAST *asAlterTableModifyColumnClause() { return 0; }
+    virtual DdlStatementAST *asDdlStatement() { return nullptr; }
+    virtual CreateStatementAST *asCreateStatement() { return nullptr; }
+    virtual CreateTableStatementAST *asCreateTableStatement() { return nullptr; }
+    virtual CreateViewStatementAST *asCreateViewStatement() { return nullptr; }
+    virtual CreateIndexStatementAST *asCreateIndexStatement() { return nullptr; }
+    virtual CreateTriggerStatementAST *asCreateTriggerStatement() { return nullptr; }
+    virtual DropStatementAST *asDropStatement() { return nullptr; }
+    virtual DropTableStatementAST *asDropTableStatement() { return nullptr; }
+    virtual DropViewStatementAST *asDropViewStatement() { return nullptr; }
+    virtual DropIndexStatementAST *asDropIndexStatement() { return nullptr; }
+    virtual DropTriggerStatementAST *asDropTriggerStatement() { return nullptr; }
+    virtual TruncateStatementAST *asTruncateStatement() { return nullptr; }
+    virtual AlterStatementAST *asAlterStatement() { return nullptr; }
+    virtual AlterTableStatementAST *asAlterTableStatement() { return nullptr; }
+    virtual AlterTableClauseAST *asAlterTableClause() { return nullptr; }
+    virtual AlterTableDropClauseAST *asAlterTableDropClause() { return nullptr; }
+    virtual AlterTableAddClauseAST *asAlterTableAddClause() { return nullptr; }
+    virtual AlterTableAddConstraintClauseAST *asAlterTableAddConstraintClause() { return nullptr; }
+    virtual AlterTableAddColumnClauseAST *asAlterTableAddColumnClause() { return nullptr; }
+    virtual AlterTableModifyColumnClauseAST *asAlterTableModifyColumnClause() { return nullptr; }
 
-    virtual CommentStatementAST *asCommentStatement() { return 0; }
-    virtual CommentOnTableStatementAST *asCommentOnTableStatement() { return 0; }
-    virtual CommentOnColumnStatementAST *asCommentOnColumnStatement() { return 0; }
+    virtual CommentStatementAST *asCommentStatement() { return nullptr; }
+    virtual CommentOnTableStatementAST *asCommentOnTableStatement() { return nullptr; }
+    virtual CommentOnColumnStatementAST *asCommentOnColumnStatement() { return nullptr; }
 
-    virtual CommitStatementAST *asCommitStatement() { return 0; }
-    virtual RollbackStatementAST *asRollbackStatement() { return 0; }
-    virtual CallStatementAST *asCallStatement() { return 0; }
+    virtual CommitStatementAST *asCommitStatement() { return nullptr; }
+    virtual RollbackStatementAST *asRollbackStatement() { return nullptr; }
+    virtual CallStatementAST *asCallStatement() { return nullptr; }
 
-    virtual BaseTypeAST *asBaseType() { return 0; }
-    virtual CharacterTypeAST *asCharacterType() { return 0; }
-    virtual NumberTypeAST *asNumericType() { return 0; }
-    virtual SimpleTypeAST *asSimpleType() { return 0; }
+    virtual BaseTypeAST *asBaseType() { return nullptr; }
+    virtual CharacterTypeAST *asCharacterType() { return nullptr; }
+    virtual NumberTypeAST *asNumericType() { return nullptr; }
+    virtual SimpleTypeAST *asSimpleType() { return nullptr; }
 
     // Expressions
-    virtual BaseExpressionAST *asBaseExpression() { return 0; }
-    virtual ValueExpressionAST *asValueExpression() { return 0; }
-    virtual CompoundValueExpressionAST *asCompoundValueExpression() { return 0; }
-    virtual UnaryValueExpressionAST *asUnaryValueExpression() { return 0; }
-    virtual BinaryValueExpressionAST *asBinaryValueExpression() { return 0; }
-    virtual SimpleValueExpressionAST *asSimpleValueExpression() { return 0; }
-    virtual ConstantExpressionAST *asConstantExpression() { return 0; }
-    virtual ColumnExpressionAST *asColumnExpression() { return 0; }
-    virtual LiteralExpressionAST *asLiteralExpression() { return 0; }
-    virtual NumericExpressionAST *asNumericExpression() { return 0; }
-    virtual FunctionExpressionAST *asFunctionExpression() { return 0; }
-    virtual CastFunctionAST *asCastFunction() { return 0; }
-    virtual SubstringFunctionAST *asSubstringFunction() { return 0; }
-    virtual CountFunctionAST *asCountFunction() { return 0; }
-    virtual ParameterExpressionAST *asParameterExpression() { return 0; }
-    virtual NullValueExpressionAST *asNullValueExpression() { return 0; }
-    virtual SelectCompoundValueExpressionAST *asSelectCompoundValueExpression() { return 0; }
-    virtual CompoundRValueExpressionAST *asCompoundRValueExpression() { return 0; }
-    virtual ValueListExpressionAST *asValueListExpression() { return 0; }
-    virtual SubQueryExpressionAST *asSubQueryExpression() { return 0; }
-    virtual ConditionExpressionAST *asConditionExpression() { return 0; }
-    virtual CompoundConditionExpressionAST *asCompoundConditionExpression() { return 0; }
-    virtual InConditionExpressionAST *asInConditionExpression() { return 0; }
-    virtual LikeConditionExpressionAST *asLikeConditionExpression() { return 0; }
-    virtual BetweenConditionExpressionAST *asBetweenConditionExpression() { return 0; }
-    virtual ExistsConditionExpressionAST *asExistsConditionExpression() { return 0; }
-    virtual UnaryConditionExpressionAST *asUnaryConditionExpression() { return 0; }
-    virtual BinaryConditionExpressionAST *asBinaryConditionExpression() { return 0; }
-    virtual AssignmentExpressionAST *asAssignmentExpression() { return 0; }
-    virtual CaseExpressionAST *asCaseExpression() { return 0; }
-    virtual CaseExpressionClauseAST *asCaseExpressionClause() { return 0; }
-    virtual CaseConditionAST *asCaseCondition() { return 0; }
-    virtual CaseConditionClauseAST *asCaseConditionClause() { return 0; }
+    virtual BaseExpressionAST *asBaseExpression() { return nullptr; }
+    virtual ValueExpressionAST *asValueExpression() { return nullptr; }
+    virtual CompoundValueExpressionAST *asCompoundValueExpression() { return nullptr; }
+    virtual UnaryValueExpressionAST *asUnaryValueExpression() { return nullptr; }
+    virtual BinaryValueExpressionAST *asBinaryValueExpression() { return nullptr; }
+    virtual SimpleValueExpressionAST *asSimpleValueExpression() { return nullptr; }
+    virtual ConstantExpressionAST *asConstantExpression() { return nullptr; }
+    virtual ColumnExpressionAST *asColumnExpression() { return nullptr; }
+    virtual LiteralExpressionAST *asLiteralExpression() { return nullptr; }
+    virtual NumericExpressionAST *asNumericExpression() { return nullptr; }
+    virtual FunctionExpressionAST *asFunctionExpression() { return nullptr; }
+    virtual CastFunctionAST *asCastFunction() { return nullptr; }
+    virtual SubstringFunctionAST *asSubstringFunction() { return nullptr; }
+    virtual CountFunctionAST *asCountFunction() { return nullptr; }
+    virtual ParameterExpressionAST *asParameterExpression() { return nullptr; }
+    virtual NullValueExpressionAST *asNullValueExpression() { return nullptr; }
+    virtual SelectCompoundValueExpressionAST *asSelectCompoundValueExpression() { return nullptr; }
+    virtual CompoundRValueExpressionAST *asCompoundRValueExpression() { return nullptr; }
+    virtual ValueListExpressionAST *asValueListExpression() { return nullptr; }
+    virtual SubQueryExpressionAST *asSubQueryExpression() { return nullptr; }
+    virtual ConditionExpressionAST *asConditionExpression() { return nullptr; }
+    virtual CompoundConditionExpressionAST *asCompoundConditionExpression() { return nullptr; }
+    virtual InConditionExpressionAST *asInConditionExpression() { return nullptr; }
+    virtual LikeConditionExpressionAST *asLikeConditionExpression() { return nullptr; }
+    virtual BetweenConditionExpressionAST *asBetweenConditionExpression() { return nullptr; }
+    virtual ExistsConditionExpressionAST *asExistsConditionExpression() { return nullptr; }
+    virtual UnaryConditionExpressionAST *asUnaryConditionExpression() { return nullptr; }
+    virtual BinaryConditionExpressionAST *asBinaryConditionExpression() { return nullptr; }
+    virtual AssignmentExpressionAST *asAssignmentExpression() { return nullptr; }
+    virtual CaseExpressionAST *asCaseExpression() { return nullptr; }
+    virtual CaseExpressionClauseAST *asCaseExpressionClause() { return nullptr; }
+    virtual CaseConditionAST *asCaseCondition() { return nullptr; }
+    virtual CaseConditionClauseAST *asCaseConditionClause() { return nullptr; }
 
     // Additional for SelectStatement and InvalidSelectStatement
     virtual bool isSelectStatement() const { return false; }
@@ -316,7 +316,7 @@ public:
 
 public:
     TranslationUnitAST()
-        : statement_list(0)
+        : statement_list(nullptr)
     {}
 
     virtual TranslationUnitAST *asTranslationUnit() { return this; }
@@ -435,10 +435,10 @@ public:
 public:
     SelectStatementAST()
         : DmlStatementAST()
-        , select_core_list(0)
-        , select_compound_list(0)
-        , order_by_block(0)
-        , limit_to_block(0)
+        , select_core_list(nullptr)
+        , select_compound_list(nullptr)
+        , order_by_block(nullptr)
+        , limit_to_block(nullptr)
         , last_token(0)
     {}
 
@@ -471,12 +471,12 @@ public:
     SelectCoreAST()
         : select_token(0)
         , select_spec_token(0)
-        , columnList(0)
+        , columnList(nullptr)
         , from_token(0)
-        , joinSource(0)
+        , joinSource(nullptr)
         , where_token(0)
-        , whereExpr(0)
-        , groupBy(0)
+        , whereExpr(nullptr)
+        , groupBy(nullptr)
     {}
 
     virtual SelectCoreAST *asSelectCore() { return this; }
@@ -600,7 +600,7 @@ public:
     OrderByBlockAST()
         : order_token(0)
         , by_token(0)
-        , term_list(0)
+        , term_list(nullptr)
     {}
 
     virtual OrderByBlockAST *asOrderByBlock() { return this; }
@@ -627,7 +627,7 @@ public:
     LimitToBlockAST()
         : limit_token(0)
         , to_token(0)
-        , expr(0)
+        , expr(nullptr)
         , row_token(0)
     {}
 
@@ -651,7 +651,7 @@ public:
 
 public:
     OrderingTermAST()
-        : expr(0)
+        : expr(nullptr)
         , asc_or_desc_token(0)
     {}
 
@@ -678,7 +678,7 @@ public: // Annotations
 public:
     NameAST()
         : name_token(0)
-        , name(0)
+        , name(nullptr)
     {}
 
     virtual NameAST *asName() { return this; }
@@ -788,9 +788,9 @@ public:
 
 public:
     SchemaTableNameAST()
-        : schemaName(0)
+        : schemaName(nullptr)
         , dot_token(0)
-        , tableName(0)
+        , tableName(nullptr)
     {}
 
     virtual SchemaTableNameAST *asSchemaTableName() { return this; }
@@ -816,9 +816,9 @@ public:
 
 public:
     SchemaIndexNameAST()
-        : schemaName(0)
+        : schemaName(nullptr)
         , dot_token(0)
-        , indexName(0)
+        , indexName(nullptr)
     {}
 
     virtual SchemaIndexNameAST *asSchemaIndexName() { return this; }
@@ -844,9 +844,9 @@ public:
 
 public:
     SchemaTriggerNameAST()
-        : schemaName(0)
+        : schemaName(nullptr)
         , dot_token(0)
-        , triggerName(0)
+        , triggerName(nullptr)
     {}
 
     virtual SchemaTriggerNameAST *asSchemaTriggerName() { return this; }
@@ -871,8 +871,8 @@ public: // Annotations
 public:
     TableAliasAST()
         : NameAST()
-        , subqueryAliasType(0)
-        , schemaTableName(0)
+        , subqueryAliasType(nullptr)
+        , schemaTableName(nullptr)
     {}
 
     virtual TableAliasAST *asTableAlias() { return this; }
@@ -894,8 +894,8 @@ public: // Annotations
 public:
     ColumnNameAST()
         : NameAST()
-        , schemaName(0)
-        , tableOfColumn(0)
+        , schemaName(nullptr)
+        , tableOfColumn(nullptr)
     {}
 
     virtual ColumnNameAST *asColumnName() { return this; }
@@ -1000,7 +1000,7 @@ public:
 
 public:
     StarResultColumnAST()
-        : schemaTableName(0)
+        : schemaTableName(nullptr)
         , dot_token(0)
         , star_token(0)
     {}
@@ -1026,9 +1026,9 @@ public:
 
 public:
     ExprResultColumnAST()
-        : expr(0)
+        : expr(nullptr)
         , as_token(0)
-        , columnAlias(0)
+        , columnAlias(nullptr)
     {}
 
     virtual ExprResultColumnAST *asExprResultColumn() { return this; }
@@ -1053,7 +1053,7 @@ public:
 public:
     SubQueryAST()
         : lparen_token(0)
-        , selectStatement(0)
+        , selectStatement(nullptr)
         , rparen_token(0)
     {}
 
@@ -1089,9 +1089,9 @@ public:
 
 public:
     DirectSingleSourceAST()
-        : schemaTableName(0)
+        : schemaTableName(nullptr)
         , as_token(0)
-        , tableAlias(0)
+        , tableAlias(nullptr)
     {}
 
     virtual DirectSingleSourceAST *asDirectSingleSource() { return this; }
@@ -1115,9 +1115,9 @@ public:
 
 public:
     SubQuerySingleSourceAST()
-        : subQuery(0)
+        : subQuery(nullptr)
         , as_token(0)
-        , tableAlias(0)
+        , tableAlias(nullptr)
     {}
 
     virtual SubQuerySingleSourceAST *asSubQuerySingleSource() { return this; }
@@ -1165,7 +1165,7 @@ public:
 public:
     JoinConstraintAST()
         : on_token(0)
-        , expr(0)
+        , expr(nullptr)
     {}
 
     virtual JoinConstraintAST *asJoinConstraint() { return this; }
@@ -1189,9 +1189,9 @@ public:
 
 public:
     JoinItemAST()
-        : joinOp(0)
-        , singleSource(0)
-        , joinConstraint(0)
+        : joinOp(nullptr)
+        , singleSource(nullptr)
+        , joinConstraint(nullptr)
     {}
 
     virtual JoinItemAST *asJoinItem() { return this; }
@@ -1214,8 +1214,8 @@ public:
 
 public:
     JoinSourceAST()
-        : firstSource(0)
-        , source_list(0)
+        : firstSource(nullptr)
+        , source_list(nullptr)
     {}
 
     JoinSourceAST *asJoinSource() { return this; }
@@ -1243,9 +1243,9 @@ public:
     GroupByBlockAST()
         : group_token(0)
         , by_token(0)
-        , group_items_list(0)
+        , group_items_list(nullptr)
         , having_token(0)
-        , havingExpr(0)
+        , havingExpr(nullptr)
     {}
 
     virtual GroupByBlockAST *asGroupByBlock() { return this; }
@@ -1274,9 +1274,9 @@ public:
         : DmlStatementAST()
         , delete_token(0)
         , from_token(0)
-        , source(0)
+        , source(nullptr)
         , where_token(0)
-        , whereExpr(0)
+        , whereExpr(nullptr)
     {}
 
     virtual DeleteStatementAST *asDeleteStatement() { return this; }
@@ -1307,11 +1307,11 @@ public:
         : DmlStatementAST()
         , insert_token(0)
         , into_token(0)
-        , source(0)
+        , source(nullptr)
         , lparen_columns_token(0)
-        , columns_list(0)
+        , columns_list(nullptr)
         , rparen_columns_token(0)
-        , insClause(0)
+        , insClause(nullptr)
     {}
 
     virtual InsertStatementAST *asInsertStatement() { return this; }
@@ -1340,11 +1340,11 @@ public:
     UpdateStatementAST()
         : DmlStatementAST()
         , update_token(0)
-        , source(0)
+        , source(nullptr)
         , set_token(0)
-        , upd_list(0)
+        , upd_list(nullptr)
         , where_token(0)
-        , whereExpr(0)
+        , whereExpr(nullptr)
     {}
 
     virtual UpdateStatementAST *asUpdateStatement() { return this; }
@@ -1387,8 +1387,8 @@ public:
     CreateTableDirectClauseAST()
         : CreateTableClauseAST()
         , lparen_token(0)
-        , column_def_list(0)
-        , constraintList(0)
+        , column_def_list(nullptr)
+        , constraintList(nullptr)
         , rparen_token(0)
     {}
 
@@ -1414,7 +1414,7 @@ public:
     CreateTableAsSelectClauseAST()
         : CreateTableClauseAST()
         , as_token(0)
-        , selectStatement(0)
+        , selectStatement(nullptr)
     {}
 
     CreateTableAsSelectClauseAST *asCreateTableAsSelectClause() { return this; }

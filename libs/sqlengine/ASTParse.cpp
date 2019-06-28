@@ -276,6 +276,7 @@ bool AlterTableStatementAST::targetTableObjectName( QString *tableName, unsigned
         case Sql::AlterTableClauseAST::Unknown:     return false;
         case Sql::AlterTableClauseAST::Constraint:  *tableObjectType = Sql::Constants::DbSchemaObjectSubtype::C_CONSTRAINT; break;
         case Sql::AlterTableClauseAST::Field:       *tableObjectType = Sql::Constants::DbSchemaObjectSubtype::C_COLUMN; break;
+        case Sql::AlterTableClauseAST::Index:       *tableObjectType = Sql::Constants::DbSchemaObjectSubtype::C_INDEX; break;
     }
 
     return true;
