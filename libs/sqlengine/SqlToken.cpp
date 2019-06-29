@@ -62,9 +62,9 @@ static const char *token_names[] = {
 };
 
 /*
- keyword1 - стандартные для SQL
- kewword2 - стандартные встроенные функции
- keyword3 - типы данных
+ keyword1 - standrard SQL-keywords
+ kewword2 - standard SQL-builtins-functions
+ keyword3 - standard SQL-types
 */
 
 static const char *token_keyword1_names[] = {
@@ -211,10 +211,12 @@ static const char *token_keyword1_names[] = {
   ("HAVING"),
   ("INSERT"),
   ("METHOD"),
+  ("MODIFY"),
   ("MODULE"),
   ("OPTION"),
   ("OUTPUT"),
   ("PUBLIC"),
+  ("RENAME"),
   ("REPEAT"),
   ("RESULT"),
   ("RETURN"),
@@ -399,7 +401,7 @@ static const char *token_keyword3_names[] = {
 ////////////////////////////////////////////////////////////////////////////////
 /// Literal
 Literal::Literal(const char *chars, unsigned size, bool toUpp)
-    : _next(0), _index(0)
+    : _next(nullptr), _index(0)
 {
     _chars = new char[size + 1];
 
@@ -522,7 +524,7 @@ Identifier::~Identifier()
 Token::Token()
     : flags(0)
     , offset(0)
-    , ptr(0)
+    , ptr(nullptr)
     , keywordFlags(0)
     , m_kindGlobal(0)
 {
@@ -536,7 +538,7 @@ void Token::reset()
 {
     flags = 0;
     offset = 0;
-    ptr = 0;
+    ptr = nullptr;
     keywordFlags = 0;
 }
 
@@ -590,12 +592,6 @@ static const char *string_spell = "<STRING>";
 const char *Token::spell() const
 {
     if ( isKeyword() ) {
-//        switch (kf.keytype) {
-//            case 1: return token_keyword1_names[kf.keyid];
-//            case 2: return token_keyword2_names[kf.keyid];
-//            case 3: return token_keyword3_names[kf.keyid];
-//        }
-//        return 0;
         return identifier->chars();
     }
 
