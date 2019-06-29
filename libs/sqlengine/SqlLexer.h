@@ -158,6 +158,7 @@ enum KindKeyword1 {
   T_6_OUTPUT,
   T_6_PUBLIC,
   T_6_REPEAT,
+  T_6_RENAME,
   T_6_RESULT,
   T_6_RETURN,
   T_6_REVOKE,

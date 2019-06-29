@@ -196,7 +196,7 @@ public:
     inline int LA3(int n = 1) const
     { return _translationUnit->tokenTypeSpecifier(_tokenIndex + n - 1); }
 
-    inline int consumeToken()
+    inline unsigned consumeToken()
     { return _tokenIndex++; }
 
     inline unsigned cursor() const

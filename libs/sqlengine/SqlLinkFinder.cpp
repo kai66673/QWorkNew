@@ -21,7 +21,7 @@ static Core::ILink *createSubobjectLink( Database::DbConnection *connection,
             }
         }
     }
-    return 0;
+    return nullptr;
 }
 
 namespace {     // Anonimous namespace
@@ -47,7 +47,7 @@ private:
                 if ( !columnName.compare(c->name->chars(), Qt::CaseInsensitive) )
                     return c;
             }
-            return 0;
+            return nullptr;
         }
     };
 
@@ -56,7 +56,7 @@ public:
         : ASTVisitor(unit)
         , m_translationUnit(unit)
         , m_connection(connection)
-        , m_currentColumns(0)
+        , m_currentColumns(nullptr)
     { }
 
     virtual ~ColumnFinder() {
@@ -74,7 +74,7 @@ public:
                 if ( statement == currentStatemenAst )
                     currentStatemenNotProceded = false;
                 if ( statement->asCreateTableStatement() || statement->asCreateViewStatement() || statement->asAlterTableStatement() ) {
-                    m_currentColumns = 0;
+                    m_currentColumns = nullptr;
                     statement->accept(this);
                 }
             }
@@ -85,7 +85,7 @@ public:
                 return link;
         }
 
-        return 0;
+        return nullptr;
     }
 
 protected:
@@ -205,7 +205,7 @@ private:
                 return createTextTargetLinkForToken(linkAst->name_token);
             }
         }
-        return 0;
+        return nullptr;
     }
 
     TranslationUnit *m_translationUnit;
@@ -223,12 +223,12 @@ private:
 SqlLinkFinder::SqlLinkFinder( TranslationUnit *unit )
     : ASTVisitor(unit)
     , m_translationUnit(unit)
-    , m_ast(0)
-    , m_currentStatemenAst(0)
-    , m_linkTokenIndex(-1)
+    , m_ast(nullptr)
+    , m_currentStatemenAst(nullptr)
+    , m_linkTokenIndex(0)
     , m_begin(-1)
     , m_end(-1)
-    , m_link(0)
+    , m_link(nullptr)
 {
 }
 
@@ -241,17 +241,17 @@ Core::ILink *SqlLinkFinder::findLinkAt( TranslationUnitAST *ast, int position )
             const Token &tk = m_translationUnit->tokenAt(i - 1);
             if ( tk.begin() <= m_position && tk.end() >= m_position ) {
                 if ( !tk.isIdentifier() )
-                    return 0;
+                    return nullptr;
                 m_linkTokenIndex = i - 1;
                 m_begin = tk.begin();
                 m_end = tk.end();
                 m_linkText = QString(tk.identifier->chars()).toUpper();
                 return findLinkInternal(ast);
             }
-            return 0;
+            return nullptr;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 bool SqlLinkFinder::visit( SelectCoreAST *ast )
@@ -386,11 +386,11 @@ Core::ILink *SqlLinkFinder::findLinkInternal( TranslationUnitAST *ast )
             if ( m_linkTokenIndex <= statement->lastToken() ) {
                 if ( m_linkTokenIndex >= statement->firstToken() )
                     return findLinkInStatement(statement);
-                return 0;
+                return nullptr;
             }
         }
     }
-    return 0;
+    return nullptr;
 }
 
 Core::ILink *SqlLinkFinder::findLinkInStatement( StatementAST *ast )
@@ -401,13 +401,13 @@ Core::ILink *SqlLinkFinder::findLinkInStatement( StatementAST *ast )
 
 Core::ILink *SqlLinkFinder::findLinkInSingleStatement( AST *ast )
 {
-    if ( m_provider = DbMetadataProvider::getInstance() ) {
-        if ( m_connection = m_provider->connection() ) {
+    if ( (m_provider = DbMetadataProvider::getInstance()) ) {
+        if ( (m_connection = m_provider->connection()) ) {
             ast->accept(this);
             return m_link;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 DetailsLink *SqlLinkFinder::findSchemaObjectLink( unsigned objectType )
@@ -420,7 +420,7 @@ DetailsLink *SqlLinkFinder::findSchemaObjectLink( unsigned objectType )
             }
         }
     }
-    return 0;
+    return nullptr;
 }
 
 Core::ILink *SqlLinkFinder::findCreateTableLink( const QString &tableName )
@@ -450,7 +450,7 @@ Core::ILink *SqlLinkFinder::findCreateTableLink( const QString &tableName )
         }
     }
 
-    return 0;
+    return nullptr;
 }
 
 Core::ILink *SqlLinkFinder::findCreateIndexLink( const QString &indexName )
@@ -473,7 +473,7 @@ Core::ILink *SqlLinkFinder::findCreateIndexLink( const QString &indexName )
         }
     }
 
-    return 0;
+    return nullptr;
 }
 
 Core::ILink *SqlLinkFinder::findCreateTriggerLink( const QString &triggerName )
@@ -496,7 +496,7 @@ Core::ILink *SqlLinkFinder::findCreateTriggerLink( const QString &triggerName )
         }
     }
 
-    return 0;
+    return nullptr;
 }
 
 Core::ILink *SqlLinkFinder::findCreateConstraintLink( const QString &constraintName )
@@ -551,7 +551,7 @@ Core::ILink *SqlLinkFinder::findCreateConstraintLink( const QString &constraintN
         }
     }
 
-    return 0;
+    return nullptr;
 }
 
 /// TODO: To Static Method

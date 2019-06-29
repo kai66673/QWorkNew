@@ -215,7 +215,7 @@ public:
     virtual CreateTriggerRefClauseAST *asCreateTriggerRefClause() { return nullptr; }
     virtual CreateRdbTriggerBodyAST *asCreateRdbTriggerBody() { return nullptr; }
     virtual CreateRdbTriggerBodyItemAST *asCreateRdbTriggerBodyItem() { return nullptr; }
-     virtual CreateTriggerBodyAST *asCreateTriggerBody() { return nullptr; }
+    virtual CreateTriggerBodyAST *asCreateTriggerBody() { return nullptr; }
     virtual UpdateStatementAST *asUpdateStatement() { return nullptr; }
     virtual ColumnDefinitionAST *asColumnDefinition() { return nullptr; }
     virtual ConstraintAST *asConstraint() { return nullptr; }
@@ -419,7 +419,7 @@ class SQL_EXPORT DmlStatementAST: public StatementAST
 {
 public:
     DmlStatementAST() : StatementAST() {}
-    virtual DmlStatementAST *asDmlStatement() { return this; }
+    virtual DmlStatementAST *asDmlStatement();
     virtual StatementAST *clone(Utils::MemoryPool *pool) const = 0;
 };
 
@@ -495,7 +495,7 @@ class SQL_EXPORT SelectCompoundAST: public AST
 {
 public:
     SelectCompoundAST() {}
-    virtual SelectCompoundAST *asSelectCompound() { return this; }
+    virtual SelectCompoundAST *asSelectCompound();
     virtual SelectCompoundAST *clone(Utils::MemoryPool *pool) const = 0;
 };
 
@@ -685,8 +685,8 @@ public:
 
     virtual NameAST *clone(Utils::MemoryPool *pool) const = 0;
 
-    virtual unsigned firstToken() const { return name_token; }
-    virtual unsigned lastToken() const { return name_token + 1; }
+    virtual unsigned firstToken() const;
+    virtual unsigned lastToken() const;
 };
 
 class SQL_EXPORT SchemaNameAST: public NameAST
@@ -986,7 +986,7 @@ public:
     ResultColumnAST()
     {}
 
-    virtual ResultColumnAST *asResultColumn() { return this; }
+    virtual ResultColumnAST *asResultColumn();
 
     virtual ResultColumnAST *clone(Utils::MemoryPool *pool) const = 0;
 };
@@ -1075,7 +1075,7 @@ public:
     SingleSourceAST()
     {}
 
-    virtual SingleSourceAST *asSingleSource() { return this; }
+    virtual SingleSourceAST *asSingleSource();
 
     virtual SingleSourceAST *clone(Utils::MemoryPool *pool) const = 0;
 };
@@ -1363,7 +1363,7 @@ class SQL_EXPORT InsertClauseAST: public AST
 {
 public:
     InsertClauseAST() {}
-    virtual InsertClauseAST *asInsertClause() { return this; }
+    virtual InsertClauseAST *asInsertClause();
     virtual InsertClauseAST *clone(Utils::MemoryPool *pool) const = 0;
 };
 
@@ -1371,7 +1371,7 @@ class SQL_EXPORT CreateTableClauseAST: public AST
 {
 public:
     CreateTableClauseAST() {}
-    virtual CreateTableClauseAST *asCreateTableClause() { return this; }
+    virtual CreateTableClauseAST *asCreateTableClause();
     virtual CreateTableClauseAST *clone(Utils::MemoryPool *pool) const = 0;
 };
 
@@ -1451,10 +1451,10 @@ public:
         , referencing_token(0)
         , new_token(0)
         , asn_token(0)
-        , newAlias(0)
+        , newAlias(nullptr)
         , old_token(0)
         , aso_token(0)
-        , oldAlias(0)
+        , oldAlias(nullptr)
     {}
 
     virtual CreateTriggerRefClauseAST *asCreateTriggerRefClause() { return this; }
@@ -1473,7 +1473,7 @@ class SQL_EXPORT CreateTriggerBodyAST: public AST
 {
 public:
     CreateTriggerBodyAST() {}
-    virtual CreateTriggerBodyAST *asCreateTriggerBody() { return this; }
+    virtual CreateTriggerBodyAST *asCreateTriggerBody();
     virtual CreateTriggerBodyAST *clone(Utils::MemoryPool *pool) const = 0;
 };
 
@@ -1485,7 +1485,7 @@ public:
 public:
     CreateRdbTriggerBodyAST()
         : CreateTriggerBodyAST()
-        , item_list(0)
+        , item_list(nullptr)
     {}
 
     virtual CreateRdbTriggerBodyAST *asCreateRdbTriggerBody() { return this; }
@@ -1518,10 +1518,10 @@ public:
     CreateRdbTriggerBodyItemAST()
         : when_token(0)
         , lparen_when_token(0)
-        , whenExpr(0)
+        , whenExpr(nullptr)
         , rparen_when_token(0)
         , lparen_token(0)
-        , stat_list(0)
+        , stat_list(nullptr)
         , rparen_token(0)
         , for_token(0)
         , each_token(0)
@@ -1551,11 +1551,11 @@ public:
 
 public:
     ColumnDefinitionAST()
-        : columnName(0)
-        , columnType(0)
+        : columnName(nullptr)
+        , columnType(nullptr)
         , default_token(0)
-        , defaultExpr(0)
-        , constraintList(0)
+        , defaultExpr(nullptr)
+        , constraintList(nullptr)
     {}
 
     virtual ColumnDefinitionAST *asColumnDefinition() { return this; }
@@ -1579,10 +1579,10 @@ public:
 public:
     ConstraintAST()
         : constraint_token(0)
-        , constraintName(0)
+        , constraintName(nullptr)
     {}
 
-    virtual ConstraintAST *asConstraint() { return this; }
+    virtual ConstraintAST *asConstraint();
 
     virtual ConstraintAST *clone(Utils::MemoryPool *pool) const = 0;
 };
@@ -1604,7 +1604,7 @@ public:
 
     inline TableConstraintType tableConstraintType() const { return constraintType; }
 
-    virtual TableConstraintAST *asTableConstraint() { return this; }
+    virtual TableConstraintAST *asTableConstraint();
 
     virtual TableConstraintAST *clone(Utils::MemoryPool *pool) const = 0;
 
@@ -1619,7 +1619,7 @@ public:
         : ConstraintAST()
     {}
 
-    virtual ColumnConstraintAST *asColumnConstraint() { return this; }
+    virtual ColumnConstraintAST *asColumnConstraint();
 
     virtual ColumnConstraintAST *clone(Utils::MemoryPool *pool) const = 0;
 };
@@ -1641,7 +1641,7 @@ public:
         , unique_or_primary_token(0)
         , key_token(0)
         , lparen_token(0)
-        , column_list(0)
+        , column_list(nullptr)
         , rparen_token(0)
     {}
 
@@ -1672,7 +1672,7 @@ public:
         : TableConstraintAST(TableConstraintAST::Check)
         , check_token(0)
         , lparen_token(0)
-        , checkExpr(0)
+        , checkExpr(nullptr)
         , rparen_token(0)
     {}
 
@@ -1706,9 +1706,9 @@ public:
         , foreign_token(0)
         , key_token(0)
         , lparen_token(0)
-        , col_list(0)
+        , col_list(nullptr)
         , rparen_token(0)
-        , refClause(0)
+        , refClause(nullptr)
     {}
 
     virtual FkTableConstraintAST *asFkTableConstraint() { return this; }
@@ -1737,9 +1737,9 @@ public:
 public:
     FkReferencesClauseAST()
         : references_token(0)
-        , refSchemaTableName(0)
+        , refSchemaTableName(nullptr)
         , ref_lparen_token(0)
-        , ref_col_list(0)
+        , ref_col_list(nullptr)
         , ref_rparen_token(0)
     {}
 
@@ -1850,7 +1850,7 @@ public:
         : ColumnConstraintAST()
         , check_token(0)
         , lparen_token(0)
-        , checkExpr(0)
+        , checkExpr(nullptr)
         , rparen_token(0)
     {}
 
@@ -1876,7 +1876,7 @@ public:
 public:
     ReferencesColumnConstraintAST()
         : ColumnConstraintAST()
-        , refClause(0)
+        , refClause(nullptr)
     {}
 
     virtual ReferencesColumnConstraintAST *asReferencesColumnConstraint() { return this; }
@@ -1899,7 +1899,7 @@ public:
 
 public:
     SortedColumnNameAST()
-        : columnName(0)
+        : columnName(nullptr)
         , asc_or_desc_token(0)
     {}
 
@@ -1928,7 +1928,7 @@ public:
         : InsertClauseAST()
         , values_token(0)
         , lparen_token(0)
-        , val_list(0)
+        , val_list(nullptr)
         , rparen_token(0)
     {}
 
@@ -1952,7 +1952,7 @@ public:
 public:
     InsertClauseAsSelectAST()
         : InsertClauseAST()
-        , selectStatement(0)
+        , selectStatement(nullptr)
     {}
 
     virtual InsertClauseAsSelectAST *asInsertClauseAsSelect() { return this; }
@@ -1971,7 +1971,7 @@ class SQL_EXPORT DdlStatementAST: public StatementAST
 {
 public:
     DdlStatementAST() : StatementAST() {}
-    virtual DdlStatementAST *asDdlStatement() { return this; }
+    virtual DdlStatementAST *asDdlStatement();
     virtual DdlStatementAST *clone(Utils::MemoryPool *pool) const = 0;
 
     virtual unsigned targetKind() const = 0;
@@ -1987,7 +1987,7 @@ class SQL_EXPORT CreateStatementAST: public DdlStatementAST
 {
 public:
     CreateStatementAST() : DdlStatementAST() {}
-    virtual CreateStatementAST *asCreateStatement() { return this; }
+    virtual CreateStatementAST *asCreateStatement();
     virtual CreateStatementAST *clone(Utils::MemoryPool *pool) const = 0;
 };
 
@@ -2004,8 +2004,8 @@ public:
         : CreateStatementAST()
         , create_token(0)
         , table_token(0)
-        , schemaTableName(0)
-        , tableClause(0)
+        , schemaTableName(nullptr)
+        , tableClause(nullptr)
     {}
 
     virtual unsigned targetKind() const { return Sql::Constants::DbSchemaObjectType::C_TABLE; }
@@ -2037,9 +2037,9 @@ public:
         : CreateStatementAST()
         , create_token(0)
         , view_token(0)
-        , schemaViewName(0)
+        , schemaViewName(nullptr)
         , as_token(0)
-        , selectStatement(0)
+        , selectStatement(nullptr)
     {}
 
     virtual unsigned targetKind() const { return Sql::Constants::DbSchemaObjectType::C_VIEW; }
@@ -2076,11 +2076,11 @@ public:
         , create_token(0)
         , unique_token(0)
         , index_token(0)
-        , schemaIndexName(0)
+        , schemaIndexName(nullptr)
         , on_token(0)
-        , schemaTableName(0)
+        , schemaTableName(nullptr)
         , lparen_token(0)
-        , columns_list(0)
+        , columns_list(nullptr)
         , rparen_token(0)
     {}
 
@@ -2120,15 +2120,15 @@ public:
         : CreateStatementAST()
         , create_token(0)
         , trigger_token(0)
-        , schemaTriggerName(0)
+        , schemaTriggerName(nullptr)
         , before_or_after_token(0)
         , action_token(0)
         , of_token(0)
-        , col_list(0)
+        , col_list(nullptr)
         , on_token(0)
-        , schemaTableName(0)
-        , triggerRefClause(0)
-        , triggerBody(0)
+        , schemaTableName(nullptr)
+        , triggerRefClause(nullptr)
+        , triggerBody(nullptr)
     {}
 
     virtual unsigned targetKind() const { return Sql::Constants::DbSchemaObjectType::C_TRIGGER; }
@@ -2151,7 +2151,7 @@ class SQL_EXPORT DropStatementAST: public DdlStatementAST
 {
 public:
     DropStatementAST() : DdlStatementAST() {}
-    virtual DropStatementAST *asDropStatement() { return this; }
+    virtual DropStatementAST *asDropStatement();
     virtual DropStatementAST *clone(Utils::MemoryPool *pool) const = 0;
 };
 
@@ -2167,7 +2167,7 @@ public:
         : DropStatementAST()
         , drop_token(0)
         , table_token(0)
-        , schemaTableName(0)
+        , schemaTableName(nullptr)
     {}
 
     virtual unsigned targetKind() const { return Sql::Constants::DbSchemaObjectType::C_TABLE; }
@@ -2197,7 +2197,7 @@ public:
         : DropStatementAST()
         , drop_token(0)
         , view_token(0)
-        , schemaViewName(0)
+        , schemaViewName(nullptr)
     {}
 
     virtual unsigned targetKind() const { return Sql::Constants::DbSchemaObjectType::C_VIEW; }
@@ -2227,7 +2227,7 @@ public:
         : DropStatementAST()
         , drop_token(0)
         , index_token(0)
-        , schemaIndexName(0)
+        , schemaIndexName(nullptr)
     {}
 
     virtual unsigned targetKind() const { return Sql::Constants::DbSchemaObjectType::C_INDEX; }
@@ -2263,7 +2263,7 @@ public:
         : DropStatementAST()
         , drop_token(0)
         , trigger_token(0)
-        , schemaTriggerName(0)
+        , schemaTriggerName(nullptr)
     {}
 
     virtual unsigned targetKind() const { return Sql::Constants::DbSchemaObjectType::C_TRIGGER; }
@@ -2298,7 +2298,7 @@ public:
         : DdlStatementAST()
         , truncate_token(0)
         , table_token(0)
-        , schemaTableName(0)
+        , schemaTableName(nullptr)
     {}
 
     virtual unsigned targetKind() const { return Sql::Constants::DbSchemaObjectType::C_TABLE; }
@@ -2323,7 +2323,7 @@ public:
         : DdlStatementAST()
     {}
 
-    virtual AlterStatementAST *asAlterStatement() { return this; }
+    virtual AlterStatementAST *asAlterStatement();
 
     virtual AlterStatementAST *clone(Utils::MemoryPool *pool) const = 0;
 };
@@ -2343,8 +2343,8 @@ public:
         : AlterStatementAST()
         , alter_token(0)
         , table_token(0)
-        , schemaTableName(0)
-        , alterTableClause(0)
+        , schemaTableName(nullptr)
+        , alterTableClause(nullptr)
     {}
 
     virtual unsigned targetKind() const;
@@ -2380,7 +2380,7 @@ public:
         : objectKind(Unknown)
     {}
 
-    virtual AlterTableClauseAST *asAlterTableClause() { return this; }
+    virtual AlterTableClauseAST *asAlterTableClause();
 
     virtual AlterTableClauseAST *clone(Utils::MemoryPool *pool) const = 0;
 };
@@ -2401,7 +2401,7 @@ public:
         , drop_token(0)
         , drop_object_type_token(0)
         , drop_object_type_token1(0)
-        , dropObjectName(0)
+        , dropObjectName(nullptr)
     {}
 
     virtual AlterTableDropClauseAST *asAlterTableDropClause() { return this; }
@@ -2423,7 +2423,7 @@ public:
         : AlterTableClauseAST()
     {}
 
-    virtual AlterTableAddClauseAST *asAlterTableAddClause() { return this; }
+    virtual AlterTableAddClauseAST *asAlterTableAddClause();
 
     virtual AlterTableAddClauseAST *clone(Utils::MemoryPool *pool) const = 0;
 };
@@ -2440,7 +2440,7 @@ public:
     AlterTableAddConstraintClauseAST()
         : AlterTableAddClauseAST()
         , add_token(0)
-        , constraint(0)
+        , constraint(nullptr)
     {}
 
     virtual AlterTableAddConstraintClauseAST *asAlterTableAddConstraintClause() { return this; }
@@ -2469,7 +2469,7 @@ public:
         : AlterTableAddClauseAST()
         , add_token(0)
         , column_token(0)
-        , column(0)
+        , column(nullptr)
     {}
 
     virtual AlterTableAddColumnClauseAST *asAlterTableAddColumnClause() { return this; }
@@ -2517,7 +2517,7 @@ class SQL_EXPORT CommentStatementAST: public StatementAST
 {
 public:
     CommentStatementAST() : StatementAST() {}
-    CommentStatementAST *asCommentStatement() { return this; }
+    CommentStatementAST *asCommentStatement();
     CommentStatementAST *clone(Utils::MemoryPool *pool) const = 0;
 };
 
@@ -2537,9 +2537,9 @@ public:
         , comment_token(0)
         , on_token(0)
         , table_token(0)
-        , schemaTableName(0)
+        , schemaTableName(nullptr)
         , is_token(0)
-        , comment(0)
+        , comment(nullptr)
     {}
 
     virtual CommentOnTableStatementAST *asCommentOnTableStatement() { return this; }
@@ -2572,11 +2572,11 @@ public:
         , comment_token(0)
         , on_token(0)
         , column_token(0)
-        , schemaTableName(0)
+        , schemaTableName(nullptr)
         , dot_token(0)
-        , column(0)
+        , column(nullptr)
         , is_token(0)
-        , comment(0)
+        , comment(nullptr)
     {}
 
     virtual CommentOnColumnStatementAST *asCommentOnColumnStatement() { return this; }
@@ -2650,9 +2650,9 @@ public:
     CallStatementAST()
         : StatementAST()
         , call_token(0)
-        , funcName(0)
+        , funcName(nullptr)
         , lparen_token(0)
-        , arg_list(0)
+        , arg_list(nullptr)
         , rparen_token(0)
     {}
 
@@ -2673,7 +2673,7 @@ class BaseTypeAST: public AST
 {
 public:
     BaseTypeAST() {}
-    virtual BaseTypeAST *asBaseType() { return this; }
+    virtual BaseTypeAST *asBaseType();
     virtual BaseTypeAST *clone(Utils::MemoryPool *pool) const = 0;
 };
 
@@ -2781,8 +2781,8 @@ public:
 
     virtual BaseExpressionAST *clone(Utils::MemoryPool *pool) const = 0;
 
-    virtual unsigned firstToken() const { return first_token; }
-    virtual unsigned lastToken() const { return last_token; }
+    virtual unsigned firstToken() const;
+    virtual unsigned lastToken() const;
 };
 
 class SQL_EXPORT ValueExpressionAST: public BaseExpressionAST
@@ -2792,7 +2792,7 @@ public:
         : BaseExpressionAST()
     {}
 
-    virtual ValueExpressionAST *asValueExpression() { return this; }
+    virtual ValueExpressionAST *asValueExpression();
 
     virtual ValueExpressionAST *clone(Utils::MemoryPool *pool) const = 0;
 };
@@ -2808,7 +2808,7 @@ public:
     CompoundValueExpressionAST ()
         : ValueExpressionAST()
         , lparen_token(0)
-        , valExpr(0)
+        , valExpr(nullptr)
         , rparen_token(0)
     {}
 
@@ -2831,7 +2831,7 @@ public:
     UnaryValueExpressionAST()
         : ValueExpressionAST()
         , op_token(0)
-        , valExpr(0)
+        , valExpr(nullptr)
     {}
 
     virtual UnaryValueExpressionAST *asUnaryValueExpression() { return this; }
@@ -2853,9 +2853,9 @@ public:
 public:
     BinaryValueExpressionAST()
         : ValueExpressionAST()
-        , lvExpr(0)
+        , lvExpr(nullptr)
         , op_token(0)
-        , rvExpr(0)
+        , rvExpr(nullptr)
     {}
 
     virtual BinaryValueExpressionAST *asBinaryValueExpression() { return this; }
@@ -2874,7 +2874,7 @@ public:
         : ValueExpressionAST()
     {}
 
-    virtual SimpleValueExpressionAST *asSimpleValueExpression() { return this; }
+    virtual SimpleValueExpressionAST *asSimpleValueExpression();
 
     virtual SimpleValueExpressionAST *clone(Utils::MemoryPool *pool) const = 0;
 };
@@ -2886,7 +2886,7 @@ public:
         : SimpleValueExpressionAST()
     {}
 
-    virtual ConstantExpressionAST *asConstantExpression() { return this; }
+    virtual ConstantExpressionAST *asConstantExpression();
 
     virtual ConstantExpressionAST *clone(Utils::MemoryPool *pool) const = 0;
 };
@@ -2899,7 +2899,7 @@ public:
 public:
     ColumnExpressionAST()
         : SimpleValueExpressionAST()
-        , column(0)
+        , column(nullptr)
     {}
 
     virtual ColumnExpressionAST *asColumnExpression() { return this; }
@@ -2968,9 +2968,9 @@ public:
 public:
     FunctionExpressionAST()
         : SimpleValueExpressionAST()
-        , functionName(0)
+        , functionName(nullptr)
         , lparen_token(0)
-        , arg_list(0)
+        , arg_list(nullptr)
         , rparen_token(0)
     {}
 
@@ -2998,9 +2998,9 @@ public:
         : SimpleValueExpressionAST()
         , cast_token(0)
         , lparen_token(0)
-        , castExpr(0)
+        , castExpr(nullptr)
         , as_token(0)
-        , typeSpec(0)
+        , typeSpec(nullptr)
         , rparen_token(0)
     {}
 
@@ -3029,11 +3029,11 @@ public:
     SubstringFunctionAST()
         : substring_token(0)
         , lparen_token(0)
-        , strExpr(0)
+        , strExpr(nullptr)
         , from_token(0)
-        , startExpr(0)
+        , startExpr(nullptr)
         , for_token(0)
-        , lengthExpr(0)
+        , lengthExpr(nullptr)
         , rparen_token(0)
     {}
 
@@ -3061,7 +3061,7 @@ public:
         , count_token(0)
         , lparen_token(0)
         , distinct_token(0)
-        , countExpr(0)
+        , countExpr(nullptr)
         , rparen_token(0)
     {}
 
@@ -3082,7 +3082,7 @@ public:
 public:
     ParameterExpressionAST()
         : SimpleValueExpressionAST()
-        , binding(0)
+        , binding(nullptr)
     {}
 
     virtual ParameterExpressionAST *asParameterExpression() { return this; }
@@ -3130,7 +3130,7 @@ public:
     SelectCompoundValueExpressionAST()
         : SimpleValueExpressionAST()
         , lparen_token(0)
-        , query(0)
+        , query(nullptr)
         , rparen_token(0)
     {}
 
@@ -3156,7 +3156,7 @@ public:
         , rparen_roken(0)
     {}
 
-    virtual CompoundRValueExpressionAST *asCompoundRValueExpression() { return this; }
+    virtual CompoundRValueExpressionAST *asCompoundRValueExpression();
 
     virtual CompoundRValueExpressionAST *clone(Utils::MemoryPool *pool) const = 0;
 };
@@ -3169,7 +3169,7 @@ public:
 public:
     ValueListExpressionAST()
         : CompoundRValueExpressionAST()
-        , val_list(0)
+        , val_list(nullptr)
     {}
 
     virtual ValueListExpressionAST *asValueListExpression() { return this; }
@@ -3189,7 +3189,7 @@ public:
 public:
     SubQueryExpressionAST()
         : CompoundRValueExpressionAST()
-        , query(0)
+        , query(nullptr)
     {}
 
     virtual SubQueryExpressionAST *asSubQueryExpression() { return this; }
@@ -3208,7 +3208,7 @@ public:
         : BaseExpressionAST()
     {}
 
-    virtual ConditionExpressionAST *asConditionExpression() { return this; }
+    virtual ConditionExpressionAST *asConditionExpression();
 
     virtual ConditionExpressionAST *clone(Utils::MemoryPool *pool) const = 0;
 };
@@ -3224,7 +3224,7 @@ public:
     CompoundConditionExpressionAST()
         : ConditionExpressionAST()
         , lparen_token(0)
-        , condExpr(0)
+        , condExpr(nullptr)
         , rparen_token(0)
     {}
 
@@ -3248,10 +3248,10 @@ public:
 public:
     InConditionExpressionAST()
         : ConditionExpressionAST()
-        , lvExpr(0)
+        , lvExpr(nullptr)
         , not_token(0)
         , in_token(0)
-        , rvExpr(0)
+        , rvExpr(nullptr)
     {}
 
     virtual InConditionExpressionAST *asInConditionExpression() { return this; }
@@ -3274,10 +3274,10 @@ public:
 public:
     LikeConditionExpressionAST()
         : ConditionExpressionAST()
-        , lvExpr(0)
+        , lvExpr(nullptr)
         , not_token(0)
         , like_token(0)
-        , rvExpr(0)
+        , rvExpr(nullptr)
     {}
 
     virtual LikeConditionExpressionAST *asLikeConditionExpression() { return this; }
@@ -3302,12 +3302,12 @@ public:
 public:
     BetweenConditionExpressionAST()
         : ConditionExpressionAST()
-        , lvExpr(0)
+        , lvExpr(nullptr)
         , not_token(0)
         , between_token(0)
-        , rv1Expr(0)
+        , rv1Expr(nullptr)
         , and_token(0)
-        , rv2Expr(0)
+        , rv2Expr(nullptr)
     {}
 
     virtual BetweenConditionExpressionAST *asBetweenConditionExpression() { return this; }
@@ -3331,6 +3331,7 @@ public:
         : ConditionExpressionAST()
         , not_token(0)
         , exists_token(0)
+        , rvExpr(nullptr)
     {}
 
     virtual ExistsConditionExpressionAST *asExistsConditionExpression() { return this; }
@@ -3351,7 +3352,7 @@ public:
 public:
     UnaryConditionExpressionAST()
         : ConditionExpressionAST()
-        , lvExpr(0)
+        , lvExpr(nullptr)
         , last_op_token(0)
     {}
 
@@ -3374,9 +3375,9 @@ public:
 public:
     BinaryConditionExpressionAST()
         : ConditionExpressionAST()
-        , lvCondExpr(0)
+        , lvCondExpr(nullptr)
         , cond_op_token(0)
-        , rvCondExpr(0)
+        , rvCondExpr(nullptr)
     {}
 
     virtual BinaryConditionExpressionAST *asBinaryConditionExpression() { return this; }
@@ -3398,9 +3399,9 @@ public:
 public:
     AssignmentExpressionAST()
         : BaseExpressionAST()
-        , columnName(0)
+        , columnName(nullptr)
         , equal_token(0)
-        , rvExpr(0)
+        , rvExpr(nullptr)
     {}
 
     virtual AssignmentExpressionAST *asAssignmentExpression() { return this; }
@@ -3426,10 +3427,10 @@ public:
     CaseExpressionAST()
         : ValueExpressionAST()
         , case_token(0)
-        , caseExpr(0)
-        , var_list(0)
+        , caseExpr(nullptr)
+        , var_list(nullptr)
         , else_token(0)
-        , elseExpr(0)
+        , elseExpr(nullptr)
         , end_token(0)
     {}
 
@@ -3453,9 +3454,9 @@ public:
 public:
     CaseExpressionClauseAST()
         : when_token(0)
-        , whenExpr(0)
+        , whenExpr(nullptr)
         , then_token(0)
-        , thenExpr(0)
+        , thenExpr(nullptr)
     {}
 
     virtual CaseExpressionClauseAST *asCaseExpressionClause() { return this; }
@@ -3483,9 +3484,9 @@ public:
     CaseConditionAST()
         : ValueExpressionAST()
         , case_token(0)
-        , var_list(0)
+        , var_list(nullptr)
         , else_token(0)
-        , elseExpr(0)
+        , elseExpr(nullptr)
         , end_token(0)
     {}
 
@@ -3509,9 +3510,9 @@ public:
 public:
     CaseConditionClauseAST()
         : when_token(0)
-        , whenExpr(0)
+        , whenExpr(nullptr)
         , then_token(0)
-        , thenExpr(0)
+        , thenExpr(nullptr)
     {}
 
     virtual CaseConditionClauseAST *asCaseConditionClause() { return this; }

@@ -214,20 +214,23 @@ Parser::~Parser()
 BaseWalker *Parser::parseDocument( ParseTarget target )
 {
     switch ( target ) {
-        case ParseSqlNames:
-            TranslationUnitAST *node = 0;
+        case ParseSqlNames: {
+            TranslationUnitAST *node = nullptr;
             parseTranslationUnit(node);
             BaseWalker *walker = new SqlCheckNamesWalker(node, _translationUnit);
             return walker;
+        }
+        case ParseCodeAssist:
+            return nullptr;
     }
 
-    return 0;
+    return nullptr;
 }
 
 void Parser::fillSqlStatements( QList<SqlStatement *> *statements,
                                 Database::ExecuteType executeType, ITextDocument *textDocument )
 {
-    TranslationUnitAST *node = 0;
+    TranslationUnitAST *node = nullptr;
     parseTranslationUnit(node);
     SqlStatementsBindVisitor visitor(_translationUnit);
     visitor.fillStatementsList(statements, node, executeType, textDocument);
@@ -235,7 +238,7 @@ void Parser::fillSqlStatements( QList<SqlStatement *> *statements,
 
 void Parser::fillStatementFromText( QList<SqlStatement *> *statements, const QString &statementText )
 {
-    TranslationUnitAST *node = 0;
+    TranslationUnitAST *node = nullptr;
     parseTranslationUnit(node);
     SqlStatementsBindVisitor visitor(_translationUnit);
     visitor.fillStatementFromText(statements, node, statementText);
@@ -244,7 +247,7 @@ void Parser::fillStatementFromText( QList<SqlStatement *> *statements, const QSt
 int Parser::fillCompletions( QList<TextEditor::BasicProposalItem *> *completions, unsigned position,
                              int startPosition, unsigned completionOperator )
 {
-    TranslationUnitAST *node = 0;
+    TranslationUnitAST *node = nullptr;
     parseTranslationUnit(node);
     SqlCompletionAssistVisitor visitor(_translationUnit);
     return visitor.fillCompletions(completions, node, position, startPosition, completionOperator);
@@ -252,7 +255,7 @@ int Parser::fillCompletions( QList<TextEditor::BasicProposalItem *> *completions
 
 Core::ILink *Parser::findLinkAt( const QTextCursor &tc )
 {
-    TranslationUnitAST *node = 0;
+    TranslationUnitAST *node = nullptr;
     parseTranslationUnit(node);
     SqlLinkFinder finder(_translationUnit);
     return finder.findLinkAt(node, tc.position());
@@ -378,7 +381,7 @@ bool Parser::parseTranslationUnit( TranslationUnitAST *&node )
 
     while ( LA() ) {
         // unsigned start_declaration = cursor();
-        StatementAST *statement = 0;
+        StatementAST *statement = nullptr;
         unsigned line;
         unsigned column;
         _translationUnit->getTokenStartPosition(_tokenIndex, &line, &column);
@@ -509,12 +512,12 @@ bool Parser::parseSelectStatement( StatementAST *&node , bool topLevel )
 
     int counter = 0;
     while ( LA() && counter < 20 ) {
-        SelectCoreAST *sel_core = 0;
+        SelectCoreAST *sel_core = nullptr;
         if ( parseSelectCore(sel_core) ) {
             *sel_core_list = new (_pool) SelectCoreListAST;
             (*sel_core_list)->value = sel_core;
             sel_core_list = &(*sel_core_list)->next;
-            SelectCompoundAST *sel_comp = 0;
+            SelectCompoundAST *sel_comp = nullptr;
             switch ( LA1() ) {
                 case T_5_UNION: {
                     SelectCompoundUnionAST *comp = new (_pool) SelectCompoundUnionAST;
@@ -640,8 +643,6 @@ bool Parser::parseOrderTermList( OrderingTermListAST *&node )
             return false;
         }
     }
-
-    return true;
 }
 
 bool Parser::parseLimitToBlock( LimitToBlockAST *&node )
@@ -768,8 +769,6 @@ bool Parser::parseResultColumnList( ResultColumnListAST *&node )
             return false;
         }
     }
-
-    return true;
 }
 
 bool Parser::parseJoinSource(JoinSourceAST *&node)
@@ -900,7 +899,7 @@ bool Parser::parseDeleteStatement( DeleteStatementAST *&node )
 
 bool Parser::parseDeleteStatement( StatementAST *&node )
 {
-    DeleteStatementAST *ast = 0;
+    DeleteStatementAST *ast = nullptr;
     bool result = parseDeleteStatement(ast);
     node = ast;
     return result;
@@ -962,7 +961,7 @@ bool Parser::parseInsertStatement( InsertStatementAST *&node )
 
 bool Parser::parseInsertStatement( StatementAST *&node )
 {
-    InsertStatementAST *ast = 0;
+    InsertStatementAST *ast = nullptr;
     bool result = parseInsertStatement(ast);
     node = ast;
     return result;
@@ -1009,7 +1008,7 @@ bool Parser::parseUpdateStatement( UpdateStatementAST *&node )
 
 bool Parser::parseUpdateStatement( StatementAST *&node )
 {
-    UpdateStatementAST *ast = 0;
+    UpdateStatementAST *ast = nullptr;
     bool result = parseUpdateStatement(ast);
     node = ast;
     return result;
@@ -1084,8 +1083,6 @@ bool Parser::parseColumnList(ColumnNameListAST *&node)
             return false;
         }
     }
-
-    return true;
 }
 
 bool Parser::parseAssignmentExpressionList(AssignmentExpressionListAST *&node)
@@ -1229,8 +1226,6 @@ bool Parser::parseDropStatement(StatementAST *&node)
             error(_tokenIndex, "Expected object type (TABLE, VIEW, INDEX, TRIGGER)");
             return false;
     }
-
-    return false;
 }
 
 bool Parser::parseTruncateStatement( StatementAST *&node )
@@ -1357,8 +1352,6 @@ bool Parser::parseCommentStatement( StatementAST *&node )
             error(_tokenIndex, "Expected TABLE|COLUMN token");
             return false;
     }
-
-    return false;
 }
 
 bool Parser::parseCreateStatement( StatementAST *&node )
@@ -1596,8 +1589,6 @@ bool Parser::parseColumnDefinitionList(ColumnDefinitionListAST *&node)
                 consumeToken();
         }
     }
-
-    return false;
 }
 
 /*
@@ -1682,7 +1673,7 @@ bool Parser::parseColumnConstraintList( ColumnConstraintListAST *&node )
         return true;
 
     unsigned constraint_token = 0;
-    ConstraintNameAST *constraintName = 0;
+    ConstraintNameAST *constraintName = nullptr;
     if ( LA1() == T_10_CONSTRAINT ) {
         constraint_token = consumeToken();
         if ( isPatentialIdentifier() ) {
@@ -1768,7 +1759,7 @@ bool Parser::parseTableConstraintList(TableConstraintListAST *&node)
     TableConstraintListAST **constr_list_ptr = &node;
 
     unsigned constraint_token = 0;
-    ConstraintNameAST *constraintName = 0;
+    ConstraintNameAST *constraintName = nullptr;
     if ( LA1() == T_10_CONSTRAINT ) {
         constraint_token = consumeToken();
         if ( isPatentialIdentifier() ) {
@@ -1836,8 +1827,6 @@ bool Parser::parseTableConstraintList(TableConstraintListAST *&node)
                 consumeToken();
         }
     }
-
-    return false;
 }
 
 bool Parser::parseSortedColumnNameList( SortedColumnNameListAST *&node )
@@ -1888,8 +1877,6 @@ bool Parser::parseSortedColumnNameList( SortedColumnNameListAST *&node )
                 consumeToken();
         }
     }
-
-    return false;
 }
 
 bool Parser::parseRdbTriggerBodyList( CreateRdbTriggerBodyListAST *&node )
@@ -1924,7 +1911,7 @@ bool Parser::parseRdbTriggerBodyList( CreateRdbTriggerBodyListAST *&node )
     if ( ok ) {
         if ( LA() == T_LPAREN ) {
             bodyItem->lparen_token = consumeToken();
-            if ( ok = parseTriggerStatementList(bodyItem->stat_list) ) {
+            if ( (ok = parseTriggerStatementList(bodyItem->stat_list)) ) {
                 if ( LA() == T_RPAREN ) {
                     bodyItem->rparen_token = consumeToken();
                     if ( LA1() == T_3_FOR ) {
@@ -1977,7 +1964,7 @@ bool Parser::parseTriggerStatementList( StatementListAST *&node )
     }
 
     int la = LA1();
-    StatementAST *statement = 0;
+    StatementAST *statement = nullptr;
 
     if ( la == T_6_DELETE ) {
         parseDeleteStatement(statement);
@@ -2076,7 +2063,7 @@ bool Parser::parseCallStatement( CallStatementAST *&node )
 
 bool Parser::parseCallStatement( StatementAST *&node )
 {
-    CallStatementAST *ast = 0;
+    CallStatementAST *ast = nullptr;
     bool result = parseCallStatement(ast);
     node = ast;
     return result;
@@ -2084,7 +2071,7 @@ bool Parser::parseCallStatement( StatementAST *&node )
 
 bool Parser::parseValueExpresion( ValueExpressionAST *&node, bool conditionMode )
 {
-    ValueExpressionAST *ast = 0;
+    ValueExpressionAST *ast = nullptr;
     QList<ValueExpressionAST *>items;
     bool result = parseValueExpresionInternal(ast, items, conditionMode);
     if ( ast ) {
@@ -2278,7 +2265,7 @@ bool Parser::parseValueExpresionInternal( ValueExpressionAST *&node, QList<Value
                     node = items[0];
                     return true;
                 }
-                // VVV break down
+                [[clang::fallthrough]];
             default:
                 warning(_tokenIndex, "Invalid value-expression");
                 return false;
@@ -2334,8 +2321,6 @@ bool Parser::parseValueExpresionList( ValueExpressionListAST *&node, bool eatRPa
             return false;
         }
     }
-
-    return true;
 }
 
 bool Parser::parseCompoundValueExpresion( CompoundValueExpressionAST *&node )
@@ -2344,7 +2329,7 @@ bool Parser::parseCompoundValueExpresion( CompoundValueExpressionAST *&node )
     ast->lparen_token = consumeToken();
     ast->first_token = ast->lparen_token;
     {
-        ValueExpressionAST *subExpr = 0;
+        ValueExpressionAST *subExpr = nullptr;
         if ( !parseValueExpresion(subExpr) )
             return false;
         if ( !subExpr )
@@ -2604,8 +2589,6 @@ bool Parser::parseTypeSpecifier( BaseTypeAST *&node )
             return true;
         }
     }
-
-    return false;
 }
 
 bool Parser::parseColumnExpression( ColumnExpressionAST *&node )
@@ -2725,8 +2708,6 @@ bool Parser::parseCaseExpressionClauseList( CaseExpressionClauseListAST *&node )
             return false;
         }
     }
-
-    return true;
 }
 
 bool Parser::parseCaseCondition( CaseConditionAST *&node )
@@ -2801,13 +2782,11 @@ bool Parser::parseCaseConditionClauseList( CaseConditionClauseListAST *&node )
             return false;
         }
     }
-
-    return true;
 }
 
 bool Parser::parseConditionExpression( ConditionExpressionAST *&node )
 {
-    ConditionExpressionAST *ast = 0;
+    ConditionExpressionAST *ast = nullptr;
     QList<ConditionExpressionAST *>items;
     bool result = parseConditionExpressionInternal(ast, items);
     if ( ast ) {
@@ -2839,10 +2818,10 @@ bool Parser::parseConditionExpressionInternal( ConditionExpressionAST *&node, QL
     }
 
     if ( items.size() == 0 ) {
-        BaseExpressionAST *expr = 0;
+        BaseExpressionAST *expr = nullptr;
         if ( !parseSimpleExpression(expr, true, true) )
             return false;
-        ConditionExpressionAST *ast = (expr ? expr->asConditionExpression() : 0);
+        ConditionExpressionAST *ast = (expr ? expr->asConditionExpression() : nullptr);
         if ( !ast )
             return false;
         node = ast;
@@ -2887,7 +2866,7 @@ bool Parser::parseCompoundConditionExpresion( CompoundConditionExpressionAST *&n
     ast->lparen_token = consumeToken();
     ast->first_token = ast->lparen_token;
     {
-        ConditionExpressionAST *subExpr = 0;
+        ConditionExpressionAST *subExpr = nullptr;
         if ( !parseConditionExpression(subExpr) )
             return false;
         if ( !subExpr )
@@ -3084,7 +3063,7 @@ bool Parser::parseCompoundExpresion( BaseExpressionAST *&node, bool enableCondit
         return true;
     }
 
-    BaseExpressionAST *sExpr = 0;
+    BaseExpressionAST *sExpr = nullptr;
     if ( !parseSimpleExpression(sExpr, enableCondition) )
         return false;
     if ( !sExpr ) {
@@ -3153,10 +3132,10 @@ bool Parser::parseSimpleExpression( BaseExpressionAST *&node, bool enableConditi
         }
     }
 
-    ValueExpressionAST *lvExpr = 0;
+    ValueExpressionAST *lvExpr = nullptr;
 
     if ( LA() == T_LPAREN ) {
-        BaseExpressionAST *cExpr = 0;
+        BaseExpressionAST *cExpr = nullptr;
         if ( !parseCompoundExpresion(cExpr , enableCondition) )
             return false;
         if ( !cExpr ) {
@@ -3467,8 +3446,6 @@ bool Parser::isKeywordOnly(int n) const
         default:
             return true;
     }
-
-    return false;
 }
 
 void Parser::warning(unsigned index, const char *format, ...)

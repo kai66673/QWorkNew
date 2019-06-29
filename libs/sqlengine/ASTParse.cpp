@@ -356,7 +356,7 @@ bool AlterTableAddConstraintClauseAST::parse( Parser *p, Utils::MemoryPool *pool
 {
     add_token = p->consumeToken();
     unsigned constraint_token = p->consumeToken();
-    ConstraintNameAST *constraintName = 0;
+    ConstraintNameAST *constraintName = nullptr;
     if ( p->isPatentialIdentifier() ) {
         constraintName = new (pool) ConstraintNameAST;
         const Token &tk = p->tok();
@@ -371,7 +371,8 @@ bool AlterTableAddConstraintClauseAST::parse( Parser *p, Utils::MemoryPool *pool
     bool notCheckEndCorrect = true;
     switch ( p->LA1() ) {
         default:
-            notCheckEndCorrect = false; /// break Down!!
+            notCheckEndCorrect = false;
+            [[clang::fallthrough]];
         case T_6_UNIQUE:
         case T_7_PRIMARY: {
             UniqueOrPkTableConstraintAST *constraintPK = new (pool) UniqueOrPkTableConstraintAST;

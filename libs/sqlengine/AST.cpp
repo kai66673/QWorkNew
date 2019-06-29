@@ -254,6 +254,12 @@ unsigned OrderingTermAST::lastToken() const
     return 1;
 }
 
+unsigned NameAST::firstToken() const
+{ return name_token; }
+
+unsigned NameAST::lastToken() const
+{ return name_token + 1; }
+
 unsigned StarResultColumnAST::firstToken() const
 {
     if ( schemaTableName )
@@ -1539,6 +1545,12 @@ unsigned NumberTypeAST::lastToken() const
     return type_token + 1;
 }
 
+unsigned BaseExpressionAST::firstToken() const
+{ return first_token; }
+
+unsigned BaseExpressionAST::lastToken() const
+{ return last_token; }
+
 unsigned CaseExpressionClauseAST::firstToken() const
 {
     return when_token;
@@ -1577,3 +1589,27 @@ void SqlCheckNamesWalker::walk( BaseWalkReflector *reflector) {
         m_ast->accept(&visitor);
     }
 }
+
+DmlStatementAST *DmlStatementAST::asDmlStatement() { return this; }
+SelectCompoundAST *SelectCompoundAST::asSelectCompound() { return this; }
+ResultColumnAST *ResultColumnAST::asResultColumn() { return this; }
+SingleSourceAST *SingleSourceAST::asSingleSource() { return this; }
+InsertClauseAST *InsertClauseAST::asInsertClause() { return this; }
+CreateTableClauseAST *CreateTableClauseAST::asCreateTableClause() { return this; }
+CreateTriggerBodyAST *CreateTriggerBodyAST::asCreateTriggerBody() { return this; }
+ConstraintAST *ConstraintAST::asConstraint() { return this; }
+TableConstraintAST *TableConstraintAST::asTableConstraint() { return this; }
+ColumnConstraintAST *ColumnConstraintAST::asColumnConstraint() { return this; }
+DdlStatementAST *DdlStatementAST::asDdlStatement() { return this; }
+CreateStatementAST *CreateStatementAST::asCreateStatement() { return this; }
+DropStatementAST *DropStatementAST::asDropStatement() { return this; }
+AlterStatementAST *AlterStatementAST::asAlterStatement() { return this; }
+AlterTableClauseAST *AlterTableClauseAST::asAlterTableClause() { return this; }
+AlterTableAddClauseAST *AlterTableAddClauseAST::asAlterTableAddClause() { return this; }
+CommentStatementAST *CommentStatementAST::asCommentStatement() { return this; }
+BaseTypeAST *BaseTypeAST::asBaseType() { return this; }
+ValueExpressionAST *ValueExpressionAST::asValueExpression() { return this; }
+SimpleValueExpressionAST *SimpleValueExpressionAST::asSimpleValueExpression() { return this; }
+ConstantExpressionAST *ConstantExpressionAST::asConstantExpression() { return this; }
+CompoundRValueExpressionAST *CompoundRValueExpressionAST::asCompoundRValueExpression() { return this; }
+ConditionExpressionAST *ConditionExpressionAST::asConditionExpression() { return this; }

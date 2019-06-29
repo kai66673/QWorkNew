@@ -1975,7 +1975,19 @@ static inline void sqlClassify6( const char *s, Token &tk )
   }
   else if ( s[0] == 'R' || s[0] == 'r') {
     if ( s[1] == 'E' || s[1] == 'e') {
-      if ( s[2] == 'P' || s[2] == 'p') {
+      if ( s[2] == 'N' || s[2] == 'n' ) {
+        if ( s[3] == 'A' || s[3] == 'a' ) {
+          if ( s[4] == 'M' || s[4] == 'm' ) {
+            if ( s[5] == 'E' || s[5] == 'e' ) {
+              tk.kf.keytype = 1;
+              tk.kf.keyword1 = 1;
+              tk.kf.keyid = T_6_RENAME;
+              return;
+            }
+          }
+        }
+      }
+      else if ( s[2] == 'P' || s[2] == 'p') {
         if ( s[3] == 'E' || s[3] == 'e') {
           if ( s[4] == 'A' || s[4] == 'a') {
             if ( s[5] == 'T' || s[5] == 't') {
