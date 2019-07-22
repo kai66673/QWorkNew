@@ -5,6 +5,11 @@
 #include <QHeaderView>
 #include <QDate>
 #include <QPainter>
+#include <QDialog>
+#include <QHBoxLayout>
+#include <QPushButton>
+#include <QPlainTextEdit>
+#include <QDebug>
 
 #include "QwTableView.h"
 
@@ -97,8 +102,7 @@ public:
             m_orderList.append(newColOrder);
         }
 
-        sort(-1);           /// Грязный хук - для очистки приватных данных предка о сортировке ...
-                            /// Иначе не будет происходить сортировка при повторном нажатии на столбец
+        sort(-1);
         sort(logicalIndex, Qt::AscendingOrder);
     }
 
@@ -253,6 +257,32 @@ protected:
     QList <QPair <int, Qt::SortOrder> > orderList;
 };
 
+class QwTableCellViewDialog: public QDialog
+{
+public:
+    QwTableCellViewDialog(const QString &cellText, QWidget *parent = nullptr)
+        : QDialog(parent)
+    {
+        QHBoxLayout *buttonsLayout = new QHBoxLayout();
+        QPushButton *closeButton = new QPushButton(tr("Close"));
+        buttonsLayout->addStretch();
+        buttonsLayout->addWidget(closeButton);
+
+        QPlainTextEdit *cellEdit = new QPlainTextEdit();
+        cellEdit->setPlainText(cellText);
+        cellEdit->setReadOnly(true);
+
+        QVBoxLayout *mainLayout = new QVBoxLayout();
+        mainLayout->addWidget(cellEdit);
+        mainLayout->addLayout(buttonsLayout);
+
+        setLayout(mainLayout);
+
+        connect(closeButton, &QPushButton::clicked, this, &QDialog::accept);
+    }
+
+};
+
 QwTableView::QwTableView( const QString &clipboardSplitter, QWidget *parent )
     : QTableView(parent)
     , m_clipboardSplitter(clipboardSplitter)
@@ -303,6 +333,24 @@ void QwTableView::keyPressEvent( QKeyEvent * event )
     }
     else {
         QTableView::keyPressEvent(event);
+    }
+}
+
+void QwTableView::mouseDoubleClickEvent(QMouseEvent *ev)
+{
+    if (ev->button() == Qt::LeftButton) {
+        QModelIndexList indexes = selectionModel()->selectedIndexes();
+        if (indexes.size() == 1) {
+            QModelIndex index = indexes.at(0);
+            if (index.isValid()) {
+                ev->accept();
+                auto cellData =  model()->data(index);
+                QByteArray ba = cellData.toByteArray();
+                qDebug() << "---" << ba;
+                QwTableCellViewDialog cellEditDialog(ba);
+                cellEditDialog.exec();
+            }
+        }
     }
 }
 

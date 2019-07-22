@@ -22,6 +22,7 @@ public slots:
 
 protected:
     void keyPressEvent( QKeyEvent * event );
+    void mouseDoubleClickEvent(QMouseEvent *ev);
 
 private:
     void copy();
