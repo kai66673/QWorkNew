@@ -431,7 +431,7 @@ static IDbDetailsFactory *createTableDbDetailsFactory( const QString &connName, 
                 .arg(schemaName)
                 .arg(tableName);
         if (Database::Utils::executeQueryWithLog(&query, queryString)) {
-            while ( query.next() ) {
+            while (query.next()) {
                 bool is_pk = query.value(3).toBool();
                 cls_src += QString("    %1 = Column(%2%3)\n")
                         .arg(query.value(0).toString())
