@@ -76,7 +76,22 @@ public:
         , m_source(source)
     {}
 
-    virtual QWidget *createDetailsWidget( QWidget *parent = 0 ) const;
+    virtual QWidget *createDetailsWidget(QWidget *parent = nullptr) const;
+
+private:
+    QString m_source;
+};
+
+
+class SQL_EXPORT DbDetailsPySourceFactory: public IDbDetailsFactory
+{
+public:
+    DbDetailsPySourceFactory(const QString &source)
+        : IDbDetailsFactory()
+        , m_source(source)
+    {}
+
+    virtual QWidget *createDetailsWidget(QWidget *parent = nullptr) const;
 
 private:
     QString m_source;

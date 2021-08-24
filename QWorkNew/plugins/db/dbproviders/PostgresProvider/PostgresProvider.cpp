@@ -18,6 +18,45 @@
 namespace Database {
 namespace Postgres {
 
+static QString toCamelCase(const QString &txt)
+{
+    QString result;
+    bool need_to_upper = true;
+    for (auto ch: txt) {
+        if (ch == QChar('_')) {
+            need_to_upper = true;
+            continue;
+        }
+        if (need_to_upper && ch.isLetter())
+            result += ch.toUpper();
+        else
+            result += ch;
+        need_to_upper = false;
+    }
+    return result;
+}
+
+static QMap<QString, QString> s_py_types = {
+    {"integer", "Integer"},
+    {"text", "String"},
+    {"boolean", "Boolean"},
+    {"character varying", "String"},
+    {"double precision", "Float"}
+};
+
+static QString OrmTypeString(const QString &type, const QString &length)
+{
+    if (type == "character varying") {
+        if (length.isEmpty())
+            return QString("String");
+        return QString("String(%1)").arg(length);
+    }
+
+    QString py_type = s_py_types.value(type);
+
+    return py_type.isEmpty() ? type : py_type;
+}
+
 Provider::Provider( QObject *parent )
     : QObject(parent)
     , m_engine(new ::Postgres::PostgresParserEngine())
@@ -367,12 +406,51 @@ static IDbDetailsFactory *createTableDbDetailsFactory( const QString &connName, 
         }
     }
 
+    // ORM class
+    QString cls_src = QString("class %1(Base):\n").arg(toCamelCase(tableName));
+    cls_src += QString("    __tablename__ = '%1'\n\n").arg(tableName);
+    {
+        QSqlQuery query(db);
+        QString   queryString;
+        queryString = QString("SELECT columns.column_name, columns.data_type, columns.character_maximum_length,"
+                              "  case when columns.column_name in ("
+                              "         select ccu.column_name "
+                              "           FROM information_schema.table_constraints tc"
+                              "              , information_schema.constraint_column_usage ccu "
+                              "          where ccu.constraint_schema = tc.constraint_schema "
+                              "            and ccu.constraint_name = tc.constraint_name "
+                              "            and tc.constraint_type = 'PRIMARY KEY' and tc.table_name = '%2' "
+                              "            and tc.table_schema = '%1') "
+                              "       then true "
+                              "       else false "
+                              "   end as is_pk "
+                              "  FROM information_schema.columns "
+                              " WHERE columns.table_schema = '%1' "
+                              "   AND columns.table_name = '%2' "
+                              " ORDER BY columns.ordinal_position;")
+                .arg(schemaName)
+                .arg(tableName);
+        if (Database::Utils::executeQueryWithLog(&query, queryString)) {
+            while ( query.next() ) {
+                bool is_pk = query.value(3).toBool();
+                cls_src += QString("    %1 = Column(%2%3)\n")
+                        .arg(query.value(0).toString())
+                        .arg(OrmTypeString(query.value(1).toString(),
+                                           query.value(2).toString()))
+                        .arg(is_pk ? ", primary_key=True" : "");
+            }
+        }
+    }
+
+    Database::DbDetailsPySourceFactory *ps = new Database::DbDetailsPySourceFactory(cls_src);
+
     Database::DbDetailsTabbedFactory *tab = new Database::DbDetailsTabbedFactory;
     tab->addTab(QObject::tr("Table Info"), t);
     tab->addTab(QObject::tr("Columns Info"), c);
     tab->addTab(QObject::tr("Indexes"), in);
     tab->addTab(QObject::tr("Triggers"), tr);
     tab->addTab(QObject::tr("Constraints"), cn);
+    tab->addTab(QObject::tr("Sqlalchemy Table Class"), ps);
 
     return tab;
 }

@@ -63,10 +63,19 @@ QWidget *DbDetailsTabbedFactory::createDetailsWidget( QWidget *parent ) const
     return t;
 }
 
-QWidget *DbDetailsSourceFactory::createDetailsWidget( QWidget *parent ) const
+QWidget *DbDetailsSourceFactory::createDetailsWidget(QWidget *parent) const
 {
-    SqlTextEditorWidget *viewSourceWidget = new SqlTextEditorWidget(0, parent);
+    SqlTextEditorWidget *viewSourceWidget = new SqlTextEditorWidget(nullptr, parent);
     viewSourceWidget->initializeAsTextInfoWidget();
+    viewSourceWidget->setFrameShape(QFrame::WinPanel);
+    viewSourceWidget->setFrameShadow(QFrame::Sunken);
+    viewSourceWidget->setPlainText(m_source);
+    return viewSourceWidget;
+}
+
+QWidget *DbDetailsPySourceFactory::createDetailsWidget(QWidget *parent) const
+{
+    QPlainTextEdit *viewSourceWidget = new QPlainTextEdit(parent);
     viewSourceWidget->setFrameShape(QFrame::WinPanel);
     viewSourceWidget->setFrameShadow(QFrame::Sunken);
     viewSourceWidget->setPlainText(m_source);
