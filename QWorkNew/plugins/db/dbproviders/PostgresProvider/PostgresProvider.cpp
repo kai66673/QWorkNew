@@ -406,7 +406,7 @@ static IDbDetailsFactory *createTableDbDetailsFactory( const QString &connName, 
         }
     }
 
-    // ORM class
+    // ORM (sqlalchemy) class
     QString cls_src = QString("class %1(Base):\n").arg(toCamelCase(tableName));
     cls_src += QString("    __tablename__ = '%1'\n\n").arg(tableName);
     {
