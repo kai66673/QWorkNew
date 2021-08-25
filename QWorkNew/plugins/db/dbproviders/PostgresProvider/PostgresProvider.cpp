@@ -412,7 +412,22 @@ static IDbDetailsFactory *createTableDbDetailsFactory( const QString &connName, 
     {
         QSqlQuery query(db);
         QString   queryString;
-        queryString = QString("SELECT columns.column_name, columns.data_type, columns.character_maximum_length,"
+        queryString = QString("with fk_view as (select kcu.column_name as fk_column, rel_kcu.table_name || '.' || rel_kcu.column_name as fk "
+                              "     from information_schema.table_constraints tco "
+                              "     join information_schema.key_column_usage kcu "
+                              "          on tco.constraint_schema = kcu.constraint_schema "
+                              "          and tco.constraint_name = kcu.constraint_name "
+                              "     join information_schema.referential_constraints rco "
+                              "          on tco.constraint_schema = rco.constraint_schema "
+                              "          and tco.constraint_name = rco.constraint_name "
+                              "     join information_schema.key_column_usage rel_kcu "
+                              "          on rco.unique_constraint_schema = rel_kcu.constraint_schema "
+                              "          and rco.unique_constraint_name = rel_kcu.constraint_name "
+                              "          and kcu.ordinal_position = rel_kcu.ordinal_position "
+                              "    where tco.constraint_type = 'FOREIGN KEY' "
+                              "      and kcu.table_schema = '%1' "
+                              "      and kcu.table_name = '%2') "
+                              "SELECT columns.column_name, columns.data_type, columns.character_maximum_length,"
                               "  case when columns.column_name in ("
                               "         select ccu.column_name "
                               "           FROM information_schema.table_constraints tc"
@@ -423,8 +438,8 @@ static IDbDetailsFactory *createTableDbDetailsFactory( const QString &connName, 
                               "            and tc.table_schema = '%1') "
                               "       then true "
                               "       else false "
-                              "   end as is_pk "
-                              "  FROM information_schema.columns "
+                              "   end as is_pk, fk_view.fk "
+                              "  FROM information_schema.columns left join fk_view on fk_view.fk_column = columns.column_name "
                               " WHERE columns.table_schema = '%1' "
                               "   AND columns.table_name = '%2' "
                               " ORDER BY columns.ordinal_position;")
@@ -433,11 +448,13 @@ static IDbDetailsFactory *createTableDbDetailsFactory( const QString &connName, 
         if (Database::Utils::executeQueryWithLog(&query, queryString)) {
             while (query.next()) {
                 bool is_pk = query.value(3).toBool();
-                cls_src += QString("    %1 = Column(%2%3)\n")
+                QString fk = query.value(4).toString();
+                cls_src += QString("    %1 = Column(%2%3%4)\n")
                         .arg(query.value(0).toString())
                         .arg(OrmTypeString(query.value(1).toString(),
                                            query.value(2).toString()))
-                        .arg(is_pk ? ", primary_key=True" : "");
+                        .arg(is_pk ? ", primary_key=True" : "")
+                        .arg(fk.isEmpty() ? "" : QString(", ForeignKey('%1')").arg(fk));
             }
         }
     }
