@@ -1,0 +1,65 @@
+QWidget {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #E1E1E1, stop: 0.4 #EEEEEE,
+                                stop: 0.6 #E7E7E7, stop: 1.0 #D3D3D3);
+    color: black;
+}
+
+QLabel {
+    padding: 2px
+}
+
+QToolButton {
+    margin: 0px;
+    border: 0px;
+    border-radius: 0px;
+    padding: 2px;
+}
+QToolButton:hover {
+      border: 0px;
+      border-radius: 0px;
+      background-color: #c6c6c6;
+}
+QToolButton:checked {
+      border-radius: 0px;
+      background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(56, 80, 73, 255), stop:1 rgba(212, 212, 212, 212));
+}
+QToolButton:hover:checked {
+      border-radius: 0px;
+      background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(56, 80, 73, 255), stop:1 #c6c6c6);
+}
+
+QComboBox {
+    subcontrol-origin: padding;
+    subcontrol-position: center;
+    width: 20px;
+    border: 0px;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    border-radius: 0px;
+    padding: 2px;
+    min-width: 6em;
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    border-left-width: 1px;
+    border-left-color: gray;
+    border-left-style: solid;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+QComboBox::down-arrow {
+    image: url(:/utils/images/cb_down_arrow.png);
+}
+
+QLineEdit {
+    border: 0px;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    border-radius: 0px;
+}
+
+QToolBar {
+    spacing: 0px;
+    icon-size: 13px;
+}

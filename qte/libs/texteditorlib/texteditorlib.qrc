@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/texteditorlib">
+        <file>images/refactormarker.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,6 @@
+add_subdirectory(utils)
+add_subdirectory(aggregation)
+add_subdirectory(settings)
+add_subdirectory(corelib)
+add_subdirectory(texteditorlib)
+add_subdirectory(pythoneditorlib)
