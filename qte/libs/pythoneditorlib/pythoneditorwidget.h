@@ -45,7 +45,7 @@ class PYTHONEDITOR_EXPORT EditorWidget : public TextEditor::TextEditorWidget
     Q_OBJECT
 
 public:
-    EditorWidget(IDocument *document, QWidget *parent = 0);
+    EditorWidget(QWidget *parent = 0);
     virtual ~EditorWidget();
 
     virtual void unCommentSelection();

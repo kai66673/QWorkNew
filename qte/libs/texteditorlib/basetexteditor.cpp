@@ -181,10 +181,9 @@ static void convertToPlainText(QString &txt)
     }
 }
 
-TextEditorWidget::TextEditorWidget(IDocument *document, QWidget *parent )
+TextEditorWidget::TextEditorWidget(QWidget *parent )
     : QPlainTextEdit(parent)
     , m_completitionProvider(0)
-    , m_document(document)
 {
     d = new BaseTextEditorPrivate;
     d->q = this;
@@ -3970,9 +3969,6 @@ void TextEditorWidget::drawFoldingMarker(QPainter *painter, const QPalette &pal,
 
 void TextEditorWidget::slotModificationChanged(bool m)
 {
-    if ( m_document )
-        DocumentManager::getInstance()->onDocumentModificationChanged(m_document);
-
     if (m)
         return;
 
@@ -4052,15 +4048,6 @@ void TextEditorWidget::updateCurrentLineHighlight()
 
 void TextEditorWidget::slotCursorPositionChanged()
 {
-    if ( m_document ) {
-        DocumentManager::getInstance()->onCursorPositionChanged();
-    }
-
-#if 0
-    qDebug() << "block" << textCursor().blockNumber()+1
-            << "brace depth:" << BaseTextDocumentLayout::braceDepth(textCursor().block())
-            << "indent:" << BaseTextDocumentLayout::userData(textCursor().block())->foldingIndent();
-#endif
     if (!d->m_contentsChanged && d->m_lastCursorChangeWasInteresting) {
         Core::Storage::mainWindow()->addCurrentPositionToNavigationHistory(editor(), d->m_tempNavigationState);
         d->m_lastCursorChangeWasInteresting = false;

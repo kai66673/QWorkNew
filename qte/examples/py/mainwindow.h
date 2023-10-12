@@ -6,6 +6,9 @@
 
 #include "pythoneditorwidget.h"
 
+class HighlighterFormatsManager;
+class SettingsManager;
+
 class MainWindow : public SimpleMainWindow
 {
     Q_OBJECT

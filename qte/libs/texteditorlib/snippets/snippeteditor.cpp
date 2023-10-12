@@ -60,7 +60,7 @@ QString SnippetEditor::id() const
 }
 
 SnippetEditorWidget::SnippetEditorWidget(QWidget *parent)
-    : TextEditorWidget(0, parent)
+    : TextEditorWidget(parent)
 {
     setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
     setHighlightCurrentLine(false);

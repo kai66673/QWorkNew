@@ -37,7 +37,6 @@
 #include "codeassist/assistenums.h"
 #include "ILink.h"
 #include "completionassistprovider.h"
-#include "IDocument.h"
 
 #include <ifindsupport.h>
 #include "texteditor_global.h"
@@ -132,7 +131,7 @@ class TEXTEDITOR_EXPORT TextEditorWidget : public QPlainTextEdit
     Q_PROPERTY(int verticalBlockSelectionFirstColumn READ verticalBlockSelectionFirstColumn)
     Q_PROPERTY(int verticalBlockSelectionLastColumn READ verticalBlockSelectionLastColumn)
 public:
-    TextEditorWidget(IDocument *document, QWidget *parent);
+    TextEditorWidget(QWidget *parent);
     ~TextEditorWidget();
 
     const Utils::ChangeSet &changeSet() const;
@@ -571,9 +570,6 @@ private slots:
 
 private:
     TextEditor::CompletionAssistProvider *m_completitionProvider;
-
-protected:
-    IDocument *m_document;
 };
 
 

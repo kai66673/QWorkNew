@@ -2,6 +2,9 @@
 
 #include "texteditorsettings.h"
 
+#include <HighlighterFormatsManager.h>
+#include <SettingsManager.h>
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 /// PythonHighlighterFormatData
 class PythonHighlighterFormatData: public HighlighterFormatData
@@ -95,7 +98,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     m_highlighterFormatsManager->registerLanguageHighlighter(new PythonHighlighterFormatData);
 
-    m_editor = new PythonEditor::EditorWidget(nullptr, this);
+    m_editor = new PythonEditor::EditorWidget(this);
     m_editor->onSettingsChanged();
 
     setCentralWidget(m_editor);

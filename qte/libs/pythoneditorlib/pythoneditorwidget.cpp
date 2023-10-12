@@ -46,8 +46,8 @@
 
 namespace PythonEditor {
 
-EditorWidget::EditorWidget(IDocument *document, QWidget *parent)
-    : TextEditor::TextEditorWidget(document, parent)
+EditorWidget::EditorWidget(QWidget *parent)
+    : TextEditor::TextEditorWidget(parent)
 {
     m_commentDefinition.setMultiLineStart(QString());
     m_commentDefinition.setMultiLineEnd(QString());

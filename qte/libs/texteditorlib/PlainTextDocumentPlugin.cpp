@@ -166,7 +166,7 @@ PlainTextDocument::PlainTextDocument( IDocumentPlugin *docPlugin )
     , m_editor(0)
     , m_documentPlugin(docPlugin)
 {
-    m_editor = new TextEditor::PlainTextEditorWidget(this, 0);
+    m_editor = new TextEditor::PlainTextEditorWidget(nullptr);
 }
 
 PlainTextDocument::~PlainTextDocument()

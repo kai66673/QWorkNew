@@ -65,8 +65,8 @@ PlainTextEditor::PlainTextEditor(PlainTextEditorWidget *editor)
                              TextEditor::Constants::C_TEXTEDITOR));
 }
 
-PlainTextEditorWidget::PlainTextEditorWidget(IDocument *document, QWidget *parent)
-  : TextEditorWidget(document, parent)
+PlainTextEditorWidget::PlainTextEditorWidget(QWidget *parent)
+  : TextEditorWidget(parent)
   , m_isMissingSyntaxDefinition(false)
   , m_ignoreMissingSyntaxDefinition(false)
 {

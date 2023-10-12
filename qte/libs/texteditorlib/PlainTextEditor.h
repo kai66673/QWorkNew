@@ -64,7 +64,7 @@ class TEXTEDITOR_EXPORT PlainTextEditorWidget : public TextEditorWidget
     Q_OBJECT
 
 public:
-    PlainTextEditorWidget(IDocument *document, QWidget *parent);
+    PlainTextEditorWidget(QWidget *parent);
     virtual ~PlainTextEditorWidget();
 
     void configure(const QString& mimeType);
