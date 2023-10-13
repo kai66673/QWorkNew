@@ -130,4 +130,28 @@ TextEditorWidget::~TextEditorWidget()
     d = 0;
 }
 
+void TextEditorWidget::appendStandardContextMenuActions(QMenu *)
+{ }
+
+void TextEditorWidget::setParenthesesMatchingEnabled(bool b)
+{
+    d->m_parenthesesMatchingEnabled = b;
+}
+
+bool TextEditorWidget::isParenthesesMatchingEnabled() const
+{
+    return d->m_parenthesesMatchingEnabled;
+}
+
+void TextEditorWidget::setHighlightCurrentLine(bool b)
+{
+    d->m_highlightCurrentLine = b;
+    updateCurrentLineHighlight();
+}
+
+bool TextEditorWidget::highlightCurrentLine() const
+{
+    return d->m_highlightCurrentLine;
+}
+
 }   // namespace TextEditor

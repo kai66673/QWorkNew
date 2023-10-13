@@ -116,7 +116,7 @@ public:
 //    virtual void setMimeType(const QString &mt);
 
 
-    void appendStandardContextMenuActions(QMenu *menu);
+    void appendStandardContextMenuActions(QMenu *);
 
     // Works only in conjunction with a syntax highlighter that puts
     // parentheses into text block user data
