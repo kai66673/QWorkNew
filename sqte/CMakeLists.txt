@@ -18,3 +18,4 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Xml PrintSupport Network S
 ###########################################################
 
 add_subdirectory(libs)
+add_subdirectory(examples)
