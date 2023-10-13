@@ -2,6 +2,7 @@
 
 #include <QPlainTextEdit>
 #include <QPrinter>
+#include <QTimeLine>
 
 #include "codeassist/assistenums.h"
 #include "codeassist/completionassistprovider.h"
@@ -35,6 +36,46 @@ namespace Internal {
     typedef QList<RefactorMarker> RefactorMarkers;
     typedef QString (TransformationMethod)(const QString &);
 }
+
+class TEXTEDITOR_EXPORT BaseTextEditorAnimator : public QObject
+{
+    Q_OBJECT
+
+public:
+    BaseTextEditorAnimator(QObject *parent);
+
+    inline void setPosition(int position) { m_position = position; }
+    inline int position() const { return m_position; }
+
+    void setData(QFont f, QPalette pal, const QString &text);
+
+    void draw(QPainter *p, const QPointF &pos);
+    QRectF rect() const;
+
+    inline qreal value() const { return m_value; }
+    inline QPointF lastDrawPos() const { return m_lastDrawPos; }
+
+    void finish();
+
+    bool isRunning() const;
+
+signals:
+    void updateRequest(int position, QPointF lastPos, QRectF rect);
+
+
+private slots:
+    void step(qreal v);
+
+private:
+    QTimeLine *m_timeline;
+    qreal m_value;
+    int m_position;
+    QPointF m_lastDrawPos;
+    QFont m_font;
+    QPalette m_palette;
+    QString m_text;
+    QSizeF m_size;
+};
 
 class TEXTEDITOR_EXPORT TextEditorWidget : public QPlainTextEdit
 {
