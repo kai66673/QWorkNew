@@ -30,40 +30,40 @@
 **
 **************************************************************************/
 
-#ifndef DEFAULTASSISTINTERFACE_H
-#define DEFAULTASSISTINTERFACE_H
+#ifndef SNIPPETSSETTINGS_H
+#define SNIPPETSSETTINGS_H
 
-#include "iassistinterface.h"
+#include <QtCore/QString>
+
+QT_BEGIN_NAMESPACE
+class QSettings;
+QT_END_NAMESPACE
 
 namespace TextEditor {
 
-class TEXTEDITOR_EXPORT DefaultAssistInterface : public IAssistInterface
+class SnippetsSettings
 {
 public:
-    DefaultAssistInterface(QTextDocument *textDocument,
-                           int position,
-                           const QString &fileName,
-                           AssistReason reason);
-    ~DefaultAssistInterface();
+    SnippetsSettings();
 
-    int position() const override { return m_position; }
-    QChar characterAt(int position) const override;
-    QString textAt(int position, int length) const override;
-    QString fileName() const override { return m_fileName; }
-    QTextDocument *textDocument() const override { return m_textDocument; }
-    void prepareForAsyncUse() override;
-    void recreateTextDocument() override;
-    AssistReason reason() const override;
+    void toSettings(const QString &category, QSettings *s) const;
+    void fromSettings(const QString &category, QSettings *s);
+
+    void setLastUsedSnippetGroup(const QString &lastUsed);
+    const QString &lastUsedSnippetGroup() const;
+
+    bool equals(const SnippetsSettings &snippetsSettings) const;
 
 private:
-    QTextDocument *m_textDocument;
-    bool m_isAsync;
-    int m_position;
-    QString m_fileName;
-    AssistReason m_reason;
-    QString m_text;
+    QString m_lastUsedSnippetGroup;
 };
+
+inline bool operator==(const SnippetsSettings &a, const SnippetsSettings &b)
+{ return a.equals(b); }
+
+inline bool operator!=(const SnippetsSettings &a, const SnippetsSettings &b)
+{ return !a.equals(b); }
 
 } // TextEditor
 
-#endif // DEFAULTASSISTINTERFACE_H
+#endif // SNIPPETSSETTINGS_H

@@ -30,40 +30,52 @@
 **
 **************************************************************************/
 
-#ifndef DEFAULTASSISTINTERFACE_H
-#define DEFAULTASSISTINTERFACE_H
+#ifndef CODECSELECTOR_H
+#define CODECSELECTOR_H
 
-#include "iassistinterface.h"
+#include <QDialog>
+#include <QLabel>
+#include <QDialogButtonBox>
+#include <QListWidget>
 
 namespace TextEditor {
 
-class TEXTEDITOR_EXPORT DefaultAssistInterface : public IAssistInterface
-{
-public:
-    DefaultAssistInterface(QTextDocument *textDocument,
-                           int position,
-                           const QString &fileName,
-                           AssistReason reason);
-    ~DefaultAssistInterface();
+class BaseTextDocument;
 
-    int position() const override { return m_position; }
-    QChar characterAt(int position) const override;
-    QString textAt(int position, int length) const override;
-    QString fileName() const override { return m_fileName; }
-    QTextDocument *textDocument() const override { return m_textDocument; }
-    void prepareForAsyncUse() override;
-    void recreateTextDocument() override;
-    AssistReason reason() const override;
+namespace Internal {
+
+class CodecSelector : public QDialog
+{
+    Q_OBJECT
+
+public:
+
+    CodecSelector(QWidget *parent, BaseTextDocument *doc);
+    ~CodecSelector();
+
+    QTextCodec *selectedCodec() const;
+
+    enum Result {
+        Cancel, Reload, Save
+    };
+
+    int exec();
+
+private slots:
+    void updateButtons();
+    void buttonClicked(QAbstractButton *button);
 
 private:
-    QTextDocument *m_textDocument;
-    bool m_isAsync;
-    int m_position;
-    QString m_fileName;
-    AssistReason m_reason;
-    QString m_text;
+    bool m_hasDecodingError;
+    bool m_isModified;
+    QLabel *m_label;
+    QListWidget *m_listWidget;
+    QDialogButtonBox *m_dialogButtonBox;
+    QAbstractButton *m_reloadButton;
+    QAbstractButton *m_saveButton;
 };
 
-} // TextEditor
+} // namespace Internal
+} // namespace TextEditor
 
-#endif // DEFAULTASSISTINTERFACE_H
+#endif // CODECSELECTOR_H

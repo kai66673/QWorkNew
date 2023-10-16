@@ -30,40 +30,35 @@
 **
 **************************************************************************/
 
-#ifndef DEFAULTASSISTINTERFACE_H
-#define DEFAULTASSISTINTERFACE_H
+#ifndef SNIPPETEDITOR_H
+#define SNIPPETEDITOR_H
 
-#include "iassistinterface.h"
+#include <texteditor_global.h>
+#include <texteditor.h>
 
 namespace TextEditor {
 
-class TEXTEDITOR_EXPORT DefaultAssistInterface : public IAssistInterface
+class SnippetEditorWidget;
+class SyntaxHighlighter;
+class Indenter;
+
+class TEXTEDITOR_EXPORT SnippetEditorWidget : public TextEditorWidget
 {
+    Q_OBJECT
+
 public:
-    DefaultAssistInterface(QTextDocument *textDocument,
-                           int position,
-                           const QString &fileName,
-                           AssistReason reason);
-    ~DefaultAssistInterface();
+    SnippetEditorWidget(QWidget *parent);
 
-    int position() const override { return m_position; }
-    QChar characterAt(int position) const override;
-    QString textAt(int position, int length) const override;
-    QString fileName() const override { return m_fileName; }
-    QTextDocument *textDocument() const override { return m_textDocument; }
-    void prepareForAsyncUse() override;
-    void recreateTextDocument() override;
-    AssistReason reason() const override;
+signals:
+    void snippetContentChanged();
 
-private:
-    QTextDocument *m_textDocument;
-    bool m_isAsync;
-    int m_position;
-    QString m_fileName;
-    AssistReason m_reason;
-    QString m_text;
+protected:
+    virtual void focusOutEvent(QFocusEvent *event);
+    virtual void contextMenuEvent(QContextMenuEvent *event);
+
+    virtual int extraAreaWidth(int * /* markWidthPtr */ = 0) const { return 0; }
 };
 
 } // TextEditor
 
-#endif // DEFAULTASSISTINTERFACE_H
+#endif // SNIPPETEDITOR_H

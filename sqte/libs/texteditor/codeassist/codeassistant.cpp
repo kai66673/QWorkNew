@@ -31,6 +31,7 @@
 **************************************************************************/
 
 #include "codeassistant.h"
+#include "basetexteditor.h"
 #include "completionassistprovider.h"
 #include "quickfixassistprovider.h"
 #include "iassistprocessor.h"
@@ -40,7 +41,7 @@
 #include "iassistproposalitem.h"
 #include "runner.h"
 #include "qtcassert.h"
-#include "Core.h"
+//#include "Core.h"
 
 #include <texteditor.h>
 #include <texteditorsettings.h>
@@ -183,11 +184,11 @@ void CodeAssistantPrivate::configure(BaseTextEditor *textEditor)
     if ( CompletionAssistProvider *provider = m_textEditor->completionProvider() )
         m_completionProvider = provider;
     else {
-        QList<CompletionAssistProvider *> completionProviders;
-        completionProviders = Core::Storage::mainWindow()->getCompletionAssistProviders();
-        filterEditorSpecificProviders(&completionProviders, m_textEditor->context());
-        if ( !completionProviders.isEmpty() )
-            m_completionProvider = completionProviders[0];
+//        QList<CompletionAssistProvider *> completionProviders;
+//        completionProviders = Core::Storage::mainWindow()->getCompletionAssistProviders();
+//        filterEditorSpecificProviders(&completionProviders, m_textEditor->context());
+//        if ( !completionProviders.isEmpty() )
+//            m_completionProvider = completionProviders[0];
     }
 
 //    m_quickFixProviders =
@@ -258,7 +259,7 @@ void CodeAssistantPrivate::requestProposal(AssistReason reason,
 {
     QTC_ASSERT(!isWaitingForProposal(), return);
 
-    if (m_textEditor->editorWidget()->hasBlockSelection())
+    if (m_textEditor->hasBlockSelection())
         return; // TODO
 
     if (!provider) {
@@ -274,7 +275,7 @@ void CodeAssistantPrivate::requestProposal(AssistReason reason,
     m_assistKind = kind;
     IAssistProcessor *processor = provider->createProcessor();
     IAssistInterface *assistInterface =
-        m_textEditor->editorWidget()->createAssistInterface(kind, reason);
+        m_textEditor->createAssistInterface(kind, reason);
     if (!assistInterface)
         return;
 
@@ -361,7 +362,7 @@ void CodeAssistantPrivate::displayProposal(IAssistProposal *newProposal, AssistR
     m_proposalWidget->setAssistant(m_q);
     m_proposalWidget->setReason(reason);
     m_proposalWidget->setKind(m_assistKind);
-    m_proposalWidget->setUnderlyingWidget(m_textEditor->widget());
+    m_proposalWidget->setUnderlyingWidget(m_textEditor->editorWidget());
     m_proposalWidget->setModel(m_proposal->model());
     m_proposalWidget->setDisplayRect(m_textEditor->cursorRect(basePosition));
     if (m_receivedContentWhileWaiting)

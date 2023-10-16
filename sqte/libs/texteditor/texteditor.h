@@ -7,7 +7,12 @@
 #include "codeassist/assistenums.h"
 #include "codeassist/completionassistprovider.h"
 
+#include "ifindsupport.h"
 #include "texteditor_global.h"
+
+namespace Utils {
+    class ChangeSet;
+}
 
 namespace TextEditor {
 
@@ -36,6 +41,9 @@ namespace Internal {
     typedef QList<RefactorMarker> RefactorMarkers;
     typedef QString (TransformationMethod)(const QString &);
 }
+
+class ITextMarkable;
+class BaseTextDocument;
 
 class TEXTEDITOR_EXPORT BaseTextEditorAnimator : public QObject
 {
@@ -86,34 +94,37 @@ public:
     TextEditorWidget(QWidget *parent);
     ~TextEditorWidget();
 
+    const Utils::ChangeSet &changeSet() const;
+    void setChangeSet(const Utils::ChangeSet &changeSet);
+
 //    // EditorInterface
 //    Core::IFile * file();
-//    bool createNew(const QString &contents);
-//    virtual bool open(QString *errorString, const QString &fileName, const QString &realFileName);
-//    QByteArray saveState() const;
-//    bool restoreState(const QByteArray &state);
-//    QString displayName() const;
+    bool createNew(const QString &contents);
+    virtual bool open(QString *errorString, const QString &fileName, const QString &realFileName);
+    QByteArray saveState() const;
+    bool restoreState(const QByteArray &state);
+    QString displayName() const;
 
 //    // ITextEditor
 
-//    void gotoLine(int line, int column = 0);
-//    virtual void refreshDocumentCursor();
+    void gotoLine(int line, int column = 0);
+    virtual void refreshDocumentCursor();
 
 //    int position(
 //        ITextEditor::PositionOperation posOp = ITextEditor::Current
 //        , int at = -1) const;
-//    void convertPosition(int pos, unsigned *line, unsigned *column) const;
+    void convertPosition(int pos, unsigned *line, unsigned *column) const;
 
 //    BaseTextEditor *editor() const;
-//    ITextMarkable *markableInterface() const;
+    ITextMarkable *markableInterface() const;
 
-//    QChar characterAt(int pos) const;
+    QChar characterAt(int pos) const;
 
-//    void print(QPrinter *);
+    void print(QPrinter *);
 
-//    void setSuggestedFileName(const QString &suggestedFileName);
-//    QString mimeType() const;
-//    virtual void setMimeType(const QString &mt);
+    void setSuggestedFileName(const QString &suggestedFileName);
+    QString mimeType() const;
+    virtual void setMimeType(const QString &mt);
 
 
     void appendStandardContextMenuActions(QMenu *);
@@ -321,11 +332,17 @@ private:
 public:
     void duplicateFrom(TextEditorWidget *editor);
 
+protected:
+    BaseTextDocument *baseTextDocument() const;
+    void setBaseTextDocument(BaseTextDocument *doc);
+
+    void setDefaultPath(const QString &defaultPath);
+
 private slots:
     void editorContentsChange(int position, int charsRemoved, int charsAdded);
     void documentAboutToBeReloaded();
     void documentReloaded();
-//    void highlightSearchResults(const QString &txt, Find::FindFlags findFlags);
+    void highlightSearchResults(const QString &txt, Find::FindFlags findFlags);
     void setFindScope(const QTextCursor &start, const QTextCursor &end, int, int);
     bool inFindScope(const QTextCursor &cursor);
     bool inFindScope(int selectionStart, int selectionEnd);
@@ -487,7 +504,7 @@ private:
 
 //    void updateLink(QMouseEvent *e);
 //    void showLink( Core::ILink *link );
-//    void clearLink();
+    void clearLink();
 
     void universalHelper(); // test function for development
 

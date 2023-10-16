@@ -30,40 +30,41 @@
 **
 **************************************************************************/
 
-#ifndef DEFAULTASSISTINTERFACE_H
-#define DEFAULTASSISTINTERFACE_H
+#include "snippeteditor.h"
 
-#include "iassistinterface.h"
+#include <texteditorconstants.h>
 
-namespace TextEditor {
+#include <QtGui/QTextDocument>
+#include <QtGui/QFocusEvent>
 
-class TEXTEDITOR_EXPORT DefaultAssistInterface : public IAssistInterface
+using namespace TextEditor;
+
+/*!
+    \class TextEditor::SnippetEditorWidget
+    \brief The SnippetEditorWidget class is a lightweight editor for code snippets
+    with basic support for syntax highlighting, indentation, and others.
+    \ingroup Snippets
+*/
+
+SnippetEditorWidget::SnippetEditorWidget(QWidget *parent)
+    : TextEditorWidget(parent)
 {
-public:
-    DefaultAssistInterface(QTextDocument *textDocument,
-                           int position,
-                           const QString &fileName,
-                           AssistReason reason);
-    ~DefaultAssistInterface();
+    setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+    setHighlightCurrentLine(false);
+    setLineNumbersVisible(false);
+    setParenthesesMatchingEnabled(true);
+}
 
-    int position() const override { return m_position; }
-    QChar characterAt(int position) const override;
-    QString textAt(int position, int length) const override;
-    QString fileName() const override { return m_fileName; }
-    QTextDocument *textDocument() const override { return m_textDocument; }
-    void prepareForAsyncUse() override;
-    void recreateTextDocument() override;
-    AssistReason reason() const override;
+void SnippetEditorWidget::focusOutEvent(QFocusEvent *event)
+{
+    if (event->reason() != Qt::ActiveWindowFocusReason && document()->isModified()) {
+        document()->setModified(false);
+        emit snippetContentChanged();
+    }
+    TextEditorWidget::focusOutEvent(event);
+}
 
-private:
-    QTextDocument *m_textDocument;
-    bool m_isAsync;
-    int m_position;
-    QString m_fileName;
-    AssistReason m_reason;
-    QString m_text;
-};
-
-} // TextEditor
-
-#endif // DEFAULTASSISTINTERFACE_H
+void SnippetEditorWidget::contextMenuEvent(QContextMenuEvent *event)
+{
+    QPlainTextEdit::contextMenuEvent(event);
+}

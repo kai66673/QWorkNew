@@ -30,40 +30,33 @@
 **
 **************************************************************************/
 
-#ifndef DEFAULTASSISTINTERFACE_H
-#define DEFAULTASSISTINTERFACE_H
+#ifndef REUSE_H
+#define REUSE_H
 
-#include "iassistinterface.h"
+#include <QtCore/QString>
+#include <QtCore/QLatin1String>
 
 namespace TextEditor {
+namespace Internal {
 
-class TEXTEDITOR_EXPORT DefaultAssistInterface : public IAssistInterface
+const QLatin1String kTrue("true");
+const QLatin1String kFalse("false");
+
+inline bool toBool(const QString &s)
 {
-public:
-    DefaultAssistInterface(QTextDocument *textDocument,
-                           int position,
-                           const QString &fileName,
-                           AssistReason reason);
-    ~DefaultAssistInterface();
+    if (s == kTrue)
+        return true;
+    return false;
+}
 
-    int position() const override { return m_position; }
-    QChar characterAt(int position) const override;
-    QString textAt(int position, int length) const override;
-    QString fileName() const override { return m_fileName; }
-    QTextDocument *textDocument() const override { return m_textDocument; }
-    void prepareForAsyncUse() override;
-    void recreateTextDocument() override;
-    AssistReason reason() const override;
+inline QString fromBool(bool b)
+{
+    if (b)
+        return kTrue;
+    return kFalse;
+}
 
-private:
-    QTextDocument *m_textDocument;
-    bool m_isAsync;
-    int m_position;
-    QString m_fileName;
-    AssistReason m_reason;
-    QString m_text;
-};
-
+} // Internal
 } // TextEditor
 
-#endif // DEFAULTASSISTINTERFACE_H
+#endif // REUSE_H

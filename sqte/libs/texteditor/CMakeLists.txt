@@ -4,9 +4,11 @@ project(texteditor VERSION 0.1 LANGUAGES CXX)
 
 set (TEXTEDITOR_HEADERS
     texteditor_global.h
+    basetexteditor.h
     texteditor.h
     texteditoroverlay.h
     refactoroverlay.h
+    basetextdocument.h
     basetexteditor_p.h
     texteditorsettings.h
     behaviorsettings.h
@@ -27,9 +29,40 @@ set (TEXTEDITOR_HEADERS
     highlighterformatsmanager.h
     highlighterformatsconfigurewidget.h
     codestylepool.h
+    codecselector.h
+    convenience.h
+    autocompleter.h
 
     core/corelib_global.h
+    core/coreconstants.h
     core/itexteditor.h
+    core/ifile.h
+    core/textfile.h
+    core/infobar.h
+    core/ifindsupport.h
+    core/manhattanstyle.h
+    core/styleanimator.h
+
+    codeassist/codeassistant.h
+    codeassist/runner.h
+    codeassist/iassistinterface.h
+    codeassist/iassistprovider.h
+    codeassist/completionassistprovider.h
+    codeassist/defaultassistinterface.h
+
+    snippets/isnippetprovider.h
+    snippets/plaintextsnippetprovider.h
+    snippets/reuse.h
+    snippets/snippet.h
+    snippets/plaintextsnippetprovider.h
+    snippets/snippeteditor.h
+    snippets/snippetscollection.h
+    snippets/snippetssettings.h
+
+    tooltip/tooltip.h
+    tooltip/tipcontents.h
+    tooltip/tipfactory.h
+    tooltip/tips.h
 
     utils/utils_global.h
     utils/settingsutils.h
@@ -47,6 +80,9 @@ set (TEXTEDITOR_HEADERS
     utils/stringutils.h
     utils/uncommentselection.h
     utils/persistentsettings.h
+    utils/textfileformat.h
+    utils/changeset.h
+    utils/stylehelper.h
 )
 
 set (TEXTEDITOR_SOURCES
@@ -65,14 +101,44 @@ set (TEXTEDITOR_SOURCES
     icodestylepreferencesfactory.cpp
     colorscheme.cpp
     basetextdocumentlayout.cpp
+    basetextdocument.cpp
     indenter.cpp
     tabsettings.cpp
     syntaxhighlighter.cpp
     highlighterformatsmanager.cpp
     highlighterformatsconfigurewidget.cpp
     codestylepool.cpp
+    codecselector.cpp
+    convenience.cpp
+    autocompleter.cpp
 
     core/itexteditor.cpp
+    core/ifile.cpp
+    core/textfile.cpp
+    core/infobar.cpp
+    core/ifindsupport.cpp
+    core/manhattanstyle.cpp
+    core/styleanimator.cpp
+
+    codeassist/codeassistant.cpp
+    codeassist/runner.cpp
+    codeassist/iassistinterface.cpp
+    codeassist/iassistprovider.cpp
+    codeassist/completionassistprovider.cpp
+    codeassist/defaultassistinterface.cpp
+
+    snippets/isnippetprovider.cpp
+    snippets/plaintextsnippetprovider.cpp
+    snippets/snippet.cpp
+    snippets/plaintextsnippetprovider.cpp
+    snippets/snippeteditor.cpp
+    snippets/snippetscollection.cpp
+    snippets/snippetssettings.cpp
+
+    tooltip/tooltip.cpp
+    tooltip/tipcontents.cpp
+    tooltip/tipfactory.cpp
+    tooltip/tips.cpp
 
     utils/qtcfileutils.cpp
     utils/qtcassert.cpp
@@ -86,6 +152,9 @@ set (TEXTEDITOR_SOURCES
     utils/stringutils.cpp
     utils/uncommentselection.cpp
     utils/persistentsettings.cpp
+    utils/textfileformat.cpp
+    utils/changeset.cpp
+    utils/stylehelper.cpp
 )
 
 set (TEXTEDITOR_FORMS
@@ -113,3 +182,5 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE CORELIB_LIBRARY)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/core)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/codeassist)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/utils)
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/tooltip)
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/snippets)

@@ -30,40 +30,51 @@
 **
 **************************************************************************/
 
-#ifndef DEFAULTASSISTINTERFACE_H
-#define DEFAULTASSISTINTERFACE_H
+#include "snippetssettings.h"
+#include "reuse.h"
 
-#include "iassistinterface.h"
+#include <QtCore/QSettings>
 
-namespace TextEditor {
+namespace {
 
-class TEXTEDITOR_EXPORT DefaultAssistInterface : public IAssistInterface
+static const QLatin1String kGroupPostfix("SnippetsSettings");
+static const QLatin1String kLastUsedSnippetGroup("LastUsedSnippetGroup");
+
+} // Anonymous
+
+using namespace TextEditor;
+using namespace Internal;
+
+SnippetsSettings::SnippetsSettings()
+{}
+
+void SnippetsSettings::toSettings(const QString &category, QSettings *s) const
 {
-public:
-    DefaultAssistInterface(QTextDocument *textDocument,
-                           int position,
-                           const QString &fileName,
-                           AssistReason reason);
-    ~DefaultAssistInterface();
+    const QString &group = category + kGroupPostfix;
+    s->beginGroup(group);
+    s->setValue(kLastUsedSnippetGroup, m_lastUsedSnippetGroup);
+    s->endGroup();
+}
 
-    int position() const override { return m_position; }
-    QChar characterAt(int position) const override;
-    QString textAt(int position, int length) const override;
-    QString fileName() const override { return m_fileName; }
-    QTextDocument *textDocument() const override { return m_textDocument; }
-    void prepareForAsyncUse() override;
-    void recreateTextDocument() override;
-    AssistReason reason() const override;
+void SnippetsSettings::fromSettings(const QString &category, QSettings *s)
+{
+    const QString &group = category + kGroupPostfix;
+    s->beginGroup(group);
+    m_lastUsedSnippetGroup = s->value(kLastUsedSnippetGroup, QString()).toString();
+    s->endGroup();
+}
 
-private:
-    QTextDocument *m_textDocument;
-    bool m_isAsync;
-    int m_position;
-    QString m_fileName;
-    AssistReason m_reason;
-    QString m_text;
-};
+void SnippetsSettings::setLastUsedSnippetGroup(const QString &lastUsed)
+{
+    m_lastUsedSnippetGroup = lastUsed;
+}
 
-} // TextEditor
+const QString &SnippetsSettings::lastUsedSnippetGroup() const
+{
+    return m_lastUsedSnippetGroup;
+}
 
-#endif // DEFAULTASSISTINTERFACE_H
+bool SnippetsSettings::equals(const SnippetsSettings &snippetsSettings) const
+{
+    return m_lastUsedSnippetGroup == snippetsSettings.m_lastUsedSnippetGroup;
+}

@@ -30,40 +30,45 @@
 **
 **************************************************************************/
 
-#ifndef DEFAULTASSISTINTERFACE_H
-#define DEFAULTASSISTINTERFACE_H
+#ifndef CORE_TEXTFILE_H
+#define CORE_TEXTFILE_H
 
-#include "iassistinterface.h"
+#include "ifile.h"
 
-namespace TextEditor {
+#include <textfileformat.h>
 
-class TEXTEDITOR_EXPORT DefaultAssistInterface : public IAssistInterface
+namespace Core {
+
+namespace Internal {
+class TextFilePrivate;
+}
+
+class CORELIB_EXPORT TextFile : public IFile
 {
+    Q_OBJECT
 public:
-    DefaultAssistInterface(QTextDocument *textDocument,
-                           int position,
-                           const QString &fileName,
-                           AssistReason reason);
-    ~DefaultAssistInterface();
+    typedef Utils::TextFileFormat::ReadResult ReadResult;
 
-    int position() const override { return m_position; }
-    QChar characterAt(int position) const override;
-    QString textAt(int position, int length) const override;
-    QString fileName() const override { return m_fileName; }
-    QTextDocument *textDocument() const override { return m_textDocument; }
-    void prepareForAsyncUse() override;
-    void recreateTextDocument() override;
-    AssistReason reason() const override;
+    explicit TextFile(QObject *parent = 0);
+    virtual ~TextFile();
+
+    Utils::TextFileFormat format() const;
+    const QTextCodec *codec() const;
+    void setCodec(const QTextCodec *);
+
+    ReadResult read(const QString &fileName, QStringList *plainTextList, QString *errorString);
+    ReadResult read(const QString &fileName, QString *plainText, QString *errorString);
+
+    bool hasDecodingError() const;
+    QByteArray decodingErrorSample() const;
+
+    bool write(const QString &fileName, const QString &data, QString *errorMessage) const;
+    bool write(const QString &fileName, const Utils::TextFileFormat &format, const QString &data, QString *errorMessage) const;
 
 private:
-    QTextDocument *m_textDocument;
-    bool m_isAsync;
-    int m_position;
-    QString m_fileName;
-    AssistReason m_reason;
-    QString m_text;
+    Internal::TextFilePrivate *d;
 };
 
-} // TextEditor
+} // namespace Core
 
-#endif // DEFAULTASSISTINTERFACE_H
+#endif // CORE_TEXTFILE_H

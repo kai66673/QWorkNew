@@ -30,40 +30,33 @@
 **
 **************************************************************************/
 
-#ifndef DEFAULTASSISTINTERFACE_H
-#define DEFAULTASSISTINTERFACE_H
+#ifndef SNIPPETASSISTCOLLECTOR_H
+#define SNIPPETASSISTCOLLECTOR_H
 
-#include "iassistinterface.h"
+#include <texteditor_global.h>
+
+#include <QtCore/QString>
+#include <QtCore/QList>
+#include <QtGui/QIcon>
 
 namespace TextEditor {
 
-class TEXTEDITOR_EXPORT DefaultAssistInterface : public IAssistInterface
+class BasicProposalItem;
+
+class TEXTEDITOR_EXPORT SnippetAssistCollector
 {
 public:
-    DefaultAssistInterface(QTextDocument *textDocument,
-                           int position,
-                           const QString &fileName,
-                           AssistReason reason);
-    ~DefaultAssistInterface();
+    SnippetAssistCollector(const QString &groupId, const QIcon &icon, int order = 0);
+    ~SnippetAssistCollector();
 
-    int position() const override { return m_position; }
-    QChar characterAt(int position) const override;
-    QString textAt(int position, int length) const override;
-    QString fileName() const override { return m_fileName; }
-    QTextDocument *textDocument() const override { return m_textDocument; }
-    void prepareForAsyncUse() override;
-    void recreateTextDocument() override;
-    AssistReason reason() const override;
+    QList<BasicProposalItem *> collect() const;
 
 private:
-    QTextDocument *m_textDocument;
-    bool m_isAsync;
-    int m_position;
-    QString m_fileName;
-    AssistReason m_reason;
-    QString m_text;
+    QString m_groupId;
+    QIcon m_icon;
+    int m_order;
 };
 
 } // TextEditor
 
-#endif // DEFAULTASSISTINTERFACE_H
+#endif // SNIPPETASSISTCOLLECTOR_H

@@ -30,40 +30,29 @@
 **
 **************************************************************************/
 
-#ifndef DEFAULTASSISTINTERFACE_H
-#define DEFAULTASSISTINTERFACE_H
+#ifndef TIPFACTORY_H
+#define TIPFACTORY_H
 
-#include "iassistinterface.h"
+#include <QWidget>
 
 namespace TextEditor {
 
-class TEXTEDITOR_EXPORT DefaultAssistInterface : public IAssistInterface
+class TipContent;
+
+namespace Internal {
+class QTipLabel;
+
+class TipFactory
 {
 public:
-    DefaultAssistInterface(QTextDocument *textDocument,
-                           int position,
-                           const QString &fileName,
-                           AssistReason reason);
-    ~DefaultAssistInterface();
+    TipFactory();
+    virtual ~TipFactory();
+    Q_DISABLE_COPY(TipFactory)
 
-    int position() const override { return m_position; }
-    QChar characterAt(int position) const override;
-    QString textAt(int position, int length) const override;
-    QString fileName() const override { return m_fileName; }
-    QTextDocument *textDocument() const override { return m_textDocument; }
-    void prepareForAsyncUse() override;
-    void recreateTextDocument() override;
-    AssistReason reason() const override;
-
-private:
-    QTextDocument *m_textDocument;
-    bool m_isAsync;
-    int m_position;
-    QString m_fileName;
-    AssistReason m_reason;
-    QString m_text;
+    virtual QTipLabel *createTip(const TipContent &content, QWidget *w);
 };
 
-} // TextEditor
+} // namespace Internal
+} // namespace TextEditor
 
-#endif // DEFAULTASSISTINTERFACE_H
+#endif // TIPFACTORY_H

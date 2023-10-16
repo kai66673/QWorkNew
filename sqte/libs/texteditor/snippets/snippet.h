@@ -30,40 +30,56 @@
 **
 **************************************************************************/
 
-#ifndef DEFAULTASSISTINTERFACE_H
-#define DEFAULTASSISTINTERFACE_H
+#ifndef SNIPPET_H
+#define SNIPPET_H
 
-#include "iassistinterface.h"
+#include <texteditor_global.h>
+
+#include <QtCore/QChar>
+#include <QtCore/QString>
 
 namespace TextEditor {
 
-class TEXTEDITOR_EXPORT DefaultAssistInterface : public IAssistInterface
+class TEXTEDITOR_EXPORT Snippet
 {
 public:
-    DefaultAssistInterface(QTextDocument *textDocument,
-                           int position,
-                           const QString &fileName,
-                           AssistReason reason);
-    ~DefaultAssistInterface();
+    explicit Snippet(const QString &groupId = QString(), const QString &id = QString());
+    ~Snippet();
 
-    int position() const override { return m_position; }
-    QChar characterAt(int position) const override;
-    QString textAt(int position, int length) const override;
-    QString fileName() const override { return m_fileName; }
-    QTextDocument *textDocument() const override { return m_textDocument; }
-    void prepareForAsyncUse() override;
-    void recreateTextDocument() override;
-    AssistReason reason() const override;
+    const QString &id() const;
+    const QString &groupId() const;
+
+    bool isBuiltIn() const;
+
+    void setTrigger(const QString &trigger);
+    const QString &trigger() const;
+
+    void setContent(const QString &content);
+    const QString &content() const;
+
+    void setComplement(const QString &complement);
+    const QString &complement() const;
+
+    void setIsRemoved(bool removed);
+    bool isRemoved() const;
+
+    void setIsModified(bool modified);
+    bool isModified() const;
+
+    QString generateTip() const;
+
+    static const QChar kVariableDelimiter;
 
 private:
-    QTextDocument *m_textDocument;
-    bool m_isAsync;
-    int m_position;
-    QString m_fileName;
-    AssistReason m_reason;
-    QString m_text;
+    bool m_isRemoved;
+    bool m_isModified;
+    QString m_groupId;
+    QString m_id; // Only built-in snippets have an id.
+    QString m_trigger;
+    QString m_content;
+    QString m_complement;
 };
 
 } // TextEditor
 
-#endif // DEFAULTASSISTINTERFACE_H
+#endif // SNIPPET_H

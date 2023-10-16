@@ -30,40 +30,28 @@
 **
 **************************************************************************/
 
-#ifndef DEFAULTASSISTINTERFACE_H
-#define DEFAULTASSISTINTERFACE_H
+#ifndef BASETEXTEDITORUTIL_H
+#define BASETEXTEDITORUTIL_H
 
-#include "iassistinterface.h"
+#include "texteditor_global.h"
+
+#include <QtCore/QString>
+
+QT_BEGIN_NAMESPACE
+class QTextDocument;
+class QTextCursor;
+QT_END_NAMESPACE
 
 namespace TextEditor {
+namespace Convenience {
 
-class TEXTEDITOR_EXPORT DefaultAssistInterface : public IAssistInterface
-{
-public:
-    DefaultAssistInterface(QTextDocument *textDocument,
-                           int position,
-                           const QString &fileName,
-                           AssistReason reason);
-    ~DefaultAssistInterface();
+TEXTEDITOR_EXPORT bool convertPosition(const QTextDocument *document,
+                                       int pos,
+                                       unsigned *line, unsigned *column);
 
-    int position() const override { return m_position; }
-    QChar characterAt(int position) const override;
-    QString textAt(int position, int length) const override;
-    QString fileName() const override { return m_fileName; }
-    QTextDocument *textDocument() const override { return m_textDocument; }
-    void prepareForAsyncUse() override;
-    void recreateTextDocument() override;
-    AssistReason reason() const override;
+TEXTEDITOR_EXPORT QString textAt(QTextCursor tc, int pos, int length);
 
-private:
-    QTextDocument *m_textDocument;
-    bool m_isAsync;
-    int m_position;
-    QString m_fileName;
-    AssistReason m_reason;
-    QString m_text;
-};
-
+} // Util
 } // TextEditor
 
-#endif // DEFAULTASSISTINTERFACE_H
+#endif // BASETEXTEDITORUTIL_H

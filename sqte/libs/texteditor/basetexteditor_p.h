@@ -39,6 +39,8 @@
 #include "fontsettings.h"
 #include "refactoroverlay.h"
 
+#include <utils/changeset.h>
+
 #include <QtCore/QBasicTimer>
 #include <QtCore/QSharedData>
 #include <QtCore/QPointer>
@@ -193,6 +195,8 @@ public:
     bool m_parenthesesMatchingEnabled;
     QTimer *m_updateTimer;
 
+    Utils::ChangeSet m_changeSet;
+
     // parentheses matcher
     bool m_formatRange;
     QTextCharFormat m_matchFormat;
@@ -248,6 +252,7 @@ public:
     QTextCharFormat m_ifdefedOutFormat;
 
     QRegExp m_searchExpr;
+    Find::FindFlags m_findFlags;
     QTextCharFormat m_searchResultFormat;
     QTextCharFormat m_searchScopeFormat;
     QTextCharFormat m_currentLineFormat;

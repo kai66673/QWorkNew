@@ -30,40 +30,32 @@
 **
 **************************************************************************/
 
-#ifndef DEFAULTASSISTINTERFACE_H
-#define DEFAULTASSISTINTERFACE_H
+#ifndef EFFECTS_H
+#define EFFECTS_H
 
-#include "iassistinterface.h"
+#include <QtCore/QtGlobal>
 
-namespace TextEditor {
+// This is a copy of a Qt private header. Please read comments in tooltip.h.
 
-class TEXTEDITOR_EXPORT DefaultAssistInterface : public IAssistInterface
+QT_BEGIN_NAMESPACE
+
+class QWidget;
+
+struct QEffects
 {
-public:
-    DefaultAssistInterface(QTextDocument *textDocument,
-                           int position,
-                           const QString &fileName,
-                           AssistReason reason);
-    ~DefaultAssistInterface();
+    enum Direction {
+        LeftScroll  = 0x0001,
+        RightScroll = 0x0002,
+        UpScroll    = 0x0004,
+        DownScroll  = 0x0008
+    };
 
-    int position() const override { return m_position; }
-    QChar characterAt(int position) const override;
-    QString textAt(int position, int length) const override;
-    QString fileName() const override { return m_fileName; }
-    QTextDocument *textDocument() const override { return m_textDocument; }
-    void prepareForAsyncUse() override;
-    void recreateTextDocument() override;
-    AssistReason reason() const override;
-
-private:
-    QTextDocument *m_textDocument;
-    bool m_isAsync;
-    int m_position;
-    QString m_fileName;
-    AssistReason m_reason;
-    QString m_text;
+    typedef uint DirFlags;
 };
 
-} // TextEditor
+extern void Q_GUI_EXPORT qScrollEffect(QWidget*, QEffects::DirFlags dir = QEffects::DownScroll, int time = -1);
+extern void Q_GUI_EXPORT qFadeEffect(QWidget*, int time = -1);
 
-#endif // DEFAULTASSISTINTERFACE_H
+QT_END_NAMESPACE
+
+#endif // EFFECTS_H

@@ -30,40 +30,42 @@
 **
 **************************************************************************/
 
-#ifndef DEFAULTASSISTINTERFACE_H
-#define DEFAULTASSISTINTERFACE_H
+#include "convenience.h"
 
-#include "iassistinterface.h"
+#include <QtGui/QTextDocument>
+#include <QtGui/QTextBlock>
+#include <QtGui/QTextCursor>
 
 namespace TextEditor {
+namespace Convenience {
 
-class TEXTEDITOR_EXPORT DefaultAssistInterface : public IAssistInterface
+bool convertPosition(const QTextDocument *document, int pos, unsigned *line, unsigned *column)
 {
-public:
-    DefaultAssistInterface(QTextDocument *textDocument,
-                           int position,
-                           const QString &fileName,
-                           AssistReason reason);
-    ~DefaultAssistInterface();
+    QTextBlock block = document->findBlock(pos);
+    if (!block.isValid()) {
+        (*line) = -1;
+        (*column) = -1;
+        return false;
+    } else {
+        (*line) = block.blockNumber() + 1;
+        (*column) = pos - block.position();
+        return true;
+    }
+}
 
-    int position() const override { return m_position; }
-    QChar characterAt(int position) const override;
-    QString textAt(int position, int length) const override;
-    QString fileName() const override { return m_fileName; }
-    QTextDocument *textDocument() const override { return m_textDocument; }
-    void prepareForAsyncUse() override;
-    void recreateTextDocument() override;
-    AssistReason reason() const override;
+QString textAt(QTextCursor tc, int pos, int length)
+{
+    if (pos < 0)
+        pos = 0;
+    tc.movePosition(QTextCursor::End);
+    if (pos + length > tc.position())
+        length = tc.position() - pos;
 
-private:
-    QTextDocument *m_textDocument;
-    bool m_isAsync;
-    int m_position;
-    QString m_fileName;
-    AssistReason m_reason;
-    QString m_text;
-};
+    tc.setPosition(pos);
+    tc.setPosition(pos + length, QTextCursor::KeepAnchor);
 
+    return tc.selectedText();
+}
+
+} // Util
 } // TextEditor
-
-#endif // DEFAULTASSISTINTERFACE_H

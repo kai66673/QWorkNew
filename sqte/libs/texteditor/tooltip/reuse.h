@@ -30,40 +30,36 @@
 **
 **************************************************************************/
 
-#ifndef DEFAULTASSISTINTERFACE_H
-#define DEFAULTASSISTINTERFACE_H
+#ifndef TOOLTIPREUSE_H
+#define TOOLTIPREUSE_H
 
-#include "iassistinterface.h"
+#include <QtCore/QPoint>
+#include <QtCore/QRect>
+#include <QWidget>
+#include <QApplication>
+#include <QDesktopWidget>
 
 namespace TextEditor {
+namespace Internal {
 
-class TEXTEDITOR_EXPORT DefaultAssistInterface : public IAssistInterface
+inline int screenNumber(const QPoint &pos, QWidget *w)
 {
-public:
-    DefaultAssistInterface(QTextDocument *textDocument,
-                           int position,
-                           const QString &fileName,
-                           AssistReason reason);
-    ~DefaultAssistInterface();
+    if (QApplication::desktop()->isVirtualDesktop())
+        return QApplication::desktop()->screenNumber(pos);
+    else
+        return QApplication::desktop()->screenNumber(w);
+}
 
-    int position() const override { return m_position; }
-    QChar characterAt(int position) const override;
-    QString textAt(int position, int length) const override;
-    QString fileName() const override { return m_fileName; }
-    QTextDocument *textDocument() const override { return m_textDocument; }
-    void prepareForAsyncUse() override;
-    void recreateTextDocument() override;
-    AssistReason reason() const override;
+inline QRect screenGeometry(const QPoint &pos, QWidget *w)
+{
+#ifdef Q_WS_MAC
+    return QApplication::desktop()->availableGeometry(screenNumber(pos, w));
+#else
+    return QApplication::desktop()->screenGeometry(screenNumber(pos, w));
+#endif
+}
 
-private:
-    QTextDocument *m_textDocument;
-    bool m_isAsync;
-    int m_position;
-    QString m_fileName;
-    AssistReason m_reason;
-    QString m_text;
-};
+} // namespace Internal
+} // namespace TextEditor
 
-} // TextEditor
-
-#endif // DEFAULTASSISTINTERFACE_H
+#endif // TOOLTIPREUSE_H

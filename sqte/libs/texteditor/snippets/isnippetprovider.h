@@ -30,40 +30,31 @@
 **
 **************************************************************************/
 
-#ifndef DEFAULTASSISTINTERFACE_H
-#define DEFAULTASSISTINTERFACE_H
+#ifndef ISNIPPETEDITORDECORATOR_H
+#define ISNIPPETEDITORDECORATOR_H
 
-#include "iassistinterface.h"
+#include <texteditor_global.h>
+
+#include <QtCore/QObject>
 
 namespace TextEditor {
 
-class TEXTEDITOR_EXPORT DefaultAssistInterface : public IAssistInterface
+class SnippetEditorWidget;
+
+class TEXTEDITOR_EXPORT ISnippetProvider : public QObject
 {
+    Q_OBJECT
 public:
-    DefaultAssistInterface(QTextDocument *textDocument,
-                           int position,
-                           const QString &fileName,
-                           AssistReason reason);
-    ~DefaultAssistInterface();
+    virtual ~ISnippetProvider();
 
-    int position() const override { return m_position; }
-    QChar characterAt(int position) const override;
-    QString textAt(int position, int length) const override;
-    QString fileName() const override { return m_fileName; }
-    QTextDocument *textDocument() const override { return m_textDocument; }
-    void prepareForAsyncUse() override;
-    void recreateTextDocument() override;
-    AssistReason reason() const override;
+    virtual QString groupId() const = 0;
+    virtual QString displayName() const = 0;
+    virtual void decorateEditor(SnippetEditorWidget *editor) const = 0;
 
-private:
-    QTextDocument *m_textDocument;
-    bool m_isAsync;
-    int m_position;
-    QString m_fileName;
-    AssistReason m_reason;
-    QString m_text;
+protected:
+    ISnippetProvider();
 };
 
 } // TextEditor
 
-#endif // DEFAULTASSISTINTERFACE_H
+#endif // ISNIPPETEDITORDECORATOR_H

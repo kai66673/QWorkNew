@@ -30,40 +30,31 @@
 **
 **************************************************************************/
 
-#ifndef DEFAULTASSISTINTERFACE_H
-#define DEFAULTASSISTINTERFACE_H
+#include "tipfactory.h"
+#include "tipcontents.h"
+#include "tips.h"
+#include <utils/qtcassert.h>
 
-#include "iassistinterface.h"
+#include <QVBoxLayout>
 
-namespace TextEditor {
+using namespace TextEditor;
+using namespace Internal;
 
-class TEXTEDITOR_EXPORT DefaultAssistInterface : public IAssistInterface
+TipFactory::TipFactory()
+{}
+
+TipFactory::~TipFactory()
+{}
+
+Internal::QTipLabel *TipFactory::createTip(const TipContent &content, QWidget *w)
 {
-public:
-    DefaultAssistInterface(QTextDocument *textDocument,
-                           int position,
-                           const QString &fileName,
-                           AssistReason reason);
-    ~DefaultAssistInterface();
+    if (content.typeId() == TextContent::TEXT_CONTENT_ID)
+        return new TextTip(w);
+    if (content.typeId() == ColorContent::COLOR_CONTENT_ID)
+        return new ColorTip(w);
+    if (content.typeId() == WidgetContent::WIDGET_CONTENT_ID)
+        return new WidgetTip(w);
 
-    int position() const override { return m_position; }
-    QChar characterAt(int position) const override;
-    QString textAt(int position, int length) const override;
-    QString fileName() const override { return m_fileName; }
-    QTextDocument *textDocument() const override { return m_textDocument; }
-    void prepareForAsyncUse() override;
-    void recreateTextDocument() override;
-    AssistReason reason() const override;
-
-private:
-    QTextDocument *m_textDocument;
-    bool m_isAsync;
-    int m_position;
-    QString m_fileName;
-    AssistReason m_reason;
-    QString m_text;
-};
-
-} // TextEditor
-
-#endif // DEFAULTASSISTINTERFACE_H
+    QTC_ASSERT(false, return 0; );
+    return 0;
+}
