@@ -7,6 +7,7 @@
 #include <QList>
 #include <QTextCharFormat>
 #include <QDomDocument>
+#include <QSettings>
 
 #include "corelib_global.h"
 
@@ -48,7 +49,9 @@ public:
     bool fillTextCharFormat(int index, QTextCharFormat &charFormat) const;
 
     void save(QDomDocument *document, QDomElement *parentElement);
+    void save(QSettings &settings);
     void restore(QDomElement *parentElement);
+    void restore(QSettings &settings);
 
     QList<HighlighterFormat *> cloneFormats() const;
     void reinit(QList<HighlighterFormat *> &formats);

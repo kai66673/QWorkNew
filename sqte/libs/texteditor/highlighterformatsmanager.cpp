@@ -45,6 +45,24 @@ void HighlighterFormatData::save(QDomDocument *document, QDomElement *parentElem
     }
 }
 
+void HighlighterFormatData::save(QSettings &settings)
+{
+    settings.beginWriteArray(QLatin1String("HL_FORMATS"));
+
+    for (int i = 0; i < m_formats.size(); i++) {
+        HighlighterFormat *format = m_formats[i];
+        settings.setArrayIndex(i);
+
+        settings.setValue("name", format->name);
+        settings.setValue("bold", format->bold);
+        settings.setValue("italic", format->italic);
+        settings.setValue("foreground-color", format->foregroundColor.isValid() ? format->foregroundColor.name() : "#");
+        settings.setValue("background-color", format->backgroundColor.isValid() ? format->backgroundColor.name() : "#");
+    }
+
+    settings.endArray();
+}
+
 void HighlighterFormatData::restore(QDomElement *parentElement)
 {
     QDomElement formatElement = parentElement->firstChildElement();
@@ -94,6 +112,26 @@ void HighlighterFormatData::restore(QDomElement *parentElement)
         }
         formatElement = formatElement.nextSiblingElement();
     }
+}
+
+void HighlighterFormatData::restore(QSettings &settings)
+{
+    int size = settings.beginReadArray(QLatin1String("HL_FORMATS"));
+
+    for (int i = 0; i < size; i++) {
+        HighlighterFormat *format = m_formats[i];
+        settings.setArrayIndex(i);
+
+        format->name = settings.value("name").toString();
+        format->bold = settings.value("bold").toBool();
+        format->italic = settings.value("italic").toBool();
+        QString colorStr = settings.value("foreground-color").toString();
+        format->foregroundColor = colorStr == QLatin1String("#") ? QColor() : QColor(colorStr);
+        colorStr = settings.value("background-color").toString();
+        format->backgroundColor = colorStr == QLatin1String("#") ? QColor() : QColor(colorStr);
+    }
+
+    settings.endArray();
 }
 
 QList<HighlighterFormat *> HighlighterFormatData::cloneFormats() const

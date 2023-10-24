@@ -50,7 +50,7 @@ public:
         m_formats.append( new HighlighterFormat( QObject::tr("Operator"),
                                                  false,
                                                  false,
-                                                 QColor(  0,  64,  64),
+                                                 QColor(160, 64, 0),
                                                  QColor() ) );
 
         m_formats.append( new HighlighterFormat( QObject::tr("Comment"),
@@ -66,9 +66,9 @@ public:
                                                  QColor() ) );
 
         m_formats.append( new HighlighterFormat( QObject::tr("Identifier"),
-                                                 true,
                                                  false,
-                                                 QColor(165,   0,   0),
+                                                 false,
+                                                 QColor(44, 62, 80),
                                                  QColor() ) );
 
         m_formats.append( new HighlighterFormat( QObject::tr("Whitespace"),
