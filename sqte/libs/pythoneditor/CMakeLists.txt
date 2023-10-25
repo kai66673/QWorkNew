@@ -10,6 +10,7 @@ set (PYTHONEDITOR_HEADERS
     tools/pythonindenter.h
     pythoneditor_global.h
     pythoneditorwidget.h
+    pythonhighlighterformatsdata.h
 )
 
 set (PYTHONEDITOR_SOURCES
@@ -17,6 +18,7 @@ set (PYTHONEDITOR_SOURCES
     tools/pythonindenter.cpp
     tools/pythonhighlighter.cpp
     pythoneditorwidget.cpp
+    pythonhighlighterformatsdata.cpp
 )
 
 add_library(${PROJECT_NAME} SHARED
