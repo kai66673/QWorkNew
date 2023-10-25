@@ -3,21 +3,18 @@
 
 #include <QMainWindow>
 
-#include "pythoneditorwidget.h"
-
-class HighlighterFormatsManager;
+namespace PythonEditor {
+    class EditorWidget;
+}
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    virtual ~MainWindow();
 
 
 private:
-    HighlighterFormatsManager *m_highlighterFormatsManager;
-
     PythonEditor::EditorWidget *m_editor;
 };
 

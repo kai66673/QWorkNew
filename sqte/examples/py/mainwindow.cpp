@@ -1,24 +1,11 @@
 #include "mainwindow.h"
 
-#include "texteditorsettings.h"
-#include "pythonhighlighterformatsdata.h"
+#include "edlib.h"
+#include "pythoneditorwidget.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    new TextEditor::TextEditorSettings(this);
-
-    m_highlighterFormatsManager = new HighlighterFormatsManager;
-
-    m_highlighterFormatsManager->registerLanguageHighlighter(new PythonEditor::PythonHighlighterFormatData);
-
-    m_editor = new PythonEditor::EditorWidget(this);
-    m_editor->onSettingsChanged();
-
+    m_editor = EditorsManager::createPythonEditor(this);
     setCentralWidget(m_editor);
-}
-
-MainWindow::~MainWindow()
-{
-    delete m_highlighterFormatsManager;
 }
