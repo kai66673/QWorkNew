@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.5)
 
 project(qte VERSION 0.1 LANGUAGES CXX)
 
+# set path to additional CMake modules
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
+cmake_policy(SET CMP0071 NEW)
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 ###########################################################
@@ -20,16 +24,10 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Xml PrintSupport Network S
 add_subdirectory(libs)
 add_subdirectory(examples)
 
-#! Надеюсь, це не ересь от chat-gpt...
-# Генерация кода Python из sip-файлов
-#set(SIP_FILES
-#    path/to/your/sip/file1.sip
-#    path/to/your/sip/file2.sip
-#    # Добавьте пути к вашим sip-файлам здесь
-#)
+find_package(Python ${MIN_PYTHON_VERSION} REQUIRED COMPONENTS Interpreter Development)
+find_package(SIP REQUIRED)
+include(SIPMacros)
 
-#foreach(SIP_FILE ${SIP_FILES})
-#    get_filename_component(SIP_FILE_NAME ${SIP_FILE} NAME_WE)
-#    sip_generate_python_module(${SIP_FILE_NAME} ${SIP_FILE})
-#endforeach()
-#
+file(GLOB_RECURSE sip_files_core sip/*.sip)
+GENERATE_SIP_PYTHON_MODULE_CODE(edlib sip/edlib.sip "${sip_files_core}" cpp_files)
+BUILD_SIP_PYTHON_MODULE(edlib sip/edlib.sip "${cpp_files}" "" edlib)
