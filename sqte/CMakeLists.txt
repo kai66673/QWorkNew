@@ -24,6 +24,9 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Xml PrintSupport Network S
 add_subdirectory(libs)
 add_subdirectory(examples)
 
+#!!!! SIP inggg..
+# not working ((
+# lets try from here: https://github.com/zanton/hello-sip-pyqt5
 find_package(Python ${MIN_PYTHON_VERSION} REQUIRED COMPONENTS Interpreter Development)
 find_package(SIP REQUIRED)
 include(SIPMacros)
@@ -31,3 +34,5 @@ include(SIPMacros)
 file(GLOB_RECURSE sip_files_core sip/*.sip)
 GENERATE_SIP_PYTHON_MODULE_CODE(edlib sip/edlib.sip "${sip_files_core}" cpp_files)
 BUILD_SIP_PYTHON_MODULE(edlib sip/edlib.sip "${cpp_files}" "" edlib)
+# not working ((
+# lets try from here: https://github.com/zanton/hello-sip-pyqt5
