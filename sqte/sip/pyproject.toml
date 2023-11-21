@@ -1,0 +1,18 @@
+# Specify the build system.
+[build-system]
+requires = ["sip >=5.0.0, <7", "PyQt-builder >=1.6, <2"]
+build-backend = "sipbuild.api"
+
+[tool.sip.project]
+sip-include-dirs = ["/home/kai/Work/mamba310/envs/sip/lib/python3.11/site-packages/PyQt5/bindings/"]
+# sip-include-dirs = ["/usr/lib/python3/dist-packages/PyQt5/bindings/"]
+
+# Specify the PEP 566 metadata for the project.
+[tool.sip.metadata]
+name = "edlib"
+version = "0.0.1"
+summary = "Python bindings for editors library"
+home-page = "https://kai.org"
+author = "MIPT software development"
+license = "GPL v2"
+requires-dist = "PyQt5"
