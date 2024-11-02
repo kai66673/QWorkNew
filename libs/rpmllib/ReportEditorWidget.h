@@ -1,6 +1,8 @@
 #ifndef REPORTEDITORWIDGET_H
 #define REPORTEDITORWIDGET_H
 
+#include <QPainterPath>
+
 #include "RichEditorWidget.h"
 #include "ReportData.h"
 #include "DataSource.h"

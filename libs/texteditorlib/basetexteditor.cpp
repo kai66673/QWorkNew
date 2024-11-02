@@ -93,6 +93,7 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QMimeData>
+#include <QPainterPath>
 
 #include "SettingsManager.h"
 #include "stringutils.h"

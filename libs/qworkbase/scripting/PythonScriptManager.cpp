@@ -626,6 +626,7 @@ static bool checkIdentifierName( const QString &name )
 
 bool PythonScriptManager::registerModule( IPythonModule *module, bool deleteOnFail, const QStringList &classNames )
 {
+    return false;
     if ( !module )
         return false;
 
@@ -916,9 +917,10 @@ QStringList PythonScriptManager::pythonCodeAssist( const QString &source, int po
 
     QVariantList args;
     args << source << position << title;
-    QVariant result =  m_pythonCodeAssist.call( "get_completion_list", args );
+    // QVariant result =  m_pythonCodeAssist.call( "get_completion_list", args );
 
-    return result.toStringList();
+    // return result.toStringList();
+    return {};
 }
 
 void PythonScriptManager::executeBuiltinScript( const QString &scriptId )
@@ -935,9 +937,9 @@ void PythonScriptManager::initPythonCodeAssist()
 {
     PythonQt::self()->addSysPath(QApplication::applicationDirPath() + "/python/DLLs");
     PythonQt::self()->addSysPath(QApplication::applicationDirPath() + "/python/Lib");
-    m_pythonCodeAssist = PythonQt::self()->createModuleFromScript("PythonCodeAssistModule", "");
-    m_pythonCodeAssist.evalFile(":/scripting/initPythonCodeAssist.py");
-    m_pythonCodeAssist.call("init_code_assist", QVariantList() << m_scriptsDir << m_scriptingRopeProjectDir);
+    // m_pythonCodeAssist = PythonQt::self()->createModuleFromScript("PythonCodeAssistModule", "");
+    // m_pythonCodeAssist.evalFile(":/scripting/initPythonCodeAssist.py");
+    // m_pythonCodeAssist.call("init_code_assist", QVariantList() << m_scriptsDir << m_scriptingRopeProjectDir);
 }
 
 static bool removeDir( const QString &dirName )
@@ -993,10 +995,10 @@ void PythonScriptManager::initScritingRopeProject()
 
 void PythonScriptManager::freeScritingRopeProject()
 {
-    m_pythonCodeAssist.call("free_code_assist");
-    QDir ropeRootDir(m_scriptingRopeProjectDir);
-    if ( ropeRootDir.exists() )
-        removeDir(m_scriptingRopeProjectDir);
+    // m_pythonCodeAssist.call("free_code_assist");
+    // QDir ropeRootDir(m_scriptingRopeProjectDir);
+    // if ( ropeRootDir.exists() )
+    //     removeDir(m_scriptingRopeProjectDir);
 }
 
 void PythonScriptManager::initScriptCommands()
@@ -1056,8 +1058,8 @@ void PythonScriptManager::reportInternal( const QString &message, IMainWindow::R
 
 void PythonScriptManager::handleScriptChanged( const QString &scriptName, const QString &source )
 {
-    m_pythonCodeAssist.call( "handle_script_source_changed",
-                             QVariantList() << scriptName << source );
+    // m_pythonCodeAssist.call( "handle_script_source_changed",
+    //                          QVariantList() << scriptName << source );
 }
 
 void PythonScriptManager::pythonReport( const QString &message, IMainWindow::ReportType reportType )

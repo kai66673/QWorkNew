@@ -38,6 +38,8 @@
 #include <QtGui/QPainter>
 #include <QtGui/QTextBlock>
 
+#include <QPainterPath>
+
 using namespace TextEditor;
 using namespace TextEditor::Internal;
 

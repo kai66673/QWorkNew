@@ -64,6 +64,7 @@
 #include <QTreeView>
 #include <QToolButton>
 #include <QAbstractItemView>
+#include <QPainterPath>
 
 // We define a currently unused state for indicating animations
 #define State_Animating 0x00000040

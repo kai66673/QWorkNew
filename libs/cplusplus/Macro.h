@@ -58,6 +58,8 @@
 #include <QtCore/QVector>
 #include <QtCore/QString>
 
+#include <QList>
+
 namespace CPlusPlus {
 
 class CPLUSPLUS_EXPORT Macro
