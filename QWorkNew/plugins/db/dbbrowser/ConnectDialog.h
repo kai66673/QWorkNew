@@ -19,6 +19,7 @@ public:
 
     int getConnectionType() const;
     QStringList getConnectionParameters() const { return m_connParameters; }
+    QString getConnectionTitle() const;
 
 public slots:
     void tryAccept();

@@ -29,6 +29,7 @@ void DbConnectionsHistory::load()
         connections[i].databaseType = settings.value("DbType").toString();
         connections[i].description = settings.value("Description").toString();
         connections[i].parameters << settings.value("Parameters").toStringList();
+        connections[i].connTitle = settings.value("Title", "").toString();
     }
 
     settings.endArray();
@@ -46,6 +47,7 @@ void DbConnectionsHistory::save()
         settings.setValue("DbType", connections[i].databaseType);
         settings.setValue("Description", connections[i].description);
         settings.setValue("Parameters", connections[i].parameters);
+        settings.setValue("Title", connections[i].connTitle);
     }
 
     settings.endArray();
@@ -86,6 +88,7 @@ bool DbConnectionsHistory::selectOrEditConnection( DbConnectionAuthInfo &connect
     connection.description = connections[selIndex].description;
     connection.parameters.clear();
     connection.parameters << connections[selIndex].parameters;
+    connection.connTitle = connections[selIndex].connTitle;
 
     return true;
 }

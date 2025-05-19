@@ -2,10 +2,13 @@
 
 bool DbConnectionAuthInfo::isEqual( const DbConnectionAuthInfo &other )
 {
-    if ( databaseType != other.databaseType )
+    if (databaseType != other.databaseType)
         return false;
 
-    if ( parameters.size() != other.parameters.size() )
+    if (connTitle != other.connTitle)
+        return false;
+
+    if (parameters.size() != other.parameters.size())
         return false;
 
     for (int i = 0; i < parameters.size(); i++) {

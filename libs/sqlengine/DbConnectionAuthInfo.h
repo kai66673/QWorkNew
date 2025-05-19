@@ -7,10 +7,11 @@
 #include "sqlengine_global.h"
 
 struct SQL_EXPORT DbConnectionAuthInfo {
-    DbConnectionAuthInfo( const QString &dbType = "", const QStringList &pars = QStringList() )
+    DbConnectionAuthInfo(const QString &dbType = "", const QStringList &pars = QStringList(), const QString &connTitile_ = "")
         : databaseType(dbType)
         , description("")
         , parameters(pars)
+        , connTitle(connTitile_)
     { }
 
     bool isEqual(const DbConnectionAuthInfo &other);
@@ -18,6 +19,7 @@ struct SQL_EXPORT DbConnectionAuthInfo {
     QString     databaseType;
     QString     description;
     QStringList parameters;
+    QString     connTitle;
 };
 
 #endif // DBCONNECTIONAUTHINFO_H

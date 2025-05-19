@@ -140,6 +140,8 @@ public:
 
     inline QString connectionName() const { return m_connectionName; }
     inline QString connectionTitle() const { return m_connectionTitle; }
+    inline void setConnectionTitle(const QString &newConnectionTitle) { m_connectionTitle = newConnectionTitle; }
+
     inline QString connectionDescription() const { return m_connectionDescription; }
     inline QString defaultSchemaName() const { return m_defaultSchemaName; }
     inline bool caseSensetive() const { return m_caseSensetive; }

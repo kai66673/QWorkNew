@@ -639,6 +639,7 @@ bool DbManager::createConnection( const DbConnectionAuthInfo &connection, bool a
     BaseConnectionInfo *connectionInfo = loader->createConnection(dbName, connection.parameters);
     if ( !connectionInfo )
         return false;
+    connectionInfo->setConnectionTitle(connection.connTitle);
     QString dbTitle = connectionInfo->connectionTitle();
 
     QDbStructWidget *structWidget = new QDbStructWidget(connectionInfo, loader, m_mainWindow->widget());
@@ -677,6 +678,7 @@ bool DbManager::createConnection( const DbConnectionAuthInfo &connection, bool a
     connInfo.databaseType = loader->databaseType();
     connInfo.description = connectionInfo->connectionDescription();
     connInfo.parameters << connection.parameters;
+    connInfo.connTitle = connectionInfo->connectionTitle();
 
     if ( addToHistory )
         m_connectionsHistory->addConnection(connInfo);
@@ -1017,10 +1019,14 @@ void DbManager::connectToDb()
     QString dbName = QString("DB_%1").arg(dbIndex);
     dbIndex++;
     QStringList parameters = connDialog.getConnectionParameters();
+    QString userConnTitle = connDialog.getConnectionTitle();
 
     BaseConnectionInfo *connectionInfo = loaderTypeList[connType]->createConnection(dbName, parameters);
     if ( !connectionInfo )
         return;
+    if (!userConnTitle.isEmpty())
+        connectionInfo->setConnectionTitle(userConnTitle);
+
     QString dbTitle = connectionInfo->connectionTitle();
 
     QDbStructWidget *structWidget = new QDbStructWidget(connectionInfo, loaderTypeList[connType], m_mainWindow->widget());
@@ -1060,6 +1066,7 @@ void DbManager::connectToDb()
     connInfo.databaseType = loaderTypeList[connType]->databaseType();
     connInfo.description = connectionInfo->connectionDescription();
     connInfo.parameters << parameters;
+    connInfo.connTitle = connectionInfo->connectionTitle();
     m_connectionsHistory->addConnection(connInfo);
 
     connectionInfoList.append(connInfo);

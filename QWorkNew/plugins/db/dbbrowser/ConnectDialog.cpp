@@ -40,6 +40,11 @@ int ConnectDialog::getConnectionType() const
     return ui->connTypeComboBox->currentIndex();
 }
 
+QString ConnectDialog::getConnectionTitle() const
+{
+    return ui->connectionNameEdit->text().trimmed();
+}
+
 void ConnectDialog::tryAccept()
 {
     int connTypeIndex = ui->connTypeComboBox->currentIndex();
